@@ -1,0 +1,33 @@
+{
+  "panel_title": "Sockstat FRAG / RAW",
+  "panel_id": 125,
+  "description": "Number of FRAG and RAW sockets currently in use. RAW sockets are used for custom protocols or tools like ping; FRAG sockets are used internally for IP packet defragmentation",
+  "targets": [
+    {
+      "refId": "A",
+      "query": "node_sockstat_FRAG_inuse{instance=\"localhost:9100\",job=\"node_exporter\"}",
+      "legendFormat": "FRAG - In-Use Sockets",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    },
+    {
+      "refId": "C",
+      "query": "node_sockstat_RAW_inuse{instance=\"localhost:9100\",job=\"node_exporter\"}",
+      "legendFormat": "RAW - In-Use Sockets",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    }
+  ]
+}

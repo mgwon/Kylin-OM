@@ -1,0 +1,50 @@
+[
+  {
+    "id": ";..;",
+    "name": ";..;",
+    "version": "L,,L",
+    "description": "'//"
+  },
+  {
+    "id": "345",
+    "name": "345",
+    "version": "34",
+    "description": "334444"
+  },
+  {
+    "id": "888",
+    "name": "888",
+    "version": "888",
+    "description": "88"
+  },
+  {
+    "id": "222",
+    "name": "222",
+    "version": "2.0",
+    "description": "222"
+  },
+  {
+    "id": "default_network",
+    "name": "default_network",
+    "version": "1.0",
+    "description": "Default network configuration and management application."
+  },
+  {
+    "id": "health_check_app",
+    "name": "health_check_app",
+    "version": "2.1",
+    "description": "Application to perform health checks on various services."
+  },
+  {
+    "id": "backup_script_app",
+    "name": "backup_script_app",
+    "version": "1.5",
+    "description": "Scripts for performing automated backups."
+  },
+  {
+    "id": "cleanup_service",
+    "name": "cleanup_service",
+    "version": "1.0",
+    "description": "A service for cleaning up system resources and logs."
+  }
+]

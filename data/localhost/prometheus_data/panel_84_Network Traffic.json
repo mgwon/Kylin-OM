@@ -1,0 +1,33 @@
+{
+  "panel_title": "Network Traffic",
+  "panel_id": 84,
+  "description": "Incoming and outgoing network traffic per interface",
+  "targets": [
+    {
+      "refId": "A",
+      "query": "rate(node_network_receive_bytes_total{instance=\"localhost:9100\",job=\"node_exporter\"}[5m])*8",
+      "legendFormat": "{{device}} - Rx in",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    },
+    {
+      "refId": "B",
+      "query": "rate(node_network_transmit_bytes_total{instance=\"localhost:9100\",job=\"node_exporter\"}[5m])*8",
+      "legendFormat": "{{device}} - Tx out",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    }
+  ]
+}

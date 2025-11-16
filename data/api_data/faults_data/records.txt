@@ -1,0 +1,50 @@
+[
+  {
+    "id": "fr-001",
+    "alertSummary": "CPU使用率超过95%",
+    "asset": "web-server-03",
+    "workflow": "Playbook: 重启Web服务",
+    "type": "自动",
+    "result": "成功",
+    "duration": "3分45秒",
+    "operator": "System-Auto",
+    "timestamp": "2025-07-23 10:15:22",
+    "faultLevel": "严重"
+  },
+  {
+    "id": "fr-002",
+    "alertSummary": "数据库连接池耗尽",
+    "asset": "db-cluster-prod",
+    "workflow": "手动操作",
+    "type": "手动",
+    "result": "成功",
+    "duration": "25分10秒",
+    "operator": "admin",
+    "timestamp": "2025-07-22 18:30:05",
+    "faultLevel": "严重"
+  },
+  {
+    "id": "fr-003",
+    "alertSummary": "磁盘空间使用率 > 90%",
+    "asset": "log-server-01",
+    "workflow": "Playbook: 清理临时日志",
+    "type": "自动",
+    "result": "失败",
+    "duration": "1分05秒",
+    "operator": "System-Auto",
+    "timestamp": "2025-07-22 14:05:11",
+    "faultLevel": "警告"
+  },
+  {
+    "id": "fr-004",
+    "alertSummary": "Pod 'frontend-abc' 持续重启",
+    "asset": "k8s-prod-cluster/namespace:default",
+    "workflow": "Playbook: 回滚应用版本",
+    "type": "自动",
+    "result": "成功",
+    "duration": "5分50秒",
+    "operator": "System-Auto",
+    "timestamp": "2025-07-21 09:45:00",
+    "faultLevel": "一般"
+  }
+]

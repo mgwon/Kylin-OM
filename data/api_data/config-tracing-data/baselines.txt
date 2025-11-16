@@ -1,0 +1,9 @@
+[
+  {
+    "id": "bl-mysql-cnf",
+    "path": "/etc/my.cnf",
+    "domain": "Database",
+    "source": "手动输入",
+    "lastModified": "2025-07-31 18:03:33"
+  }
+]

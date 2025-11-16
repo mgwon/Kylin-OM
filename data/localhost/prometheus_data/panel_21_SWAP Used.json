@@ -1,0 +1,20 @@
+{
+  "panel_title": "SWAP Used",
+  "panel_id": 21,
+  "description": "Percentage of swap space currently used by the system",
+  "targets": [
+    {
+      "refId": "A",
+      "query": "((node_memory_SwapTotal_bytes{instance=\"localhost:9100\",job=\"node_exporter\"} - node_memory_SwapFree_bytes{instance=\"localhost:9100\",job=\"node_exporter\"}) / (node_memory_SwapTotal_bytes{instance=\"localhost:9100\",job=\"node_exporter\"})) * 100",
+      "legendFormat": "",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    }
+  ]
+}

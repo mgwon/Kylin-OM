@@ -1,0 +1,33 @@
+{
+  "panel_title": "ICMP In / Out",
+  "panel_id": 115,
+  "description": "Number of ICMP messages sent and received per second, including error and control messages",
+  "targets": [
+    {
+      "refId": "A",
+      "query": "irate(node_netstat_Icmp_InMsgs{instance=\"localhost:9100\",job=\"node_exporter\"}[5m])",
+      "legendFormat": "ICMP Rx in",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    },
+    {
+      "refId": "B",
+      "query": "irate(node_netstat_Icmp_OutMsgs{instance=\"localhost:9100\",job=\"node_exporter\"}[5m])",
+      "legendFormat": "ICMP Tx out",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    }
+  ]
+}

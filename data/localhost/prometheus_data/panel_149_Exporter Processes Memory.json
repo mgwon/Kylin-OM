@@ -1,0 +1,33 @@
+{
+  "panel_title": "Exporter Processes Memory",
+  "panel_id": 149,
+  "description": "Tracks the memory usage of the process exposing this metric (e.g., node_exporter), including current virtual memory and maximum virtual memory limit",
+  "targets": [
+    {
+      "refId": "A",
+      "query": "process_virtual_memory_bytes{instance=\"localhost:9100\",job=\"node_exporter\"}",
+      "legendFormat": "Virtual Memory",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    },
+    {
+      "refId": "B",
+      "query": "process_virtual_memory_max_bytes{instance=\"localhost:9100\",job=\"node_exporter\"}",
+      "legendFormat": "Virtual Memory Limit",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    }
+  ]
+}

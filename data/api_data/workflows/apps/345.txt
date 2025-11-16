@@ -1,0 +1,36 @@
+{
+  "id": "345",
+  "name": "345",
+  "version": "34",
+  "description": "334444",
+  "flow": [
+    {
+      "id": "step-1",
+      "name": "aA"
+    },
+    {
+      "id": "step-2",
+      "name": "B"
+    },
+    {
+      "id": "step-3",
+      "name": "C"
+    },
+    {
+      "id": "step-4",
+      "name": "D"
+    },
+    {
+      "id": "step-5",
+      "name": "E"
+    },
+    {
+      "id": "step-6",
+      "name": "F"
+    },
+    {
+      "id": "step-7",
+      "name": "G"
+    }
+  ]
+}

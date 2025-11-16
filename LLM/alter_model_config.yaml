@@ -1,0 +1,18 @@
+# 智能运维团队 - 模型配置文件模板
+# 请复制此文件为 model_config.yaml 并修改相应配置
+
+provider: autogen_ext.models.ollama.OllamaChatCompletionClient
+config:
+  model: qwen3:8b  # 使用的模型名称
+  host: http://localhost:11434  # Ollama服务地址
+  model_info:
+    vision: false
+    function_calling: true
+    json_output: false
+    family: r1  # 启用reasoning支持
+    structured_output: false
+  options:
+    num_ctx: 20000  # 上下文长度
+    temperature: 0.3  # 温度参数
+    top_p: 0.8
+    repeat_penalty: 1.1 

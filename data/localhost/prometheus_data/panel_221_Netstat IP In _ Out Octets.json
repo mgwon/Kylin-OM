@@ -1,0 +1,33 @@
+{
+  "panel_title": "Netstat IP In / Out Octets",
+  "panel_id": 221,
+  "description": "Rate of octets sent and received at the IP layer, as reported by /proc/net/netstat",
+  "targets": [
+    {
+      "refId": "A",
+      "query": "irate(node_netstat_IpExt_InOctets{instance=\"localhost:9100\",job=\"node_exporter\"}[5m])",
+      "legendFormat": "IP Rx in",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    },
+    {
+      "refId": "B",
+      "query": "irate(node_netstat_IpExt_OutOctets{instance=\"localhost:9100\",job=\"node_exporter\"}[5m])",
+      "legendFormat": "IP Tx out",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    }
+  ]
+}

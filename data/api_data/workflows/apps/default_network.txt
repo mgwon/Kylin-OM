@@ -1,0 +1,11 @@
+{
+  "id": "default_network",
+  "name": "default_network",
+  "version": "1.0",
+  "description": "Default network configuration and management application.",
+  "flow": [
+    { "id": "step1", "name": "单指标检测"},
+    { "id": "step2", "name": "多指标检测"},
+    { "id": "step3", "name": "集群故障诊断"}
+  ]
+}

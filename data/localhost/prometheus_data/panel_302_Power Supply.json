@@ -1,0 +1,20 @@
+{
+  "panel_title": "Power Supply",
+  "panel_id": 302,
+  "description": "Shows the online status of power supplies (e.g., AC, battery). A value of 1-Yes indicates the power supply is active/online",
+  "targets": [
+    {
+      "refId": "A",
+      "query": "node_power_supply_online{instance=\"localhost:9100\",job=\"node_exporter\"}",
+      "legendFormat": "{{ power_supply }} online",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    }
+  ]
+}

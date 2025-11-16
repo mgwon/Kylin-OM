@@ -1,0 +1,46 @@
+{
+  "panel_title": "Time Spent Doing I/Os",
+  "panel_id": 36,
+  "description": "Percentage of time the disk spent actively processing I/O operations, including general I/O, discards (TRIM), and write cache flushes",
+  "targets": [
+    {
+      "refId": "A",
+      "query": "irate(node_disk_io_time_seconds_total{instance=\"localhost:9100\",job=\"node_exporter\"}[5m])",
+      "legendFormat": "{{device}} - General IO",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    },
+    {
+      "refId": "B",
+      "query": "irate(node_disk_discard_time_seconds_total{instance=\"localhost:9100\",job=\"node_exporter\"}[5m])",
+      "legendFormat": "{{device}} - Discard/TRIM",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    },
+    {
+      "refId": "C",
+      "query": "irate(node_disk_flush_requests_time_seconds_total{instance=\"localhost:9100\",job=\"node_exporter\"}[5m])",
+      "legendFormat": "{{device}} - Flush (write cache)",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    }
+  ]
+}

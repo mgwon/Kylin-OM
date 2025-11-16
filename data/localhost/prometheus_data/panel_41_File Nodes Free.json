@@ -1,0 +1,20 @@
+{
+  "panel_title": "File Nodes Free",
+  "panel_id": 41,
+  "description": "Number of free file nodes (inodes) available per mounted filesystem. A low count may prevent file creation even if disk space is available",
+  "targets": [
+    {
+      "refId": "A",
+      "query": "node_filesystem_files_free{instance=\"localhost:9100\",job=\"node_exporter\",device!~'rootfs'}",
+      "legendFormat": "{{mountpoint}}",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    }
+  ]
+}

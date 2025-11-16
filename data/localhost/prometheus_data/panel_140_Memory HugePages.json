@@ -1,0 +1,59 @@
+{
+  "panel_title": "Memory HugePages",
+  "panel_id": 140,
+  "description": "Displays HugePages memory usage in bytes, including allocated, free, reserved, and surplus memory. All values are calculated based on the number of huge pages multiplied by their configured size",
+  "targets": [
+    {
+      "refId": "A",
+      "query": "node_memory_HugePages_Free{instance=\"localhost:9100\",job=\"node_exporter\"} * node_memory_Hugepagesize_bytes{instance=\"localhost:9100\",job=\"node_exporter\"}",
+      "legendFormat": "HugePages Used – Currently allocated",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    },
+    {
+      "refId": "B",
+      "query": "node_memory_HugePages_Rsvd{instance=\"localhost:9100\",job=\"node_exporter\"} * node_memory_Hugepagesize_bytes{instance=\"localhost:9100\",job=\"node_exporter\"}",
+      "legendFormat": "HugePages Reserved – Promised but unused",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    },
+    {
+      "refId": "C",
+      "query": "node_memory_HugePages_Surp{instance=\"localhost:9100\",job=\"node_exporter\"} * node_memory_Hugepagesize_bytes{instance=\"localhost:9100\",job=\"node_exporter\"}",
+      "legendFormat": "HugePages Surplus – Dynamic pool extension",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    },
+    {
+      "refId": "D",
+      "query": "node_memory_HugePages_Total{instance=\"localhost:9100\",job=\"node_exporter\"} * node_memory_Hugepagesize_bytes{instance=\"localhost:9100\",job=\"node_exporter\"}",
+      "legendFormat": "HugePages Total – Reserved memory",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    }
+  ]
+}

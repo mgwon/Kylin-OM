@@ -1,0 +1,38 @@
+[
+    {
+        "id": 1,
+        "hostname": "db-master-01",
+        "ip": "192.168.2.5",
+        "checkItem": "mysql_replication_lag",
+        "condition": "> 60s",
+        "description": "主从复制延迟超过60秒",
+        "timestamp": "2025-07-28 10:15:00 至 2025-07-28 10:16:00"
+    },
+    {
+        "id": 2,
+        "hostname": "web-server-02",
+        "ip": "192.168.1.12",
+        "checkItem": "cpu_load_5min",
+        "condition": "> 5.0",
+        "description": "5分钟平均负载过高",
+        "timestamp": "2025-07-28 09:30:00 至 2025-07-28 09:35:00"
+    },
+    {
+        "id": 3,
+        "hostname": "cache-server-01",
+        "ip": "192.168.3.1",
+        "checkItem": "redis_memory_usage",
+        "condition": "> 85%",
+        "description": "Redis内存使用率超过85%",
+        "timestamp": "2025-07-28 08:00:00 至 2025-07-28 08:01:00"
+    },
+    {
+        "id": 4,
+        "hostname": "db-slave-01",
+        "ip": "192.168.2.6",
+        "checkItem": "disk_space_usage",
+        "condition": "> 90%",
+        "description": "根分区磁盘空间使用率超过90%",
+        "timestamp": "2025-07-27 23:50:00 至 2025-07-27 23:55:00"
+    }
+]

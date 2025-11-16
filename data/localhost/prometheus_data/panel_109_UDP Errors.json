@@ -1,0 +1,72 @@
+{
+  "panel_title": "UDP Errors",
+  "panel_id": 109,
+  "description": "Rate of UDP and UDPLite datagram delivery errors, including missing listeners, buffer overflows, and protocol-specific issues",
+  "targets": [
+    {
+      "refId": "A",
+      "query": "irate(node_netstat_Udp_InErrors{instance=\"localhost:9100\",job=\"node_exporter\"}[5m])",
+      "legendFormat": "UDP Rx in Errors",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    },
+    {
+      "refId": "B",
+      "query": "irate(node_netstat_Udp_NoPorts{instance=\"localhost:9100\",job=\"node_exporter\"}[5m])",
+      "legendFormat": "UDP No Listener",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    },
+    {
+      "refId": "C",
+      "query": "irate(node_netstat_UdpLite_InErrors{instance=\"localhost:9100\",job=\"node_exporter\"}[5m])",
+      "legendFormat": "UDPLite Rx in Errors",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    },
+    {
+      "refId": "D",
+      "query": "irate(node_netstat_Udp_RcvbufErrors{instance=\"localhost:9100\",job=\"node_exporter\"}[5m])",
+      "legendFormat": "UDP Rx in Buffer Errors",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    },
+    {
+      "refId": "E",
+      "query": "irate(node_netstat_Udp_SndbufErrors{instance=\"localhost:9100\",job=\"node_exporter\"}[5m])",
+      "legendFormat": "UDP Tx out Buffer Errors",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "panel_title": "Entropy",
+  "panel_id": 151,
+  "description": "Number of bits of entropy currently available to the system's random number generators (e.g., /dev/random). Low values may indicate that random number generation could block or degrade performance of cryptographic operations",
+  "targets": [
+    {
+      "refId": "A",
+      "query": "node_entropy_available_bits{instance=\"localhost:9100\",job=\"node_exporter\"}",
+      "legendFormat": "Entropy available",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    },
+    {
+      "refId": "B",
+      "query": "node_entropy_pool_size_bits{instance=\"localhost:9100\",job=\"node_exporter\"}",
+      "legendFormat": "Entropy pool max",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    }
+  ]
+}

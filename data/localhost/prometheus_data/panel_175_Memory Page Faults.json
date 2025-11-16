@@ -1,0 +1,46 @@
+{
+  "panel_title": "Memory Page Faults",
+  "panel_id": 175,
+  "description": "Rate of memory page faults, split into total, major (disk-backed), and derived minor (non-disk) faults. High major fault rates may indicate memory pressure or insufficient RAM",
+  "targets": [
+    {
+      "refId": "A",
+      "query": "irate(node_vmstat_pgfault{instance=\"localhost:9100\",job=\"node_exporter\"}[5m])",
+      "legendFormat": "Pgfault - Page major and minor fault ops",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    },
+    {
+      "refId": "B",
+      "query": "irate(node_vmstat_pgmajfault{instance=\"localhost:9100\",job=\"node_exporter\"}[5m])",
+      "legendFormat": "Pgmajfault - Major page fault ops",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    },
+    {
+      "refId": "C",
+      "query": "irate(node_vmstat_pgfault{instance=\"localhost:9100\",job=\"node_exporter\"}[5m])  - irate(node_vmstat_pgmajfault{instance=\"localhost:9100\",job=\"node_exporter\"}[5m])",
+      "legendFormat": "Pgminfault - Minor page fault ops",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    }
+  ]
+}

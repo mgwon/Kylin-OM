@@ -1,0 +1,24 @@
+-- Logs begin at Wed 2025-07-23 11:20:17 CST. --
+-- Logs begin at Wed 2025-07-23 11:20:17 CST. --
+7月 23 15:18:14 localhost.localdomain mysqld[6967]: 2025-07-23 15:18:14 0 [Note] InnoDB: 10.3.39 started; log sequence number 1625419; transaction id 20
+7月 23 15:18:14 localhost.localdomain mysqld[6967]: 2025-07-23 15:18:14 0 [Note] InnoDB: Loading buffer pool(s) from /var/lib/mysql/ib_buffer_pool
+7月 23 15:18:14 localhost.localdomain mysqld[6967]: 2025-07-23 15:18:14 0 [Note] InnoDB: Buffer pool(s) load completed at 250723 15:18:14
+7月 23 15:18:14 localhost.localdomain mysqld[6967]: 2025-07-23 15:18:14 0 [Note] Plugin 'FEEDBACK' is disabled.
+7月 23 15:18:14 localhost.localdomain mysqld[6967]: 2025-07-23 15:18:14 0 [Note] Server socket created on IP: '::'.
+7月 23 15:18:14 localhost.localdomain mysqld[6967]: 2025-07-23 15:18:14 0 [Note] Reading of all Master_info entries succeeded
+7月 23 15:18:14 localhost.localdomain mysqld[6967]: 2025-07-23 15:18:14 0 [Note] Added new Master_info '' to hash table
+7月 23 15:18:14 localhost.localdomain mysqld[6967]: 2025-07-23 15:18:14 0 [Note] /usr/libexec/mysqld: ready for connections.
+7月 23 15:18:14 localhost.localdomain mysqld[6967]: Version: '10.3.39-MariaDB'  socket: '/var/lib/mysql/mysql.sock'  port: 3306  MariaDB Server
+7月 23 15:18:14 localhost.localdomain systemd[1]: Started MariaDB 10.3.39 database server.
+7月 23 16:09:39 localhost.localdomain systemd[1]: Stopping MariaDB 10.3.39 database server...
+7月 23 16:09:39 localhost.localdomain mysqld[6967]: 2025-07-23 16:09:39 0 [Note] /usr/libexec/mysqld (initiated by: unknown): Normal shutdown
+7月 23 16:09:39 localhost.localdomain mysqld[6967]: 2025-07-23 16:09:39 0 [Note] Event Scheduler: Purging the queue. 0 events
+7月 23 16:09:39 localhost.localdomain mysqld[6967]: 2025-07-23 16:09:39 0 [Note] InnoDB: FTS optimize thread exiting.
+7月 23 16:09:40 localhost.localdomain mysqld[6967]: 2025-07-23 16:09:40 0 [Note] InnoDB: Starting shutdown...
+7月 23 16:09:40 localhost.localdomain mysqld[6967]: 2025-07-23 16:09:40 0 [Note] InnoDB: Dumping buffer pool(s) to /var/lib/mysql/ib_buffer_pool
+7月 23 16:09:40 localhost.localdomain mysqld[6967]: 2025-07-23 16:09:40 0 [Note] InnoDB: Buffer pool(s) dump completed at 250723 16:09:40
+7月 23 16:09:41 localhost.localdomain mysqld[6967]: 2025-07-23 16:09:41 0 [Note] InnoDB: Removed temporary tablespace data file: "ibtmp1"
+7月 23 16:09:41 localhost.localdomain mysqld[6967]: 2025-07-23 16:09:41 0 [Note] InnoDB: Shutdown completed; log sequence number 1625428; transaction id 21
+7月 23 16:09:41 localhost.localdomain mysqld[6967]: 2025-07-23 16:09:41 0 [Note] /usr/libexec/mysqld: Shutdown complete
+7月 23 16:09:41 localhost.localdomain systemd[1]: mariadb.service: Succeeded.
+7月 23 16:09:41 localhost.localdomain systemd[1]: Stopped MariaDB 10.3.39 database server.

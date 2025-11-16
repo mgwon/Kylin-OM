@@ -1,0 +1,33 @@
+{
+  "panel_title": "Memory Pages In / Out",
+  "panel_id": 176,
+  "description": "Rate of memory pages being read from or written to disk (page-in and page-out operations). High page-out may indicate memory pressure or swapping activity",
+  "targets": [
+    {
+      "refId": "A",
+      "query": "irate(node_vmstat_pgpgin{instance=\"localhost:9100\",job=\"node_exporter\"}[5m])",
+      "legendFormat": "Pagesin - Page in ops",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    },
+    {
+      "refId": "B",
+      "query": "irate(node_vmstat_pgpgout{instance=\"localhost:9100\",job=\"node_exporter\"}[5m])",
+      "legendFormat": "Pagesout - Page out ops",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    }
+  ]
+}

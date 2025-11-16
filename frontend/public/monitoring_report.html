@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>系统性能监控报告</title>
+    <style>
+        body {
+            background-color: #f7faff; color: #2c3e50;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            margin: 0; padding: 25px;
+        }
+        .container { max-width: 1600px; margin: 0 auto; }
+        .header { text-align: center; padding-bottom: 20px; border-bottom: 1px solid #e0e6ed; margin-bottom: 30px; }
+        .header h1 { font-size: 2.2em; font-weight: 600; margin: 0; color: #0056b3; }
+        .header p { color: #6c757d; margin-top: 5px; font-size: 1.1em; }
+        .group-container {
+            background-color: #ffffff; border-radius: 12px; border: 1px solid #e0e6ed;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05); margin-bottom: 30px;
+        }
+        .group-title {
+            font-size: 1.7em; color: #0056b3; padding: 20px 25px; margin: 0;
+            border-bottom: 1px solid #e0e6ed;
+        }
+        
+        /* --- 折叠功能 CSS --- */
+        .collapsible {
+            cursor: pointer;
+            user-select: none;
+            position: relative;
+        }
+        .collapsible::after {
+            content: '▼'; /* 折叠状态的图标 */
+            font-size: 0.7em;
+            position: absolute;
+            right: 25px;
+            top: 50%;
+            transform: translateY(-50%);
+            transition: transform 0.3s ease;
+        }
+        .collapsible.active::after {
+            transform: translateY(-50%) rotate(180deg); /* 展开状态的图标 */
+        }
+        .panel-container {
+            padding: 25px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 25px;
+            /* --- 折叠核心样式 --- */
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-in-out, padding 0.5s ease-in-out;
+            padding-top: 0;
+            padding-bottom: 0;
+        }
+        /* --- 展开时的样式 --- */
+        .panel-container.active {
+             padding-top: 25px;
+             padding-bottom: 25px;
+        }
+        
+        .panel {
+            border: 1px solid #e9ecef; border-radius: 8px; overflow: hidden;
+            display: flex; flex-direction: column; background-color: #fff;
+        }
+        .panel h3 {
+            margin: 0; font-size: 1.2em; font-weight: 600; color: #343a40;
+            background-color: #f8f9fa; padding: 15px; border-bottom: 1px solid #e9ecef;
+        }
+        .panel .description {
+            font-size: 0.9em; padding: 15px 15px 0 15px; color: #555; margin-bottom: 10px;
+        }
+        .panel-content { flex-grow: 1; }
+        iframe { width: 100%; height: 400px; border: none; }
+        footer {
+            text-align: center; margin-top: 30px; padding-top: 20px;
+            border-top: 1px solid #e0e6ed; font-size: 0.9em; color: #888;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="report-content">
+            
+        <div class="group-container">
+            <h2 class="group-title collapsible">系统概览</h2>
+            <div class="panel-container">
+                
+            <div class="panel">
+                <h3>CPU 使用率</h3>
+                <p class="description">CPU time spent busy vs idle, split by activity type</p>
+                <div class="panel-content">
+                    <iframe src="charts/chart_77_cpu basic.html"></iframe>
+                </div>
+            </div>
+            <div class="panel">
+                <h3>系统平均负载</h3>
+                <p class="description">System load average over 1, 5, and 15 minutes. Reflects the number of active or waiting processes. Values above CPU core count may indicate overload</p>
+                <div class="panel-content">
+                    <iframe src="charts/chart_7_system load.html"></iframe>
+                </div>
+            </div>
+            <div class="panel">
+                <h3>进程状态</h3>
+                <p class="description">Processes currently in runnable or blocked states. Helps identify CPU contention or I/O wait bottlenecks.</p>
+                <div class="panel-content">
+                    <iframe src="charts/chart_62_processes status.html"></iframe>
+                </div>
+            </div>
+            <div class="panel">
+                <h3>进程创建速率 (Forks)</h3>
+                <p class="description">Rate of new processes being created on the system (forks/sec).</p>
+                <div class="panel-content">
+                    <iframe src="charts/chart_148_processes forks.html"></iframe>
+                </div>
+            </div>
+            </div>
+        </div>
+        <div class="group-container">
+            <h2 class="group-title collapsible">内存</h2>
+            <div class="panel-container">
+                
+            <div class="panel">
+                <h3>内存使用情况 (详细)</h3>
+                <p class="description">Breakdown of physical memory and swap usage. Hardware-detected memory errors are also displayed</p>
+                <div class="panel-content">
+                    <iframe src="charts/chart_24_memory.html"></iframe>
+                </div>
+            </div>
+            <div class="panel">
+                <h3>内存页面交换</h3>
+                <p class="description">Rate at which memory pages are being swapped in from or out to disk. High swap-out activity may indicate memory pressure</p>
+                <div class="panel-content">
+                    <iframe src="charts/chart_22_memory pages swap in _ out.html"></iframe>
+                </div>
+            </div>
+            <div class="panel">
+                <h3>已提交内存 (Committed Memory)</h3>
+                <p class="description">Displays committed memory usage versus the system's commit limit. Exceeding the limit is allowed under Linux overcommit policies but may increase OOM risks under high load</p>
+                <div class="panel-content">
+                    <iframe src="charts/chart_135_memory committed.html"></iframe>
+                </div>
+            </div>
+            <div class="panel">
+                <h3>匿名内存页面 (Anonymous Pages)</h3>
+                <p class="description">Memory used by anonymous pages (not backed by files), including standard and huge page allocations. Includes heap, stack, and memory-mapped anonymous regions</p>
+                <div class="panel-content">
+                    <iframe src="charts/chart_129_memory anonymous.html"></iframe>
+                </div>
+            </div>
+            <div class="panel">
+                <h3>共享与映射内存</h3>
+                <p class="description">Memory used for mapped files (such as libraries) and shared memory (shmem and tmpfs), including variants backed by huge pages</p>
+                <div class="panel-content">
+                    <iframe src="charts/chart_138_memory shared and mapped.html"></iframe>
+                </div>
+            </div>
+            <div class="panel">
+                <h3>脏页与回写内存</h3>
+                <p class="description">Memory currently dirty (modified but not yet written to disk), being actively written back, or held by writeback buffers. High dirty or writeback memory may indicate disk I/O pressure or delayed flushing</p>
+                <div class="panel-content">
+                    <iframe src="charts/chart_130_memory writeback and dirty.html"></iframe>
+                </div>
+            </div>
+            <div class="panel">
+                <h3>内核Slab内存</h3>
+                <p class="description">Kernel slab memory usage, separated into reclaimable and non-reclaimable categories. Reclaimable memory can be freed under memory pressure (e.g., caches), while unreclaimable memory is locked by the kernel for core functions</p>
+                <div class="panel-content">
+                    <iframe src="charts/chart_131_memory slab.html"></iframe>
+                </div>
+            </div>
+            <div class="panel">
+                <h3>内核 Vmalloc 内存</h3>
+                <p class="description">Usage of the kernel's vmalloc area, which provides virtual memory allocations for kernel modules and drivers. Includes total, used, and largest free block sizes</p>
+                <div class="panel-content">
+                    <iframe src="charts/chart_70_memory vmalloc.html"></iframe>
+                </div>
+            </div>
+            <div class="panel">
+                <h3>内核 DirectMap 内存</h3>
+                <p class="description">How much memory is directly mapped in the kernel using different page sizes (4K, 2M, 1G). Helps monitor large page utilization in the direct map region</p>
+                <div class="panel-content">
+                    <iframe src="charts/chart_128_memory directmap.html"></iframe>
+                </div>
+            </div>
+            <div class="panel">
+                <h3>大页内存 (HugePages)</h3>
+                <p class="description">Displays HugePages memory usage in bytes, including allocated, free, reserved, and surplus memory. All values are calculated based on the number of huge pages multiplied by their configured size</p>
+                <div class="panel-content">
+                    <iframe src="charts/chart_140_memory hugepages.html"></iframe>
+                </div>
+            </div>
+            </div>
+        </div>
+        <div class="group-container">
+            <h2 class="group-title collapsible">网络</h2>
+            <div class="panel-container">
+                
+            <div class="panel">
+                <h3>网络数据流量</h3>
+                <p class="description">Per-interface network traffic (receive and transmit) in bits per second</p>
+                <div class="panel-content">
+                    <iframe src="charts/chart_74_network traffic basic.html"></iframe>
+                </div>
+            </div>
+            <div class="panel">
+                <h3>网络包流量</h3>
+                <p class="description">Number of network packets received and transmitted per second, by interface.</p>
+                <div class="panel-content">
+                    <iframe src="charts/chart_60_network traffic by packets.html"></iframe>
+                </div>
+            </div>
+            <div class="panel">
+                <h3>网络多播流量</h3>
+                <p class="description">Rate of incoming multicast packets received per network interface. Multicast is used by protocols such as mDNS, SSDP, and some streaming or cluster services</p>
+                <div class="panel-content">
+                    <iframe src="charts/chart_146_network traffic multicast.html"></iframe>
+                </div>
+            </div>
+            <div class="panel">
+                <h3>TCP 连接数</h3>
+                <p class="description">Number of currently established TCP connections and the system's max supported limit. On Linux, MaxConn may return -1 to indicate a dynamic/unlimited configuration</p>
+                <div class="panel-content">
+                    <iframe src="charts/chart_85_tcp connections.html"></iframe>
+                </div>
+            </div>
+            <div class="panel">
+                <h3>TCP 连接建立速率</h3>
+                <p class="description">Rate of TCP connection initiations per second. 'Active' opens are initiated by this host. 'Passive' opens are accepted from incoming connections</p>
+                <div class="panel-content">
+                    <iframe src="charts/chart_82_tcp direct transition.html"></iframe>
+                </div>
+            </div>
+            <div class="panel">
+                <h3>TCP 错误</h3>
+                <p class="description">Tracks various TCP error and congestion-related events, including retransmissions, timeouts, dropped connections, and buffer issues</p>
+                <div class="panel-content">
+                    <iframe src="charts/chart_104_tcp errors.html"></iframe>
+                </div>
+            </div>
+            <div class="panel">
+                <h3>TCP SYN Cookies</h3>
+                <p class="description">Rate of TCP SYN cookies sent, validated, and failed. These are used to protect against SYN flood attacks and manage TCP handshake resources under load</p>
+                <div class="panel-content">
+                    <iframe src="charts/chart_91_tcp syncookie.html"></iframe>
+                </div>
+            </div>
+            <div class="panel">
+                <h3>TCP Sockets 状态</h3>
+                <p class="description">Tracks TCP socket usage and memory per node</p>
+                <div class="panel-content">
+                    <iframe src="charts/chart_63_sockstat tcp.html"></iframe>
+                </div>
+            </div>
+            <div class="panel">
+                <h3>UDP 数据报流量</h3>
+                <p class="description">Rate of UDP datagrams sent and received per second, based on /proc/net/netstat</p>
+                <div class="panel-content">
+                    <iframe src="charts/chart_55_udp in _ out.html"></iframe>
+                </div>
+            </div>
+            <div class="panel">
+                <h3>UDP 错误</h3>
+                <p class="description">Rate of UDP and UDPLite datagram delivery errors, including missing listeners, buffer overflows, and protocol-specific issues</p>
+                <div class="panel-content">
+                    <iframe src="charts/chart_109_udp errors.html"></iframe>
+                </div>
+            </div>
+            <div class="panel">
+                <h3>ICMP 流量</h3>
+                <p class="description">Number of ICMP messages sent and received per second, including error and control messages</p>
+                <div class="panel-content">
+                    <iframe src="charts/chart_115_icmp in _ out.html"></iframe>
+                </div>
+            </div>
+            <div class="panel">
+                <h3>ICMP 接收错误</h3>
+                <p class="description">Rate of incoming ICMP messages that contained protocol-specific errors, such as bad checksums or invalid lengths</p>
+                <div class="panel-content">
+                    <iframe src="charts/chart_50_icmp errors.html"></iframe>
+                </div>
+            </div>
+            <div class="panel">
+                <h3>网络连接跟踪 (NF Conntrack)</h3>
+                <p class="description">Current and maximum connection tracking entries used by Netfilter (nf_conntrack). High usage approaching the limit may cause packet drops or connection issues</p>
+                <div class="panel-content">
+                    <iframe src="charts/chart_61_nf conntrack.html"></iframe>
+                </div>
+            </div>
+            <div class="panel">
+                <h3>UDP / UDPLite Sockets</h3>
+                <p class="description">Number of UDP and UDPLite sockets currently in use</p>
+                <div class="panel-content">
+                    <iframe src="charts/chart_124_sockstat udp.html"></iframe>
+                </div>
+            </div>
+            <div class="panel">
+                <h3>RAW / FRAG Sockets</h3>
+                <p class="description">Number of FRAG and RAW sockets currently in use. RAW sockets are used for custom protocols or tools like ping; FRAG sockets are used internally for IP packet defragmentation</p>
+                <div class="panel-content">
+                    <iframe src="charts/chart_125_sockstat frag _ raw.html"></iframe>
+                </div>
+            </div>
+            <div class="panel">
+                <h3>Sockets 总数</h3>
+                <p class="description">Total number of sockets currently in use across all protocols (TCP, UDP, UNIX, etc.), as reported by /proc/net/sockstat</p>
+                <div class="panel-content">
+                    <iframe src="charts/chart_126_sockstat used.html"></iframe>
+                </div>
+            </div>
+            </div>
+        </div>
+        <div class="group-container">
+            <h2 class="group-title collapsible">磁盘与文件系统</h2>
+            <div class="panel-container">
+                
+            <div class="panel">
+                <h3>文件系统可用空间</h3>
+                <p class="description">Amount of available disk space per mounted filesystem, excluding rootfs. Based on block availability to non-root users</p>
+                <div class="panel-content">
+                    <iframe src="charts/chart_43_filesystem space available.html"></iframe>
+                </div>
+            </div>
+            <div class="panel">
+                <h3>文件系统可用 Inodes</h3>
+                <p class="description">Number of free file nodes (inodes) available per mounted filesystem. A low count may prevent file creation even if disk space is available</p>
+                <div class="panel-content">
+                    <iframe src="charts/chart_41_file nodes free.html"></iframe>
+                </div>
+            </div>
+            <div class="panel">
+                <h3>磁盘读写 IOps</h3>
+                <p class="description">Number of I/O operations completed per second for the device (after merges), including both reads and writes</p>
+                <div class="panel-content">
+                    <iframe src="charts/chart_9_disk read_write iops.html"></iframe>
+                </div>
+            </div>
+            <div class="panel">
+                <h3>磁盘合并读写数</h3>
+                <p class="description">Number of read and write requests merged per second that were queued to the device</p>
+                <div class="panel-content">
+                    <iframe src="charts/chart_133_disk r_w merged.html"></iframe>
+                </div>
+            </div>
+            <div class="panel">
+                <h3>磁盘吞吐量</h3>
+                <p class="description">Disk I/O throughput per device</p>
+                <div class="panel-content">
+                    <iframe src="charts/chart_42_disk throughput.html"></iframe>
+                </div>
+            </div>
+            <div class="panel">
+                <h3>磁盘平均等待时间 (延迟)</h3>
+                <p class="description">Average time for requests issued to the device to be served. This includes the time spent by the requests in queue and the time spent servicing them.</p>
+                <div class="panel-content">
+                    <iframe src="charts/chart_37_disk average wait time.html"></iframe>
+                </div>
+            </div>
+            <div class="panel">
+                <h3>磁盘繁忙率 (按IO时间)</h3>
+                <p class="description">Percentage of time the disk spent actively processing I/O operations, including general I/O, discards (TRIM), and write cache flushes</p>
+                <div class="panel-content">
+                    <iframe src="charts/chart_36_time spent doing i_os.html"></iframe>
+                </div>
+            </div>
+            <div class="panel">
+                <h3>磁盘瞬时队列大小</h3>
+                <p class="description">Number of in-progress I/O requests at the time of sampling (active requests in the disk queue)</p>
+                <div class="panel-content">
+                    <iframe src="charts/chart_34_instantaneous queue size.html"></iframe>
+                </div>
+            </div>
+            <div class="panel">
+                <h3>文件系统只读或错误状态</h3>
+                <p class="description">Indicates filesystems mounted in read-only mode or reporting device-level I/O errors.</p>
+                <div class="panel-content">
+                    <iframe src="charts/chart_44_filesystem in readonly _ error.html"></iframe>
+                </div>
+            </div>
+            </div>
+        </div>
+        <div class="group-container">
+            <h2 class="group-title collapsible">Node Exporter 自身监控</h2>
+            <div class="panel-container">
+                
+            <div class="panel">
+                <h3>系统文件描述符使用情况</h3>
+                <p class="description">Number of file descriptors currently allocated system-wide versus the system limit. Important for detecting descriptor exhaustion risks</p>
+                <div class="panel-content">
+                    <iframe src="charts/chart_28_file descriptor.html"></iframe>
+                </div>
+            </div>
+            <div class="panel">
+                <h3>Exporter 进程内存使用</h3>
+                <p class="description">Tracks the memory usage of the process exposing this metric (e.g., node_exporter), including current virtual memory and maximum virtual memory limit</p>
+                <div class="panel-content">
+                    <iframe src="charts/chart_149_exporter processes memory.html"></iframe>
+                </div>
+            </div>
+            <div class="panel">
+                <h3>Node Exporter 采集器耗时</h3>
+                <p class="description">Duration of each individual collector executed during a Node Exporter scrape. Useful for identifying slow or failing collectors</p>
+                <div class="panel-content">
+                    <iframe src="charts/chart_40_node exporter scrape time.html"></iframe>
+                </div>
+            </div>
+            </div>
+        </div>
+        </div>
+    </div>
+
+    <!-- 核心改动 3: 嵌入 JavaScript 代码 -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const collapsibles = document.querySelectorAll('.collapsible');
+
+            collapsibles.forEach(item => {
+                item.addEventListener('click', function () {
+                    this.classList.toggle('active');
+                    const content = this.nextElementSibling;
+                    
+                    if (content.style.maxHeight) {
+                        // 如果正在显示，则折叠
+                        content.style.maxHeight = null;
+                        content.classList.remove('active');
+                    } else {
+                        // 如果已折叠，则展开
+                        // scrollHeight 是元素内容的总高度
+                        content.style.maxHeight = content.scrollHeight + "px";
+                        content.classList.add('active');
+                    }
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,33 @@
+{
+  "panel_title": "Network Traffic Basic",
+  "panel_id": 74,
+  "description": "Per-interface network traffic (receive and transmit) in bits per second",
+  "targets": [
+    {
+      "refId": "A",
+      "query": "rate(node_network_receive_bytes_total{instance=\"localhost:9100\",job=\"node_exporter\"}[5m])*8",
+      "legendFormat": "Rx {{device}}",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    },
+    {
+      "refId": "B",
+      "query": "rate(node_network_transmit_bytes_total{instance=\"localhost:9100\",job=\"node_exporter\"}[5m])*8",
+      "legendFormat": "Tx {{device}} ",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    }
+  ]
+}

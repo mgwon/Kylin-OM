@@ -1,0 +1,33 @@
+{
+  "panel_title": "Memory Pages Swap In / Out",
+  "panel_id": 22,
+  "description": "Rate at which memory pages are being swapped in from or out to disk. High swap-out activity may indicate memory pressure",
+  "targets": [
+    {
+      "refId": "A",
+      "query": "irate(node_vmstat_pswpin{instance=\"localhost:9100\",job=\"node_exporter\"}[5m])",
+      "legendFormat": "Pswpin - Pages swapped in",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    },
+    {
+      "refId": "B",
+      "query": "irate(node_vmstat_pswpout{instance=\"localhost:9100\",job=\"node_exporter\"}[5m])",
+      "legendFormat": "Pswpout - Pages swapped out",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    }
+  ]
+}

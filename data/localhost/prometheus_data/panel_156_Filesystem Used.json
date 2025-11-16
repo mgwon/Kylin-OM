@@ -1,0 +1,20 @@
+{
+  "panel_title": "Filesystem Used",
+  "panel_id": 156,
+  "description": "Disk usage (used = total - available) per mountpoint",
+  "targets": [
+    {
+      "refId": "A",
+      "query": "node_filesystem_size_bytes{instance=\"localhost:9100\",job=\"node_exporter\",device!~'rootfs'} - node_filesystem_avail_bytes{instance=\"localhost:9100\",job=\"node_exporter\",device!~'rootfs'}",
+      "legendFormat": "{{mountpoint}}",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    }
+  ]
+}

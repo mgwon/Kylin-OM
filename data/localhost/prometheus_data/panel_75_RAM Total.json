@@ -1,0 +1,20 @@
+{
+  "panel_title": "RAM Total",
+  "panel_id": 75,
+  "description": "",
+  "targets": [
+    {
+      "refId": "A",
+      "query": "node_memory_MemTotal_bytes{instance=\"localhost:9100\",job=\"node_exporter\"}",
+      "legendFormat": "",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    }
+  ]
+}

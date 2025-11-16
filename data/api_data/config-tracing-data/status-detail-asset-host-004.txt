@@ -1,0 +1,16 @@
+{
+  "assetId": "host-004",
+  "ip": "192.168.2.6",
+  "configs": [
+    { 
+      "id": "conf-mysql-1",
+      "path": "/etc/my.cnf", 
+      "status": "未同步" 
+    },
+    { 
+      "id": "conf-mysql-2",
+      "path": "/etc/hosts", 
+      "status": "已同步" 
+    }
+  ]
+}

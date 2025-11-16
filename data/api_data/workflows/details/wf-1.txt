@@ -1,0 +1,71 @@
+{
+  "id": "wf-1",
+  "name": "workflow1",
+  "hostGroup": "group1",
+  "hostCount": 1,
+  "application": "default_network",
+  "description": "The first workflow we created!",
+  "status": "运行中",
+  "hosts": [
+    {
+      "id": "host-test-01",
+      "name": "test",
+      "ip": "175.32.33.67",
+      "indicatorCount": 13,
+      "indicators": [
+        {
+          "id": "ind-001",
+          "name": "gala_gopher_cpu_sched",
+          "algorithm": "arima",
+          "model": "Arima"
+        },
+        {
+          "id": "ind-002",
+          "name": "gala_gopher_disk_wspeed_kB",
+          "algorithm": "mae",
+          "model": "Mae"
+        },
+        {
+          "id": "ind-003",
+          "name": "gala_gopher_file_system_Used",
+          "algorithm": "mae",
+          "model": "Mae"
+        },
+        {
+          "id": "ind-004",
+          "name": "gala_gopher_tcp_link_receive_rsts",
+          "algorithm": "ngisgma",
+          "model": "NSigma"
+        },
+        {
+          "id": "ind-005",
+          "name": "another_dummy_indicator",
+          "algorithm": "fft",
+          "model": "FftModel"
+        }
+      ],
+      "multiMetricRules": [
+        {
+          "name": "wf1",
+          "threshold": 80,
+          "metrics": [
+            {
+              "id": "m-1754041555128",
+              "name": "cpu_usage",
+              "currentValue": 50,
+              "weight": 0.5
+            },
+            {
+              "id": "m-1754041569447",
+              "name": "memory_usage",
+              "currentValue": 30,
+              "weight": 0.3
+            }
+          ],
+          "currentValue": 34,
+          "id": "rule-815bdd"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "panel_title": "Processes Detailed States",
+  "panel_id": 315,
+  "description": "Current number of processes in each state (e.g., running, sleeping, zombie). Requires --collector.processes to be enabled in node_exporter",
+  "targets": [
+    {
+      "refId": "A",
+      "query": "node_processes_state{instance=\"localhost:9100\",job=\"node_exporter\"}",
+      "legendFormat": "{{ state }}",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "panel_title": "CPU Saturation per Core",
+  "panel_id": 305,
+  "description": "Shows CPU saturation per core, calculated as the proportion of time spent waiting to run relative to total time demanded (running + waiting).",
+  "targets": [
+    {
+      "refId": "A",
+      "query": "irate(node_schedstat_running_seconds_total{instance=\"localhost:9100\",job=\"node_exporter\"}[5m])",
+      "legendFormat": "CPU {{ cpu }} - Running",
+      "hidden": true,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    },
+    {
+      "refId": "B",
+      "query": "irate(node_schedstat_waiting_seconds_total{instance=\"localhost:9100\",job=\"node_exporter\"}[5m])",
+      "legendFormat": "CPU {{cpu}} - Waiting Queue",
+      "hidden": true,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    },
+    {
+      "refId": "C",
+      "query": "irate(node_schedstat_waiting_seconds_total{instance=\"localhost:9100\",job=\"node_exporter\"}[5m])\n/\n(irate(node_schedstat_running_seconds_total{instance=\"localhost:9100\",job=\"node_exporter\"}[5m]) + irate(node_schedstat_waiting_seconds_total{instance=\"localhost:9100\",job=\"node_exporter\"}[5m]))\n",
+      "legendFormat": "CPU {{cpu}}",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    }
+  ]
+}

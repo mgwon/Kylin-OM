@@ -1,0 +1,20 @@
+{
+  "panel_title": "Sockstat Used",
+  "panel_id": 126,
+  "description": "Total number of sockets currently in use across all protocols (TCP, UDP, UNIX, etc.), as reported by /proc/net/sockstat",
+  "targets": [
+    {
+      "refId": "A",
+      "query": "node_sockstat_sockets_used{instance=\"localhost:9100\",job=\"node_exporter\"}",
+      "legendFormat": "Total sockets",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    }
+  ]
+}

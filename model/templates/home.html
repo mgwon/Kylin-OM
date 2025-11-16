@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>主页</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+        }
+        
+        .top-bar {
+            background-color: white;
+            color: black;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            z-index: 1000; /* 使主题栏位于较高层级 */
+            position: fixed; /* 固定在屏幕上 */
+            width:100%;
+            height:80px;
+            border-bottom: 1px solid #c2c4c6;
+        }
+
+        .top-bar__left {
+            margin-left: 80px;
+            font-size: 1.5rem;
+        }
+
+        .top-bar__right {
+            font-size: 1rem;
+        }
+
+        .btn {
+            text-decoration: none;
+            color: black;
+            padding: 8px 15px;
+        }
+
+        .btn:hover {
+            background-color: #fff;
+            color: #333;
+        }
+
+        .btn-goto {
+            background-color: #3d4451; /* 按钮背景颜色 */
+            color: white; /* 按钮文字颜色 */
+            padding: 10px 20px; /* 按钮内边距 */
+            border: none; /* 去除边框 */
+            border-radius: 5px; /* 圆角边框 */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 阴影效果 */
+            font-size: 16px; /* 字体大小 */
+            font-weight: bold; /* 字体加粗 */
+            transition: background-color 0.3s, color 0.3s; /* 过渡效果 */
+            margin-bottom: 80px;
+            margin-top: 30px;
+            text-decoration: none; /* 去除下划线 */
+        }
+
+        .btn-goto:hover {
+            background-color: #646974; /* 按钮悬停背景颜色 */
+            color: #fff; /* 按钮悬停文字颜色 */
+        }
+
+        .container {
+            display: flex;
+            width: 100%; /* 设置为全屏宽度 */
+            margin: 0;
+            padding: 0;
+            z-index: 900; /* 使目录栏位于较低层级 */
+        }
+
+        .sidebar {
+            width: 15%; /* 设置目录栏宽度 */
+            background-color: white;
+            padding: 20px;
+            position: fixed; /* 固定在屏幕上 */
+            left: 0; /* 距离左侧的距离 */
+            height: 100%; /* 撑满整个屏幕高度 */
+            box-sizing: border-box; /* 确保 padding 不会增加元素的实际尺寸 */
+            overflow-y: auto; /* 若内容过多，启用垂直滚动条 */
+            z-index: 900; /* 使目录栏位于较低层级 */
+            margin-top: 80px;
+            border-right: 1px solid #c2c4c6;
+        }
+
+        .menu li {
+            margin-bottom: 10px;
+        }
+
+        .sidebar-btn{
+            text-align: center;
+            padding: 10px 0;
+            transition: all 0.3s ease;
+        }
+        .sidebar-btn:hover{
+            background-color: #d6d8d98e;
+            color:#333;
+        }
+
+        .menu {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .menu li a {
+            text-decoration: none;
+            font-size: 18px;
+            color: #707070;
+            display: block;
+        }
+
+        .content {
+            flex: 1; /* 让主内容区域自动填充剩余空间 */
+            padding: 20px;
+            height:100vh;
+            margin-top: 80px;
+            margin-left:15%; /* 为了避免侧边栏覆盖内容，给内容部分增加左边距 */
+            text-align: center;
+        }
+        
+        .cont1 {
+            background-image: url('../static/images/back1.jpg'); /* 设置背景图片 */
+            background-size: cover; /* 背景图片覆盖整个元素 */
+            background-repeat: no-repeat; /* 背景图片不重复 */
+            background-position: center; /* 背景图片居中显示 */
+            height:900px;
+            font-size: 50px;
+            padding-top: 400px;
+            font-family: Arial;
+            color:white;
+            display:flex;
+            flex-direction: column;
+        }
+        
+        .cont2 {
+            height:300px;
+            justify-content: center;
+            align-items: center; /* 竖直居中 */
+            font-size: 40px;
+            font-family: Arial;
+            color:black;
+            display:flex;
+        }
+        
+        .box_picture{
+            height:500px;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        
+        img {
+            width: 70%; /* 或者您想要的任何宽度 */
+            height: auto; /* 高度会自动调整以保持图片比例 */
+            object-fit: contain; /* 保证图片不会被裁剪 */
+        }
+        
+        .cont3 {
+            height:400px;
+            justify-content: center;
+            align-items: center; /* 竖直居中 */
+            font-size: 35px;
+            font-family: Arial;
+            color:black;
+            display:flex;
+
+        }
+        
+        .cont4 {
+            height:400px;
+            justify-content: center;
+            align-items: center; /* 竖直居中 */
+            font-size: 35px;
+            font-family: Arial;
+            color:black;
+            display:flex;
+            flex-direction: column;
+        }
+        
+        .box1{
+            flex:1;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            font-family: Arial;
+            margin-right:50px;
+        }
+        
+        .cont5 {
+            height:300px;
+            font-size: 35px;
+            text-align: left;
+            font-family: Arial;
+            color:black;
+            display:flex;
+            flex-direction: column;
+            padding-left:40px;
+        }
+        
+        table {
+            width: 70%; /* 表格宽度占满容器 */
+            border-collapse: collapse; /* 边框合并为单一线条 */
+            margin-top: 20px;
+        }
+        
+        /* 为表格的头部设置样式 */
+        th {
+            background-color: #EBEBEB;
+            color: #333; /* 文字颜色 */
+            padding: 10px; /* 内边距 */
+            border: 1px solid #c2c4c6; /* 边框 */
+            font-size: 20px;
+        }
+        
+        /* 为表格的单元格设置样式 */
+        td {
+            padding: 8px; /* 内边距 */
+            border: 1px solid #c2c4c6; /* 边框 */
+            text-align: center; /* 文字对齐方式 */
+            font-size: 20px;
+        }
+        
+        tr:hover {
+            background-color: #fafafa; /* 悬停时的背景颜色 */
+        }
+    </style>
+</head>
+<body>
+    <header class="top-bar">
+        <div class="top-bar__left">
+            基于机器学习的银河麒麟操作系统智能调优软件
+        </div>
+        <div class="top-bar__right">
+            <a href="https://github.com" target="_blank" class="btn">GitHub</a>
+        </div>
+    </header>
+    <div class="container" style="height: max-content">
+        <div class="sidebar">
+            <ul class="menu">
+                <li><a class="sidebar-btn" href="{% url 'home' %}">主页</a></li>
+                <li><a class="sidebar-btn" href="{% url 'select' %}">选择时间段</a></li>
+                <li><a class="sidebar-btn" href="{% url 'show_demo' %}">可视化大屏(demo)</a></li>
+                <li><a class="sidebar-btn" href="{% url 'show' %}">可视化大屏</a></li>
+                <li><a class="sidebar-btn" href="{% url 'optimization' %}">调优界面</a></li>
+                <li><a class="sidebar-btn" href="{% url 'ebpf' %}">eBPF</a></li>
+            </ul>
+        </div>
+        <div class="content">
+            <div class="cont1">
+                <p style="font-size: 40px">基于银河麒麟操作系统的</p>
+                <p style="font-size: 50px">智能调优软件</p>
+            </div>
+            <div class="cont2">采集关键系统性能指标</div>
+            <div class="pic" style="display: flex;flex-direction: row;height: 300px">
+            <div class="box_picture">
+                <img src="../static/home_pic/index1.png" alt="index1" style="width: 80%">
+            </div>
+            <div class="box_picture">
+                <img src="../static/home_pic/index2.png" alt="index2" style="width: 80%">
+            </div>
+            <div class="box_picture">
+                <img src="../static/home_pic/index3.png" alt="index3" style="width: 75%">
+            </div>
+            </div>
+<!--            <div class="cont3">-->
+<!--                <div class="box1">运用eBPF技术实现IO统计</div>-->
+<!--                <div class="box1">-->
+<!--                   <img src="../static/images/index3.png" alt="index4">-->
+<!--                </div>-->
+<!--            </div>-->
+            <div class="cont3">
+                <div class="box1">
+                    <img src="../static/svg/cpu-demo.svg" alt="index5" style="width: 70%;margin-left:120px;">
+                </div>
+                <div class="box1">运用火焰图实现CPU统计</div>
+            </div>
+            <div style="background-color: #EBEBEB; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                <p style="margin-top: 80px; font-size: 25px">如果您想要使用本软件，请首先设置时间段</p>
+                <a class="btn-goto" href="{% url 'select' %}" >选择时间段</a>
+            </div>
+            <div class="cont4">
+                <p style="margin-top: 80px;font-size: 30px">您目前已选择的时间段：</p>
+                <table>
+                    <tr>
+                        <th>开始时间</th>
+                        <th>结束时间</th>
+                    </tr>
+                    <tr>
+                        <td>{{ start_time }}</td>
+                        <td>{{ end_time }}</td>
+                    </tr>
+                </table>
+                <p style="margin-top: 20px; margin-bottom:0; font-size: 30px">如果您想要修改，请点击跳转返回修改</p>
+                <a class="btn-goto" href="{% url 'select' %}">修改时间段</a>
+            </div>
+            <div style="background-color: #EBEBEB; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+            <!-- 按钮链接 -->
+                <p style="margin-top: 80px;font-size: 30px">可视化大屏：</p>
+                <a href="{% url 'show' %}" class="btn-goto">{{ button_text }}</a>
+            </div>    
+            <div class="cont5">
+                <p style="font-size: 30px;margin-top: 40px"></p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,50 @@
+[
+  {
+    "id": "model-01",
+    "name": "Ewma",
+    "algorithm": "ewma",
+    "precision": "95%",
+    "tags": [],
+    "createdAt": "2022-08-14 18:00:00"
+  },
+  {
+    "id": "model-02",
+    "name": "Mae",
+    "algorithm": "mae",
+    "precision": "98%",
+    "tags": ["推荐"],
+    "createdAt": "2022-08-14 18:00:00"
+  },
+  {
+    "id": "model-03",
+    "name": "NSigma",
+    "algorithm": "ngisigma",
+    "precision": "97%",
+    "tags": [],
+    "createdAt": "2022-08-14 18:00:00"
+  },
+  {
+    "id": "model-04",
+    "name": "Fft",
+    "algorithm": "fft",
+    "precision": "92%",
+    "tags": [],
+    "createdAt": "2022-08-15 10:00:00"
+  },
+  {
+    "id": "model-05",
+    "name": "Arima",
+    "algorithm": "arima",
+    "precision": "96%",
+    "tags": [],
+    "createdAt": "2022-08-16 11:00:00"
+  },
+  {
+    "id": "model-06",
+    "name": "Prophet",
+    "algorithm": "prophet",
+    "precision": "99%",
+    "tags": ["推荐"],
+    "createdAt": "2022-08-17 12:00:00"
+  }
+]

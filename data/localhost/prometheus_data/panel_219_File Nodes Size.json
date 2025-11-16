@@ -1,0 +1,20 @@
+{
+  "panel_title": "File Nodes Size",
+  "panel_id": 219,
+  "description": "Number of file nodes (inodes) available per mounted filesystem. Reflects maximum file capacity regardless of disk size",
+  "targets": [
+    {
+      "refId": "A",
+      "query": "node_filesystem_files{instance=\"localhost:9100\",job=\"node_exporter\",device!~'rootfs'}",
+      "legendFormat": "{{mountpoint}}",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    }
+  ]
+}

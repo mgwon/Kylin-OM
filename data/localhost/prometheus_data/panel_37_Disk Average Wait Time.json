@@ -1,0 +1,33 @@
+{
+  "panel_title": "Disk Average Wait Time",
+  "panel_id": 37,
+  "description": "Average time for requests issued to the device to be served. This includes the time spent by the requests in queue and the time spent servicing them.",
+  "targets": [
+    {
+      "refId": "A",
+      "query": "irate(node_disk_read_time_seconds_total{instance=\"localhost:9100\",job=\"node_exporter\"}[5m]) / irate(node_disk_reads_completed_total{instance=\"localhost:9100\",job=\"node_exporter\"}[5m])",
+      "legendFormat": "{{device}} - Read",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    },
+    {
+      "refId": "B",
+      "query": "irate(node_disk_write_time_seconds_total{instance=\"localhost:9100\",job=\"node_exporter\"}[5m]) / irate(node_disk_writes_completed_total{instance=\"localhost:9100\",job=\"node_exporter\"}[5m])",
+      "legendFormat": "{{device}} - Write",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    }
+  ]
+}

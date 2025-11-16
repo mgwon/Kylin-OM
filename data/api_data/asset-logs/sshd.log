@@ -1,0 +1,28 @@
+-- Logs begin at Wed 2025-07-23 11:20:17 CST. --
+7月 23 11:20:35 localhost.localdomain systemd[1]: Starting OpenSSH server daemon...
+7月 23 11:20:35 localhost.localdomain sshd[3641]: /etc/ssh/sshd_config line 147: Deprecated option RSAAuthentication
+7月 23 11:20:35 localhost.localdomain sshd[3641]: /etc/ssh/sshd_config line 149: Deprecated option RhostsRSAAuthentication
+7月 23 11:20:35 localhost.localdomain sshd[3641]: Server listening on 0.0.0.0 port 22.
+7月 23 11:20:35 localhost.localdomain sshd[3641]: Server listening on :: port 22.
+7月 23 11:20:35 localhost.localdomain systemd[1]: Started OpenSSH server daemon.
+-- Logs begin at Wed 2025-07-23 11:20:17 CST. --
+-- Logs begin at Wed 2025-07-23 11:20:17 CST. --
+-- Logs begin at Wed 2025-07-23 11:20:17 CST. --
+-- Logs begin at Wed 2025-07-23 11:20:17 CST. --
+7月 23 11:20:35 localhost.localdomain systemd[1]: Starting OpenSSH server daemon...
+7月 23 11:20:35 localhost.localdomain sshd[3641]: /etc/ssh/sshd_config line 147: Deprecated option RSAAuthentication
+7月 23 11:20:35 localhost.localdomain sshd[3641]: /etc/ssh/sshd_config line 149: Deprecated option RhostsRSAAuthentication
+7月 23 11:20:35 localhost.localdomain sshd[3641]: Server listening on 0.0.0.0 port 22.
+7月 23 11:20:35 localhost.localdomain sshd[3641]: Server listening on :: port 22.
+7月 23 11:20:35 localhost.localdomain systemd[1]: Started OpenSSH server daemon.
+7月 23 16:09:39 localhost.localdomain sshd[3641]: Received signal 15; terminating.
+7月 23 16:09:40 localhost.localdomain systemd[1]: Stopping OpenSSH server daemon...
+7月 23 16:09:40 localhost.localdomain systemd[1]: sshd.service: Succeeded.
+7月 23 16:09:40 localhost.localdomain systemd[1]: Stopped OpenSSH server daemon.
+-- Logs begin at Wed 2025-07-23 16:11:24 CST. -- 
+7月 23 16:11:45 localhost.localdomain systemd[1]: Starting OpenSSH server daemon...
+7月 23 16:11:45 localhost.localdomain sshd[3643]: /etc/ssh/sshd_config line 147: Deprecated option RSAAuthentication
+7月 23 16:11:45 localhost.localdomain sshd[3643]: /etc/ssh/sshd_config line 149: Deprecated option RhostsRSAAuthentication
+7月 23 16:11:45 localhost.localdomain sshd[3643]: Server listening on 0.0.0.0 port 22.
+7月 23 16:11:45 localhost.localdomain sshd[3643]: Server listening on :: port 22.
+7月 23 16:11:45 localhost.localdomain systemd[1]: Started OpenSSH server daemon.

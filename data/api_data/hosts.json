@@ -1,0 +1,117 @@
+[
+    {
+        "id": "g1",
+        "name": "Web Servers",
+        "description": "所有对外提供Web服务的主机",
+        "hosts": [
+            {
+                "id": "host-002",
+                "name": "172.16.0.1",
+                "ip": "192.168.1.11",
+                "ssh": 22,
+                "isMgmt": "否",
+                "status": "运行中"
+            },
+            {
+                "id": "host-009",
+                "name": "172.16.0.8",
+                "ip": "192.168.1.12",
+                "ssh": 22,
+                "isMgmt": "否",
+                "status": "运行中"
+            }
+        ]
+    },
+    {
+        "id": "g2",
+        "name": "Database",
+        "description": "核心数据库服务器集群",
+        "hosts": [
+            {
+                "id": "host-003",
+                "name": "172.16.0.2",
+                "ip": "192.168.2.5",
+                "ssh": 22,
+                "isMgmt": "是",
+                "status": "运行中"
+            },
+            {
+                "id": "host-004",
+                "name": "172.16.0.3",
+                "ip": "192.168.2.6",
+                "ssh": 22,
+                "isMgmt": "否",
+                "status": "告警"
+            },
+            {
+                "id": "host-010",
+                "name": "172.16.0.9",
+                "ip": "192.168.2.7",
+                "ssh": 22,
+                "isMgmt": "否",
+                "status": "运行中"
+            },
+            {
+                "id": "host-011",
+                "name": "172.16.0.0",
+                "ip": "192.168.2.8",
+                "ssh": 22,
+                "isMgmt": "否",
+                "status": "运行中"
+            }
+        ]
+    },
+    {
+        "id": "g3",
+        "name": "Cache",
+        "description": "Redis和Memcached缓存服务器",
+        "hosts": [
+            {
+                "id": "host-005",
+                "name": "172.16.0.4",
+                "ip": "192.168.3.1",
+                "ssh": 22,
+                "isMgmt": "否",
+                "status": "运行中"
+            }
+        ]
+    },
+    {
+        "id": "g4",
+        "name": "Infrastructure",
+        "description": "基础架构，如堡垒机、DNS等",
+        "hosts": [
+            {
+                "id": "host-008",
+                "name": "172.16.0.7",
+                "ip": "192.168.1.200",
+                "ssh": 22,
+                "isMgmt": "否",
+                "status": "运行中"
+            },
+            {
+                "id": "host-012",
+                "name": "172.16.0.0",
+                "ip": "192.168.0.1",
+                "ssh": 22,
+                "isMgmt": "是",
+                "status": "运行中"
+            }
+        ]
+    },
+    {
+        "id": "g5",
+        "name": "Testing",
+        "description": "用于开发和测试环境的主机",
+        "hosts": [
+            {
+                "id": "host-007",
+                "name": "172.16.0.6",
+                "ip": "172.16.10.1",
+                "ssh": 22,
+                "isMgmt": "否",
+                "status": "暂无"
+            }
+        ]
+    }
+]

@@ -1,0 +1,20 @@
+{
+  "panel_title": "Time PLL Adjust",
+  "panel_id": 291,
+  "description": "NTP phase-locked loop (PLL) time constant used by the kernel to control time adjustments. Lower values mean faster correction but less stability",
+  "targets": [
+    {
+      "refId": "A",
+      "query": "node_timex_loop_time_constant{instance=\"localhost:9100\",job=\"node_exporter\"}",
+      "legendFormat": "PLL Time Constant",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    }
+  ]
+}

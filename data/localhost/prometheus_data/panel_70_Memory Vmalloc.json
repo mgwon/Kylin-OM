@@ -1,0 +1,46 @@
+{
+  "panel_title": "Memory Vmalloc",
+  "panel_id": 70,
+  "description": "Usage of the kernel's vmalloc area, which provides virtual memory allocations for kernel modules and drivers. Includes total, used, and largest free block sizes",
+  "targets": [
+    {
+      "refId": "A",
+      "query": "node_memory_VmallocChunk_bytes{instance=\"localhost:9100\",job=\"node_exporter\"}",
+      "legendFormat": "Vmalloc Free Chunk – Largest available block in vmalloc area",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    },
+    {
+      "refId": "B",
+      "query": "node_memory_VmallocTotal_bytes{instance=\"localhost:9100\",job=\"node_exporter\"}",
+      "legendFormat": "Vmalloc Total – Total size of the vmalloc memory area",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    },
+    {
+      "refId": "C",
+      "query": "node_memory_VmallocUsed_bytes{instance=\"localhost:9100\",job=\"node_exporter\"}",
+      "legendFormat": "Vmalloc Used – Portion of vmalloc area currently in use",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    }
+  ]
+}

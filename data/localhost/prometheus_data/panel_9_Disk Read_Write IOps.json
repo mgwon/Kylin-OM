@@ -1,0 +1,33 @@
+{
+  "panel_title": "Disk Read/Write IOps",
+  "panel_id": 9,
+  "description": "Number of I/O operations completed per second for the device (after merges), including both reads and writes",
+  "targets": [
+    {
+      "refId": "A",
+      "query": "irate(node_disk_reads_completed_total{instance=\"localhost:9100\",job=\"node_exporter\"}[5m])",
+      "legendFormat": "{{device}} - Read",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    },
+    {
+      "refId": "B",
+      "query": "irate(node_disk_writes_completed_total{instance=\"localhost:9100\",job=\"node_exporter\"}[5m])",
+      "legendFormat": "{{device}} - Write",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    }
+  ]
+}

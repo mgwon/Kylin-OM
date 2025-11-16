@@ -1,0 +1,85 @@
+{
+  "panel_title": "Pressure Stall Information",
+  "panel_id": 322,
+  "description": "How often tasks experience CPU, memory, or I/O delays. “Some” indicates partial slowdown; “Full” indicates all tasks are stalled. Based on Linux PSI metrics:\nhttps://docs.kernel.org/accounting/psi.html",
+  "targets": [
+    {
+      "refId": "CPU some",
+      "query": "rate(node_pressure_cpu_waiting_seconds_total{instance=\"localhost:9100\",job=\"node_exporter\"}[5m])",
+      "legendFormat": "CPU - Some",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    },
+    {
+      "refId": "Memory some",
+      "query": "rate(node_pressure_memory_waiting_seconds_total{instance=\"localhost:9100\",job=\"node_exporter\"}[5m])",
+      "legendFormat": "Memory - Some",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    },
+    {
+      "refId": "Memory full",
+      "query": "rate(node_pressure_memory_stalled_seconds_total{instance=\"localhost:9100\",job=\"node_exporter\"}[5m])",
+      "legendFormat": "Memory - Full",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    },
+    {
+      "refId": "I/O some",
+      "query": "rate(node_pressure_io_waiting_seconds_total{instance=\"localhost:9100\",job=\"node_exporter\"}[5m])",
+      "legendFormat": "I/O - Some",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    },
+    {
+      "refId": "I/O full",
+      "query": "rate(node_pressure_io_stalled_seconds_total{instance=\"localhost:9100\",job=\"node_exporter\"}[5m])",
+      "legendFormat": "I/O - Full",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    },
+    {
+      "refId": "A",
+      "query": "rate(node_pressure_irq_stalled_seconds_total{instance=\"localhost:9100\",job=\"node_exporter\"}[5m])",
+      "legendFormat": "IRQ - Full",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    }
+  ]
+}

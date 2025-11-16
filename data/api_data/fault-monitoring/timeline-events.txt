@@ -1,0 +1,6 @@
+[
+  { "id": "evt1", "type": "anomaly", "summary": "CPU异常", "position_percent": 20 },
+  { "id": "evt2", "type": "change", "summary": "配置变更", "position_percent": 45 },
+  { "id": "evt3", "type": "log_error", "summary": "错误日志", "position_percent": 75 },
+  { "id": "evt4", "type": "anomaly", "summary": "内存泄漏", "position_percent": 80 }
+]

@@ -1,0 +1,20 @@
+{
+  "panel_title": "Sys Load",
+  "panel_id": 155,
+  "description": "System load  over all CPU cores together",
+  "targets": [
+    {
+      "refId": "A",
+      "query": "scalar(node_load1{instance=\"localhost:9100\",job=\"node_exporter\"}) * 100 / count(count(node_cpu_seconds_total{instance=\"localhost:9100\",job=\"node_exporter\"}) by (cpu))",
+      "legendFormat": "",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    }
+  ]
+}

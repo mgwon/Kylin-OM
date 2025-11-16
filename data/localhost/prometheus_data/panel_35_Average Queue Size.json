@@ -1,0 +1,20 @@
+{
+  "panel_title": "Average Queue Size",
+  "panel_id": 35,
+  "description": "Average queue length of the requests that were issued to the device",
+  "targets": [
+    {
+      "refId": "A",
+      "query": "irate(node_disk_io_time_weighted_seconds_total{instance=\"localhost:9100\",job=\"node_exporter\"}[5m])",
+      "legendFormat": "{{device}}",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    }
+  ]
+}

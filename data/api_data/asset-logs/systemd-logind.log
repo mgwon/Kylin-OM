@@ -1,0 +1,31 @@
+-- Logs begin at Wed 2025-07-23 11:20:17 CST. --
+7月 23 11:20:33 localhost.localdomain systemd[1]: Starting Login Service...
+7月 23 11:20:33 localhost.localdomain systemd-logind[3107]: New seat seat0.
+7月 23 11:20:33 localhost.localdomain systemd-logind[3107]: Watching system buttons on /dev/input/event0 (Power Button)
+7月 23 11:20:33 localhost.localdomain systemd-logind[3107]: Watching system buttons on /dev/input/event1 (AT Translated Set 2 keyboard)
+7月 23 11:20:33 localhost.localdomain systemd[1]: Started Login Service.
+7月 23 11:20:39 localhost.localdomain systemd-logind[3107]: New session c1 of user lightdm.
+7月 23 11:21:05 localhost.localdomain systemd-logind[3107]: Removed session c1.
+7月 23 11:21:05 localhost.localdomain systemd-logind[3107]: New session 2 of user root.
+-- Logs begin at Wed 2025-07-23 11:20:17 CST. --
+-- Logs begin at Wed 2025-07-23 11:20:17 CST. --
+-- Logs begin at Wed 2025-07-23 11:20:17 CST. --
+-- Logs begin at Wed 2025-07-23 11:20:17 CST. --
+7月 23 11:20:33 localhost.localdomain systemd[1]: Starting Login Service...
+7月 23 11:20:33 localhost.localdomain systemd-logind[3107]: New seat seat0.
+7月 23 11:20:33 localhost.localdomain systemd-logind[3107]: Watching system buttons on /dev/input/event0 (Power Button)
+7月 23 11:20:33 localhost.localdomain systemd-logind[3107]: Watching system buttons on /dev/input/event1 (AT Translated Set 2 keyboard)
+7月 23 11:20:33 localhost.localdomain systemd[1]: Started Login Service.
+7月 23 11:20:39 localhost.localdomain systemd-logind[3107]: New session c1 of user lightdm.
+7月 23 11:21:05 localhost.localdomain systemd-logind[3107]: Removed session c1.
+7月 23 11:21:05 localhost.localdomain systemd-logind[3107]: New session 2 of user root.
+7月 23 16:09:39 localhost.localdomain systemd-logind[3107]: System is powering down.
+-- Logs begin at Wed 2025-07-23 16:11:24 CST. --
+7月 23 16:11:42 localhost.localdomain systemd[1]: Starting Login Service...
+7月 23 16:11:42 localhost.localdomain systemd-logind[3109]: New seat seat0.
+7月 23 16:11:42 localhost.localdomain systemd-logind[3109]: Watching system buttons on /dev/input/event0 (Power Button)
+7月 23 16:11:42 localhost.localdomain systemd-logind[3109]: Watching system buttons on /dev/input/event1 (AT Translated Set 2 keyboard)
+7月 23 16:11:42 localhost.localdomain systemd[1]: Started Login Service.
+7月 23 16:11:49 localhost.localdomain systemd-logind[3109]: New session c1 of user lightdm.
+7月 23 16:12:10 localhost.localdomain systemd-logind[3109]: Removed session c1.
+7月 23 16:12:10 localhost.localdomain systemd-logind[3109]: New session 2 of user root.

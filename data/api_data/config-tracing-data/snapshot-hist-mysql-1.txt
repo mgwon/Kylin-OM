@@ -1,0 +1,6 @@
+{
+  "historyId": "hist-mysql-1",
+  "version": "v3",
+  "timestamp": "2025-07-25 10:55:10",
+  "content": "# my.cnf for 192.168.2.6\n[mysqld]\nmax_connections = 1500\n# User 'db_admin' changed this value for performance test\ninnodb_buffer_pool_size = 4G\n"
+}

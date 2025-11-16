@@ -1,0 +1,20 @@
+{
+  "panel_title": "Systemd Sockets Current",
+  "panel_id": 331,
+  "description": "Current number of active connections per systemd socket, as reported by the Node Exporter systemd collector",
+  "targets": [
+    {
+      "refId": "A",
+      "query": "node_systemd_socket_current_connections{instance=\"localhost:9100\",job=\"node_exporter\"}",
+      "legendFormat": "{{ name }}",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    }
+  ]
+}

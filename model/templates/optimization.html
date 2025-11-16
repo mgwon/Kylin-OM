@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>调优界面</title>
+    <script type="text/javascript" src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>    <style>
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body,html{
+            width: 100%;
+            margin: 0;
+            position: relative;
+            font-family: Arial, sans-serif;
+        }
+        
+        .top-bar {
+            background-color: white;
+            color: black;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            z-index: 1000; /* 使主题栏位于较高层级 */
+            position: fixed; /* 固定在屏幕上 */
+            width: 100%;
+            height:80px;
+            border-bottom: 1px solid #c2c4c6;
+        }
+
+        .top-bar__left {
+            margin-left: 80px;
+            font-size: 1.5rem;
+        }
+
+        .top-bar__right {
+            font-size: 1rem;
+        }
+
+        .btn {
+            text-decoration: none;
+            color: black;
+            padding: 8px 15px;
+        }
+
+        .btn:hover {
+            background-color: #fff;
+            color: #333;
+        }
+
+        .container {
+            display: flex;
+            margin-right: 0;
+            padding: 0;
+            z-index: 900; /* 使目录栏位于较低层级 */
+        }
+
+        .sidebar {
+            width: 15%; /* 设置目录栏宽度 */
+            background-color: white;
+            padding: 20px;
+            position: fixed; /* 固定在屏幕上 */
+            left: 0; /* 距离左侧的距离 */
+            height: 100%; /* 撑满整个屏幕高度 */
+            box-sizing: border-box; /* 确保 padding 不会增加元素的实际尺寸 */
+            overflow-y: auto; /* 若内容过多，启用垂直滚动条 */
+            z-index: 900; /* 使目录栏位于较低层级 */
+            margin-top: 80px;
+            border-right: 1px solid #c2c4c6;
+        }
+        
+        .sidebar-btn{
+            text-align: center;
+            padding: 10px 0;
+            transition: all 0.3s ease;
+        }
+        .sidebar-btn:hover{
+            background-color: #d6d8d98e;
+            color:#333;
+        }
+
+        .menu {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .menu li {
+            margin-bottom: 10px;
+        }
+
+        .menu li a {
+            text-decoration: none;
+            font-size: 18px;
+            color: #707070;
+            display: block;
+        }
+
+        .content {
+            flex: 1; /* 让主内容区域自动填充剩余空间 */
+            padding: 20px;
+            height: auto;
+            margin-left:15%; /* 为了避免侧边栏覆盖内容，给内容部分增加左边距 */
+            text-align: center;
+            margin-top: 80px;
+        }
+        
+        .h1 {
+            height: 10%;
+            width: 100%;
+            background-color: transparent;
+            color: black;
+            text-align: center;
+            font-size: 40px;
+        }
+        
+        .box {
+            /* 弹性布局 */
+            display: flex;
+            /*弹性布局，默认主轴方向为x轴方向*/
+            margin-top: 10px;
+            border:solid 3px #c2c4c6;  
+            border-radius: 10px;
+            background-color: #f9f9f9;  
+        }
+        
+        .left {
+            flex: 7;
+            /*flex继承主轴方向上的大小比例*/
+            /*或者100%，继承父级高度*/
+            /* 宽可以 */
+            background-color: transparent;
+            display: flex;
+            flex-direction: column;/*修改主轴方向为y轴方向*/
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .center {
+            flex: 1;
+            background-color: transparent;    
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;  
+            text-align: center;
+        }
+        .right {
+            flex: 7;
+            background-color: transparent;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .vertical-dashed-line {
+            border-left: 3px dashed #616263; /* 定义竖直虚线样式 */
+            height:100%; /* 设置虚线的高度，这里为页面高度 */
+            content: ""; /* 必须有内容，用来显示边框 */
+            margin: 15px 0 15px 0;
+        }
+        
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: black }
+        }  
+    
+        .picture_l{
+            margin-left: 20px;
+            margin-top: 10px;
+            display: flex;
+            height: 250px;
+            background-color: #f3f3f4;
+            justify-content: center; /* 水平居中对齐 */
+            align-items: center; /* 垂直居中对齐 */
+
+
+        }
+    
+
+    
+        .picture_r{
+            margin-right: 20px;
+            margin-top: 10px;
+            height: 95%;
+            border-radius: 10px;
+
+        }
+    
+        .pr1{
+            margin-left: 20px;
+            margin-top: 10px;
+            height: 200px;
+            width: 90%;
+            border:solid 3px #ededee;  
+            border-radius: 10px;
+            padding:5px;
+            background-color: #f3f3f4;
+            text-align: left;
+            position: relative;
+        }
+        .pr1:hover .copy-btn {
+            display: block;
+        }
+        .code-box {
+            width: 100%;
+            padding: 10px;
+            background-color: transparent;
+            font-family: 'Courier New', Courier, monospace;
+            overflow: auto;
+            white-space: pre-wrap; /* 保持空白符的格式 */
+            word-break: break-all; /* 防止内容溢出 */
+        }
+        .copy-btn {
+            display: none;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+            background-color: #eee;
+            border: none;
+            padding: 5px 10px;
+        }
+        /* 隐藏的textarea，用于复制 */
+        .temp-textarea {
+            position: absolute;
+            left: -9999px;
+            top: 0;
+        }
+    
+        .pr2{
+            margin-right: 20px;
+            margin-top: 10px;
+            height: 400px;
+            width: 90%;
+            border:solid 3px #ededee;  
+            border-radius: 10px;
+            align-items: center;
+            padding:5px;
+            background-color: #f3f3f4;
+            text-align: left;
+            position: relative;
+        }
+        
+        .pr2:hover .copy-btn {
+            display: block;
+        }
+    
+        pre { 
+            font-size: 20px; /* 设置字体大小 */
+            white-space: pre-wrap; /* 保留空白字符并自动换行 */ 
+            word-wrap: break-word; /* 允许长单词换行 */ 
+            {#border: 1px solid #ccc; /* 添加边框以便更好地看到显示区域 */#}
+            width: 100%; /* 设置宽度，确保适应不同屏幕大小 */ 
+            box-sizing: border-box; /* 包含边框和内边距在宽度内 */ 
+            overflow-x: hidden; /* 横向不溢出 */
+            overflow-y: scroll; /* 竖向滚动 */
+            height: 100%;
+        }
+    
+        #fileContent2 { 
+            font-size: 20px; /* 设置字体大小 */ 
+            white-space: pre-wrap; /* 保持文本格式 */
+            font-family: 'Courier New', Courier, monospace; /* 可选: 使用等宽字体 */
+            overflow-x: hidden; /* 横向不溢出 */
+            overflow-y: scroll; /* 竖向滚动 */
+        }
+
+        .copy-button {
+            display: inline-block;
+            width: 100px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #00356B;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s, box-shadow 0.3s;
+            margin: 10px 0 20px 0;
+        }
+
+        .copy-button:hover {
+            background-color: #00356B;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .copy-button:active {
+            background-color: #00356B;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .picture_l1{
+            flex:1;
+            padding: 10px;
+            display: flex;
+            flex-direction: row;/*修改主轴方向为y轴方向*/
+            justify-content: center; /* 水平居中对齐 */
+            align-items: center; /* 垂直居中对齐 */
+            gap: 20px; /* 设置两个容器之间的间隔 */
+            margin-top: 40px; /* 上下间隔 */
+
+
+        }
+
+<!--        .chart-box {-->
+<!--            flex: 1; /* 让两个容器均分空间 */-->
+<!--            display: flex;-->
+<!--            flex-direction: column;-->
+<!--            align-items: center;-->
+<!--            padding: 10px;-->
+<!--            border: solid 1px #c2c4c6;-->
+<!--            border-radius: 10px;-->
+<!--            background-color: #f9f9f9;-->
+
+<!--        }-->
+
+        #container_cpu{
+            display:flex;
+            width: 230px;   /* 根据需要调整宽度 */
+            height: 250px; /* 高度可根据需要调整 */
+            margin-left: 80px;
+
+        }
+
+        #mem-chart-container{
+            display:flex;
+            width: 230px;   /* 根据需要调整宽度 */
+            height: 250px; /* 高度可根据需要调整 */
+
+        }
+    </style>
+    
+</head>
+<body>
+    <header class="top-bar">
+        <div class="top-bar__left">
+            基于机器学习的银河麒麟操作系统智能调优软件
+        </div>
+        <div class="top-bar__right">
+            <a href="https://github.com" target="_blank" class="btn">GitHub</a>
+        </div>
+    </header>
+    <div class="container">
+        <div class="sidebar">
+            <ul class="menu">
+                <li><a class="sidebar-btn" href="{% url 'home' %}">主页</a></li>
+                <li><a class="sidebar-btn" href="{% url 'select' %}">选择时间段</a></li>
+                <li><a class="sidebar-btn" href="{% url 'show_demo' %}">可视化大屏(demo)</a></li>
+                <li><a class="sidebar-btn" href="{% url 'show' %}">可视化大屏</a></li>
+                <li><a class="sidebar-btn" href="{% url 'optimization' %}">调优界面</a></li>
+                <li><a class="sidebar-btn" href="{% url 'ebpf' %}">eBPF</a></li>
+                
+            </ul>
+        </div>
+        
+        <div class="content">
+            <div class="h1">调优界面</div>
+            <div class="box">
+                <div class="left">
+                    <div class="picture_l">
+                        <div class="picture_l1">
+                            <div >
+                                <p class="cpu_chart_title" style="color: darkblue; font-size: 15px; margin-left:60px">CPU利用率</p>
+                                <div id="container_cpu" ></div>
+                                  <script type="text/javascript" src="{% static 'js/echarts.js' %}"></script>
+                                  <script type="text/javascript">
+                                    var dom = document.getElementById('container_cpu');
+                                    var myChart = echarts.init(dom, null, {
+                                      renderer: 'canvas',
+                                      useDirtyRect: false
+                                    });
+
+                                    var clocktime = {{ clocktime|safe }};
+                                    var cpuFreqs = {{ cpu_freq|safe }};
+                                    var cpuLogicsNum = {{ cpu_logics_num|safe }};
+                                    var cpuPhysicalsNum = {{ cpu_physicals_num|safe }};
+                                    var usermodeRuntime = {{ usermode_runtime|safe }};
+                                    var corestateRuntime = {{ corestate_runtime|safe }};
+                                    var IOwaitTime = {{ IOwait_time|safe }};
+                                    var averloadIn1min = {{ averload_in1min|safe }};
+                                    var averloadIn5min = {{ averload_in5min|safe }};
+                                    var averloadIn15min = {{ averload_in15min|safe }};
+                                    var interruptionsNum = {{ interruptions_num|safe }};
+                                    var softinterruptionsNum = {{ softinterruptions_num|safe }};
+                                    var systemcallsNum = {{ systemcalls_num|safe }};
+
+                                    var option = {
+                                  xAxis: {
+                                    type: 'category',
+                                    boundaryGap: false,
+                                    data: {{ timestamps|safe }},
+                                    show: false // 隐藏横坐标轴
+                                  },
+                                  yAxis: {
+                                    type: 'value'
+                                  },
+                                  series: [
+                                    {
+                                      data:
+                                      {{ cpu_usages|safe }},
+                                      type: 'line',
+                                      areaStyle: {},
+                                      markPoint: {
+                                            data: [
+                                              { type: 'max', name: 'Max CPU Usage' }
+                                            ],
+                                            label: {
+                                              show: true,
+                                              formatter: function(params) {
+                                                return '瓶颈: ' + params.value;
+                                              }
+                                            }
+                                          }
+
+                                    }
+                                  ],
+                                  tooltip: { /* 提示框配置 */
+                                        trigger: 'axis', /* 触发类型 */
+                                        formatter: function (params) { /* 格式化函数 */
+                                          var point = params[0]; /* 第一个数据点 */
+                                          var index = params[0].dataIndex;
+                                          /* 显示时间戳和CPU使用率 */
+                                          return '时间戳: ' + point.axisValueLabel + '<br>' +
+                                                 '时间: ' + clocktime[index] + '<br>' +
+                                                 'CPU 利用率: ' + point.value + '%<br>' +
+                                                 'CPU 频率: ' + cpuFreqs[index] + ' MHz<br>' +
+                                                 'CPU 逻辑核心数量: ' + cpuLogicsNum[index] + '<br>' +
+                                                 'CPU 物理核心数量: ' + cpuPhysicalsNum[index] + '<br>' +
+                                                 '用户态运行时间: ' + usermodeRuntime[index] + ' s<br>' +
+                                                 '核心态运行时间: ' + corestateRuntime[index] + ' s<br>' +
+                                                 'IO 等待时间: ' + IOwaitTime[index] + ' s<br>' +
+                                                 '1min内平均负载: ' + averloadIn1min[index] + '<br>' +
+                                                 '5min内平均负载: ' + averloadIn5min[index] + '<br>' +
+                                                 '15min内平均负载: ' + averloadIn15min[index] + '<br>' +
+                                                 '中断次数: ' + interruptionsNum[index] + '<br>' +
+                                                 '软中断次数: ' + softinterruptionsNum[index] + '<br>' +
+                                                 '系统调用次数: ' + systemcallsNum[index];
+                                        }
+                                      }
+                                };
+
+                                    if (option && typeof option === 'object') {
+                                      myChart.setOption(option);
+                                    }
+
+                                    window.addEventListener('resize', myChart.resize);
+                                  </script>
+                            </div>
+                            <div >
+                                <p class="mem_chart_title" style="color: darkblue; font-size: 15px; ">内存利用率</p>
+                                <div id="mem-chart-container"></div>
+                                    <script type="text/javascript" src="{% static 'js/echarts.js' %}"></script>
+                                    <script type="text/javascript" src="{% static 'js/mem_chart.js' %}"></script>
+                                    <script type="text/javascript">
+                                      var timestamps = {{ timestamps|safe }};
+                                      var clocktime = {{ clocktime|safe }};
+                                      var Totalmemory_size = {{ Totalmemory_size|safe }};
+                                      var Usedmemory_size = {{ Usedmemory_size|safe }};
+                                      var Freememory_size = {{  Freememory_size |safe}};
+                                      var Memory_usage = {{ Memory_usage |safe }};
+                                      var Swapmemory_size = {{ Swapmemory_size |safe }};
+                                      var UsedSwapmemory_size = {{ UsedSwapmemory_size |safe }};
+                                      var FreeSwapmemory_size = {{ FreeSwapmemory_size |safe }};
+                                      var Swapmemory_usage = {{ Swapmemory_usage |safe }};
+
+                                      var dom = document.getElementById("mem-chart-container");
+                                        var myChart = echarts.init(dom, null, {
+                                          renderer: 'canvas',
+                                          useDirtyRect: false
+                                        });
+
+                                        var option = {
+                                          xAxis: {
+                                            type: 'category',
+                                            boundaryGap: false,
+                                            data: timestamps,
+                                            show: false // 隐藏横坐标轴
+                                          },
+                                          yAxis: {
+                                            type: 'value'
+                                          },
+                                          series: [
+                                            {
+                                              name: '瓶颈', // 系列名称改为 "瓶颈"
+                                              data: Memory_usage,
+                                              type: 'line',
+                                              areaStyle: {},
+                                              markPoint: {
+                                                data: [
+                                                  { type: 'max', name: '瓶颈' } // 标记点名称改为 "瓶颈"
+                                                ],
+                                                label: {
+                                                  show: true,
+                                                  formatter: function(params) {
+                                                    return '瓶颈: ' + params.value + ' %';
+                                                  }
+                                                }
+                                              }
+                                            }
+                                          ],
+                                          tooltip: {
+                                            trigger: 'axis',
+                                            formatter: function(params) {
+                                              var point = params[0];
+                                              var index = params[0].dataIndex;
+                                              return '时间戳: ' + point.axisValueLabel + '<br>' +
+                                                     '时间: ' + clocktime[index] + '<br>' +
+                                                     '内存利用率: ' + point.value + '%<br>' +
+                                                     '总内存: ' + Totalmemory_size[index] + ' MB<br>' +
+                                                     '已用内存: ' + Usedmemory_size[index] + ' MB<br>' +
+                                                     '空闲内存: ' + Freememory_size[index] + ' MB<br>' +
+                                                     '交换内存大小: ' + Swapmemory_size[index] + ' Byte<br>' +
+                                                     '交换内存已用大小: ' + UsedSwapmemory_size[index] + ' Byte<br>' +
+                                                     '交换内存空闲大小: ' + FreeSwapmemory_size[index] + ' Byte<br>' +
+                                                     '交换内存使用占比: ' + Swapmemory_usage[index]+ '%'
+                                            }
+                                          }
+                                        };
+
+                                        if (option && typeof option === 'object') {
+                                          myChart.setOption(option);
+                                        }
+
+                                        window.addEventListener('resize', myChart.resize);
+                                    </script>
+                            </div>
+                        </div>
+                        <div class="picture_l1" style="width: 100px"></div>
+                    </div>
+                    <div class="pr1">
+                        <pre class="code-box">{{ file_content1 }}</pre>
+                        <button class="copy-btn">复制</button>
+                    </div>
+                    <div class="pr1">
+                        <pre class="code-box">{{ file_content2 }}</pre>
+                        <button class="copy-btn">复制</button>
+                    </div>
+                
+                  {# 执行按钮（复制调优指令） #}
+                    <button class="copy-button" onclick="copyToClipboard1()">执行</button>
+                 
+                </div>
+                <div class="center">
+                    <div class="vertical-dashed-line"></div>
+                </div>
+                <div class="right">
+                        <div class="picture_r">
+                            <img src="{% static 'images/metagpt.png' %}" style="width: 90%;margin-top: 30px">
+                            <p class="gpt_title" style="color: darkblue; font-size: 18px; ">MetaGPT原理图</p>
+                        </div>
+                        <div class="pr2">
+                            <pre class="code-box" id="fileContent2" style="height: 400px"></pre>
+                            <button class="copy-btn">复制</button>
+                            <script>
+                            // 获取从 Django 视图传递过来的 file_content 变量 
+                              const fileContent2 = `{{ file_content3|escapejs }}`;
+                              // 获取显示文本的元素 
+                              const displayElement = document.getElementById('fileContent2');
+                              // 打字速度（每个字符的延迟，单位是毫秒） 
+                              const typingSpeed = 50; 
+                              // 定义逐字打字的函数 
+                              function typeText(text, element, speed) { 
+                                  let index = 0; 
+                                  function type() { 
+                                      if (index < text.length) { 
+                                          element.textContent += text.charAt(index); 
+                                          index++; 
+                                          setTimeout(type, speed); 
+                                      } 
+                                  } 
+                                  type(); 
+                              } 
+                              // 调用函数开始打字 
+                              typeText(fileContent2, displayElement, typingSpeed);
+                            </script></div>
+                    {# 复制按钮（复制调优指令） #}
+                        <button class="copy-button" onclick="copyToClipboard2()">执行</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 隐藏的textarea -->
+    <textarea id="code-to-execute" class="temp-textarea" aria-hidden="true"></textarea>
+    <script>
+        // 获取所有复制按钮
+        var copyButtons = document.querySelectorAll('.copy-btn');
+        copyButtons.forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                // 获取与按钮相邻的代码框
+                var codeBox = this.previousElementSibling;
+                var text = codeBox.textContent || codeBox.innerText; // 获取文本内容
+
+                // 获取隐藏的textarea并复制文本
+                var tempTextarea = document.querySelector('.temp-textarea');
+                tempTextarea.value = text; // 将文本设置到textarea
+                tempTextarea.select(); // 选择textarea中的文本
+                document.execCommand('copy'); // 执行复制操作
+
+                // 可以选择性地显示一个消息，告知用户复制成功
+                alert('代码已复制到剪贴板！');
+            });
+        });
+    </script>
+</body>
+</html>

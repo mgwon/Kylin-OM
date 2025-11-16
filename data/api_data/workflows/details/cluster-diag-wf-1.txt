@@ -1,0 +1,41 @@
+{
+  "workflowId": "wf-1",
+  "clusterName": "Group1-Dev-Cluster",
+  "diagnosisTimestamp": "2025-07-29 11:45:00 UTC",
+  "overallStatus": "异常",
+  "aiSummary": "核心交换机 'core-switch-01' 的 eth-1/1/1 端口出现大量 CRC 错误和输出丢包，导致与其连接的主机 'kylin-node-03' 网络质量严重下降。这进一步引发了 'kylin-api-gateway' 服务的大量上游连接超时，最终影响到 'kylin-web-frontend' 的用户访问，表现为页面加载缓慢和资源获取失败。",
+  "eventTimeline": [
+    { "id": 1, "time": "11:42:10", "service": "Network Switch", "message": "'core-switch-01' 端口 eth-1/1/1 输出丢包率超过 5%", "level": "warning" },
+    { "id": 2, "time": "11:43:05", "service": "Host (kylin-node-03)", "message": "检测到 ping 网关延迟 > 100ms", "level": "error" },
+    { "id": 3, "time": "11:44:20", "service": "API Gateway", "message": "到上游服务 'user-service' (192.168.1.103) 的连接超时数量激增", "level": "critical" },
+    { "id": 4, "time": "11:44:55", "service": "Web Frontend", "message": "前端资源加载出现大量 504 Gateway Timeout 错误", "level": "critical" }
+  ],
+  "topology": {
+    "nodes": [
+      { "id": "frontend", "label": "Web Frontend", "status": "error" },
+      { "id": "gateway", "label": "API Gateway", "status": "error" },
+      { "id": "host-03", "label": "Host (kylin-node-03)", "status": "critical" },
+      { "id": "switch", "label": "Core Switch", "status": "critical", "isRootCause": true }
+    ],
+    "edges": [
+      { "source": "frontend", "target": "gateway" },
+      { "source": "gateway", "target": "host-03" },
+      { "source": "host-03", "target": "switch" }
+    ]
+  },
+  "logs": [
+    {
+      "serviceName": "Core Switch",
+      "logContent": "[2025-07-29 11:42:10] %IFNET/4/BWRATE_DROP(l): Ten-GigabitEthernet1/1/1's output bandwidth usage exceeds the threshold(80%), and packets are dropped.\n[2025-07-29 11:42:15] %IFNET/2/IF_CRCERROR: Ten-GigabitEthernet1/1/1 has CRC errors. (Error count = 1052)"
+    },
+    {
+      "serviceName": "API Gateway",
+      "logContent": "[2025-07-29 11:44:20] ERROR: upstream request timeout: GET /api/v1/users failed, upstream: 192.168.1.103:8080, duration: 30s\n[2025-07-29 11:44:22] WARN: Health check for upstream 'user-service' is now unhealthy."
+    }
+  ],
+  "recommendations": [
+    "1. **立即操作**: **登录核心交换机 'core-switch-01'**，检查端口 `eth-1/1/1` 的光模块或网线物理状态，并考虑更换。",
+    "2. **根因排查**: **检查与该端口连接的设备**（kylin-node-03）的网卡驱动是否存在已知问题，或MTU配置是否与其他网络设备匹配。",
+    "3. **长期优化**: **为网络设备丢包和CRC错误率设置更灵敏的告警阈值**，并加入自动化巡检工作流，以便在问题影响业务前提前发现。"
+  ]
+}

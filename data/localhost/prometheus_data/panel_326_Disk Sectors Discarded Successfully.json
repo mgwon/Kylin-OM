@@ -1,0 +1,20 @@
+{
+  "panel_title": "Disk Sectors Discarded Successfully",
+  "panel_id": 326,
+  "description": "Shows how many disk sectors are discarded (TRIMed) per second. Useful for monitoring SSD behavior and storage efficiency",
+  "targets": [
+    {
+      "refId": "A",
+      "query": "irate(node_disk_discarded_sectors_total{instance=\"localhost:9100\",job=\"node_exporter\"}[5m])",
+      "legendFormat": "{{device}}",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    }
+  ]
+}

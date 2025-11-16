@@ -1,0 +1,20 @@
+{
+  "id": "fr-002",
+  "summary": "数据库连接池耗尽导致核心业务API不可用",
+  "type": "手动",
+  "result": "成功",
+  "timeline": [
+    { "status": "告警触发", "time": "18:05:00", "description": "收到 P1 级告警：数据库连接数达到上限" },
+    { "status": "人工介入", "time": "18:07:30", "description": "运维人员 'admin' 响应并开始排查" },
+    { "status": "修复执行", "time": "18:10:00", "description": "手动执行数据库连接清理和参数调整" },
+    { "status": "验证恢复", "time": "18:30:05", "description": "业务API恢复正常，连接数回落" },
+    { "status": "事件关闭", "time": "18:40:00", "description": "事件关闭，标记为已解决" }
+  ],
+  "llmAnalysis": "本次故障核心原因是应用服务器在一次版本发布后出现连接泄漏，导致数据库连接池被迅速耗尽。运维人员通过手动查询并终止了异常会话，并临时调大了最大连接数作为应急手段。长期解决方案是推动开发团队修复代码中的连接泄漏问题。",
+  "context": {
+    "alertDetails": "Alert: DB_Connection_Maxed_Out\nSeverity: P1\nSource: Prometheus\nDescription: MySQL连接数已达到配置上限(500/500)，新连接请求将被拒绝。",
+    "performanceChartUrl": "monitoring_report.html",
+    "relatedLogs": "[2025-07-22 18:04:55] ERROR: com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Connection is not available, request timed out after 30000ms.\n[2025-07-22 18:04:58] ERROR: com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Connection is not available, request timed out after 30000ms."
+  },
+  "executionDetails": "1. ssh admin@db-cluster-prod\n\n2. mysql -u root -p\n\n3. -- 查看当前所有连接\n   SHOW PROCESSLIST;\n\n4. -- 发现大量来自 'app-server-v3' 的SLEEP连接\n\n5. -- 批量终止异常连接 (示例)\n   KILL 12345;\n   KILL 12346;\n   ...\n\n6. -- 临时调大最大连接数\n   SET GLOBAL max_connections = 700;"
+}

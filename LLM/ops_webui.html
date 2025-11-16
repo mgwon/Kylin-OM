@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>智能运维团队 - WebUI</title>
+    <style>
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        #chat-container {
+            width: 95%;
+            max-width: 800px;
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            height: 90vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #header {
+            text-align: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        #header h1 {
+            color: #333;
+            margin: 0;
+            font-size: 24px;
+        }
+
+        #header p {
+            color: #666;
+            margin: 5px 0 0 0;
+            font-size: 14px;
+        }
+
+        #messages {
+            flex: 1;
+            overflow-y: auto;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+            background-color: #fafafa;
+        }
+
+        .message {
+            margin: 15px 0;
+            padding: 12px;
+            border-radius: 8px;
+            max-width: 80%;
+        }
+
+        .message.user {
+            text-align: right;
+            margin-left: auto;
+            background-color: #007bff;
+            color: white;
+        }
+
+        .message.ops_coordinator {
+            text-align: left;
+            background-color: #28a745;
+            color: white;
+        }
+
+        .message.system_monitor {
+            text-align: left;
+            background-color: #17a2b8;
+            color: white;
+        }
+
+        .message.ops_engineer {
+            text-align: left;
+            background-color: #ffc107;
+            color: #333;
+        }
+
+        .message.user_requester {
+            text-align: right;
+            margin-left: auto;
+            background-color: #6c757d;
+            color: white;
+        }
+
+        .message.error {
+            text-align: left;
+            background-color: #dc3545;
+            color: white;
+        }
+
+        .message.system {
+            text-align: left;
+            background-color: #6c757d;
+            color: white;
+        }
+
+        .label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+            font-size: 12px;
+            text-transform: uppercase;
+        }
+
+        .content {
+            margin-top: 5px;
+            line-height: 1.4;
+            white-space: pre-wrap;
+        }
+
+        #input-container {
+            display: flex;
+            gap: 10px;
+        }
+
+        #input-container input {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+
+        #input-container input:focus {
+            outline: none;
+            border-color: #007bff;
+        }
+
+        #input-container button {
+            padding: 12px 24px;
+            border: none;
+            background-color: #007bff;
+            color: #fff;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        #input-container button:hover {
+            background-color: #0056b3;
+        }
+
+        #input-container input:disabled,
+        #input-container button:disabled {
+            background-color: #e0e0e0;
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+
+        .status-indicator {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+
+        .status-connected {
+            background-color: #28a745;
+        }
+
+        .status-disconnected {
+            background-color: #dc3545;
+        }
+
+        .status-connecting {
+            background-color: #ffc107;
+        }
+
+        #status-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            font-size: 12px;
+            color: #666;
+        }
+
+        /* 滚动条样式 */
+        #messages::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        #messages::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 3px;
+        }
+
+        #messages::-webkit-scrollbar-thumb {
+            background: #c1c1c1;
+            border-radius: 3px;
+        }
+
+        #messages::-webkit-scrollbar-thumb:hover {
+            background: #a8a8a8;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            #chat-container {
+                width: 98%;
+                height: 95vh;
+                padding: 15px;
+            }
+
+            .message {
+                max-width: 90%;
+            }
+
+            #input-container {
+                flex-direction: column;
+            }
+
+            #input-container button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="chat-container">
+        <div id="header">
+            <h1>🤖 智能运维团队</h1>
+            <p>基于AutoGen的多智能体协作运维系统</p>
+        </div>
+
+        <div id="status-bar">
+            <div>
+                <span class="status-indicator" id="connection-status"></span>
+                <span id="status-text">连接中...</span>
+            </div>
+            <div id="team-info">
+                团队成员: 协调员 | 监控员 | 工程师
+            </div>
+        </div>
+
+        <div id="messages"></div>
+        
+        <div id="input-container">
+            <input type="text" id="message-input" placeholder="请描述您遇到的系统运维问题...">
+            <button id="send-button" onclick="sendMessage()">发送</button>
+        </div>
+    </div>
+
+    <script>
+        const ws = new WebSocket('ws://localhost:8003/ws/chat');
+        const connectionStatus = document.getElementById('connection-status');
+        const statusText = document.getElementById('status-text');
+
+        // 连接状态管理
+        function updateConnectionStatus(status, text) {
+            connectionStatus.className = `status-indicator status-${status}`;
+            statusText.textContent = text;
+        }
+
+        ws.onopen = function() {
+            updateConnectionStatus('connected', '已连接');
+        };
+
+        ws.onclose = function() {
+            updateConnectionStatus('disconnected', '连接已断开');
+        };
+
+        ws.onerror = function(error) {
+            updateConnectionStatus('disconnected', '连接错误');
+        };
+
+        let currentStreamingMessage = null; // 用于存储当前正在流式传输的消息元素
+
+        ws.onmessage = function (event) {
+            const message = JSON.parse(event.data);
+
+            if (message.type === 'UserInputRequestedEvent') {
+                enableInput();
+                displayMessage("请继续输入或确认操作...", 'system');
+            }
+            else if (message.type === 'task_completed') {
+                enableInput();
+                displayMessage(message.content, message.source);
+            }
+            else if (message.type === 'error') {
+                displayMessage(message.content, 'error');
+                enableInput();
+            }
+            else if (message.type === 'streaming_start') {
+                // 开始流式消息 - 创建新消息元素
+                currentStreamingMessage = displayMessage(message.content, message.source);
+            }
+            else if (message.type === 'streaming_update') {
+                // 更新流式消息内容 - 在现有消息上更新
+                if (currentStreamingMessage) {
+                    updateMessageContent(currentStreamingMessage, message.content);
+                }
+            }
+            else if (message.type === 'streaming_end') {
+                // 完成流式消息 - 最终更新并清理
+                if (currentStreamingMessage) {
+                    updateMessageContent(currentStreamingMessage, message.content);
+                    currentStreamingMessage = null;
+                }
+            }
+            else {
+                // 处理非流式消息
+                displayMessage(message.content, message.source);
+            }
+        };
+
+        document.getElementById('message-input').addEventListener('keydown', function (event) {
+            if (event.key === 'Enter' && !event.target.disabled) {
+                sendMessage();
+            }
+        });
+
+        async function sendMessage() {
+            const input = document.getElementById('message-input');
+            const message = input.value;
+            if (!message) return;
+
+            // Clear input and disable input and send button
+            input.value = '';
+            disableInput();
+
+            // Send message to WebSocket
+            ws.send(JSON.stringify({ content: message, source: 'user' }));
+        }
+
+        function displayMessage(content, source) {
+            const messagesContainer = document.getElementById('messages');
+            const messageElement = document.createElement('div');
+            messageElement.className = `message ${source}`;
+
+            const labelElement = document.createElement('span');
+            labelElement.className = 'label';
+            
+            // 中文标签映射
+            const sourceLabels = {
+                'user': '用户',
+                'ops_coordinator': '运维协调员',
+                'system_monitor': '系统监控员',
+                'ops_engineer': '运维工程师',
+                'user_requester': '用户代理',
+                'error': '错误',
+                'system': '系统'
+            };
+            
+            labelElement.textContent = sourceLabels[source] || source;
+
+            const contentElement = document.createElement('div');
+            contentElement.className = 'content';
+            contentElement.textContent = content;
+
+            messageElement.appendChild(labelElement);
+            messageElement.appendChild(contentElement);
+            messagesContainer.appendChild(messageElement);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+            return messageElement; // 返回消息元素以便后续更新
+        }
+
+        function updateMessageContent(messageElement, newContent) {
+            const contentElement = messageElement.querySelector('.content');
+            if (contentElement) {
+                contentElement.textContent = newContent;
+                messageElement.scrollTop = messageElement.scrollHeight; // 滚动到底部
+            }
+        }
+
+        function disableInput() {
+            const input = document.getElementById('message-input');
+            const button = document.getElementById('send-button');
+            input.disabled = true;
+            button.disabled = true;
+        }
+
+        function enableInput() {
+            const input = document.getElementById('message-input');
+            const button = document.getElementById('send-button');
+            input.disabled = false;
+            button.disabled = false;
+            input.focus();
+        }
+
+        async function loadHistory() {
+            try {
+                const response = await fetch('http://localhost:8003/history');
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const history = await response.json();
+                history.forEach(message => {
+                    displayMessage(message.content, message.source);
+                });
+            } catch (error) {
+                console.error('Error loading history:', error);
+            }
+        }
+
+        // 页面加载时显示欢迎信息
+        window.onload = function() {
+            displayMessage("欢迎使用智能运维团队！请描述您遇到的系统问题，我们的专业团队将为您提供解决方案。", 'system');
+            loadHistory();
+        };
+    </script>
+</body>
+
+</html> 

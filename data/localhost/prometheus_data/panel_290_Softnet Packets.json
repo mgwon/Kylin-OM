@@ -1,0 +1,33 @@
+{
+  "panel_title": "Softnet Packets",
+  "panel_id": 290,
+  "description": "Packets processed and dropped by the softnet network stack per CPU. Drops may indicate CPU saturation or network driver limitations",
+  "targets": [
+    {
+      "refId": "A",
+      "query": "irate(node_softnet_processed_total{instance=\"localhost:9100\",job=\"node_exporter\"}[5m])",
+      "legendFormat": "CPU {{cpu}} - Processed",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    },
+    {
+      "refId": "B",
+      "query": "irate(node_softnet_dropped_total{instance=\"localhost:9100\",job=\"node_exporter\"}[5m])",
+      "legendFormat": "CPU {{cpu}} - Dropped",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    }
+  ]
+}

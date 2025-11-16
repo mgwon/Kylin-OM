@@ -1,0 +1,20 @@
+{
+  "id": "dom-1754453073948",
+  "name": "111",
+  "assets": [
+    {
+      "id": "host-002",
+      "ip": "192.168.1.11",
+      "protocol": "ipv4",
+      "syncStatus": "✓ 已同步",
+      "driftCount": 0
+    },
+    {
+      "id": "host-009",
+      "ip": "192.168.1.12",
+      "protocol": "ipv4",
+      "syncStatus": "✓ 已同步",
+      "driftCount": 0
+    }
+  ]
+}

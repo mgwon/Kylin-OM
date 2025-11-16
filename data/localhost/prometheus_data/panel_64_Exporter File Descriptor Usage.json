@@ -1,0 +1,33 @@
+{
+  "panel_title": "Exporter File Descriptor Usage",
+  "panel_id": 64,
+  "description": "Number of file descriptors used by the exporter process versus its configured limit",
+  "targets": [
+    {
+      "refId": "A",
+      "query": "process_max_fds{instance=\"localhost:9100\",job=\"node_exporter\"}",
+      "legendFormat": "Maximum open file descriptors",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    },
+    {
+      "refId": "B",
+      "query": "process_open_fds{instance=\"localhost:9100\",job=\"node_exporter\"}",
+      "legendFormat": "Open file descriptors",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "panel_title": "UDP Queue",
+  "panel_id": 337,
+  "description": "Number of UDP packets currently queued in the receive (RX) and transmit (TX) buffers. A growing queue may indicate a bottleneck",
+  "targets": [
+    {
+      "refId": "A",
+      "query": "node_udp_queues{instance=\"localhost:9100\",job=\"node_exporter\",ip=\"v4\",queue=\"rx\"}",
+      "legendFormat": "UDP Rx in Queue",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    },
+    {
+      "refId": "B",
+      "query": "node_udp_queues{instance=\"localhost:9100\",job=\"node_exporter\",ip=\"v4\",queue=\"tx\"}",
+      "legendFormat": "UDP Tx out Queue",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    }
+  ]
+}

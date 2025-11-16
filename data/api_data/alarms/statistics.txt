@@ -1,0 +1,34 @@
+{
+  "statistics": [
+    {
+      "rank": 1,
+      "host_group": "group1",
+      "alert_count": 177
+    },
+    {
+      "rank": 2,
+      "host_group": "Database",
+      "alert_count": 78
+    },
+    {
+      "rank": 3,
+      "host_group": "group100",
+      "alert_count": 6
+    },
+    {
+      "rank": 4,
+      "host_group": "group_web_servers_prod",
+      "alert_count": 5
+    },
+    {
+      "rank": 5,
+      "host_group": "group_database_master",
+      "alert_count": 3
+    },
+    {
+      "rank": 6,
+      "host_group": "group_cache_cluster",
+      "alert_count": 2
+    }
+  ]
+}

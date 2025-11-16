@@ -1,0 +1,20 @@
+{
+  "panel_title": "ICMP Errors",
+  "panel_id": 50,
+  "description": "Rate of incoming ICMP messages that contained protocol-specific errors, such as bad checksums or invalid lengths",
+  "targets": [
+    {
+      "refId": "A",
+      "query": "irate(node_netstat_Icmp_InErrors{instance=\"localhost:9100\",job=\"node_exporter\"}[5m])",
+      "legendFormat": "ICMP Rx In",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    }
+  ]
+}

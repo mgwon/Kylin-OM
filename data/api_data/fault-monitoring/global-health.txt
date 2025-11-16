@@ -1,0 +1,7 @@
+{
+  "healthScore": 85,
+  "healthStatus": "亚健康",
+  "activeAnomalies": 12,
+  "predictedRisks": 4,
+  "mttr": "18.2分钟"
+}

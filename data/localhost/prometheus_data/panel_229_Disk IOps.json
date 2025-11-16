@@ -1,0 +1,33 @@
+{
+  "panel_title": "Disk IOps",
+  "panel_id": 229,
+  "description": "Disk I/O operations per second for each device",
+  "targets": [
+    {
+      "refId": "A",
+      "query": "irate(node_disk_reads_completed_total{instance=\"localhost:9100\",job=\"node_exporter\",device=~\"[a-z]+|nvme[0-9]+n[0-9]+|mmcblk[0-9]+\"}[5m])",
+      "legendFormat": "{{device}} - Read",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    },
+    {
+      "refId": "B",
+      "query": "irate(node_disk_writes_completed_total{instance=\"localhost:9100\",job=\"node_exporter\",device=~\"[a-z]+|nvme[0-9]+n[0-9]+|mmcblk[0-9]+\"}[5m])",
+      "legendFormat": "{{device}} - Write",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    }
+  ]
+}

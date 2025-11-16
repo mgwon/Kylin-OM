@@ -1,0 +1,20 @@
+{
+  "panel_title": "Systemd Sockets Refused",
+  "panel_id": 332,
+  "description": "Rate of systemd socket connection refusals per second, typically due to service unavailability or backlog overflow",
+  "targets": [
+    {
+      "refId": "A",
+      "query": "irate(node_systemd_socket_refused_connections_total{instance=\"localhost:9100\",job=\"node_exporter\"}[5m])",
+      "legendFormat": "{{ name }}",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    }
+  ]
+}

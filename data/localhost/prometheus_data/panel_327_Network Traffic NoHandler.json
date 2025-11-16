@@ -1,0 +1,20 @@
+{
+  "panel_title": "Network Traffic NoHandler",
+  "panel_id": 327,
+  "description": "Rate of received packets that could not be processed due to missing protocol or handler in the kernel. May indicate unsupported traffic or misconfiguration",
+  "targets": [
+    {
+      "refId": "A",
+      "query": "rate(node_network_receive_nohandler_total{instance=\"localhost:9100\",job=\"node_exporter\"}[5m])",
+      "legendFormat": "{{device}} - Rx in",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    }
+  ]
+}

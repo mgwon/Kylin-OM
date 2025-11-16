@@ -1,0 +1,20 @@
+{
+  "panel_title": "Network Traffic Multicast",
+  "panel_id": 146,
+  "description": "Rate of incoming multicast packets received per network interface. Multicast is used by protocols such as mDNS, SSDP, and some streaming or cluster services",
+  "targets": [
+    {
+      "refId": "A",
+      "query": "rate(node_network_receive_multicast_total{instance=\"localhost:9100\",job=\"node_exporter\"}[5m])",
+      "legendFormat": "{{device}} - Rx in",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    }
+  ]
+}

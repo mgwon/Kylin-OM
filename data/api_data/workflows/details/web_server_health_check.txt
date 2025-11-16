@@ -1,0 +1,82 @@
+{
+  "id": "web_server_health_check",
+  "name": "web_server_health_check",
+  "description": "Check the health of all web servers every 5 minutes.",
+  "hostGroup": "Web Servers",
+  "application": "health_check_app",
+  "hostCount": 2,
+  "status": "已暂停",
+  "isRecommended": false,
+  "hosts": [
+    {
+      "id": "host-web-01",
+      "name": "web-server-01",
+      "ip": "192.168.1.100",
+      "indicatorCount": 2,
+      "indicators": [
+        {
+          "id": "ind-web-cpu",
+          "name": "cpu_load_1min",
+          "algorithm": "MovingAverage",
+          "model": "cpu_generic_model"
+        },
+        {
+          "id": "ind-web-mem",
+          "name": "memory_utilization",
+          "algorithm": "IsolationForest",
+          "model": "mem_generic_model"
+        }
+      ],
+      "multiMetricRules": [
+        {
+          "id": "rule-web-health-score",
+          "name": "Web服务健康分",
+          "threshold": 60,
+          "currentValue": 68.5,
+          "status": "告警",
+          "metrics": [
+            {
+              "id": "mm-web-01",
+              "name": "cpu_load_1min",
+              "weight": 0.4,
+              "currentValue": 85
+            },
+            {
+              "id": "mm-web-02",
+              "name": "http_5xx_error_rate",
+              "weight": 0.4,
+              "currentValue": 50
+            },
+            {
+              "id": "mm-web-03",
+              "name": "avg_response_time_ms",
+              "weight": 0.2,
+              "currentValue": 95
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "host-web-02",
+      "name": "web-server-02",
+      "ip": "192.168.1.101",
+      "indicatorCount": 2,
+      "indicators": [
+        {
+          "id": "ind-web-cpu-02",
+          "name": "cpu_load_1min",
+          "algorithm": "MovingAverage",
+          "model": "cpu_generic_model"
+        },
+        {
+          "id": "ind-web-mem-02",
+          "name": "memory_utilization",
+          "algorithm": "IsolationForest",
+          "model": "mem_generic_model"
+        }
+      ],
+      "multiMetricRules": []
+    }
+  ]
+}

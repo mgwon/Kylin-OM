@@ -1,0 +1,33 @@
+{
+  "panel_title": "Network Operational Status",
+  "panel_id": 309,
+  "description": "Operational and physical link status of each network interface. Values are Yes for 'up' or link present, and No for 'down' or no carrier.\"",
+  "targets": [
+    {
+      "refId": "A",
+      "query": "node_network_up{operstate=\"up\",instance=\"localhost:9100\",job=\"node_exporter\"}",
+      "legendFormat": "{{interface}} - Operational state UP",
+      "hidden": true,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    },
+    {
+      "refId": "B",
+      "query": "node_network_carrier{instance=\"localhost:9100\",job=\"node_exporter\"}",
+      "legendFormat": "{{device}} - Physical link",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    }
+  ]
+}

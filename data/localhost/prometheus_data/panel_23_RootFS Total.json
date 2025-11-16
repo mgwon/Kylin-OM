@@ -1,0 +1,20 @@
+{
+  "panel_title": "RootFS Total",
+  "panel_id": 23,
+  "description": "",
+  "targets": [
+    {
+      "refId": "A",
+      "query": "node_filesystem_size_bytes{instance=\"localhost:9100\",job=\"node_exporter\",mountpoint=\"/\",fstype!=\"rootfs\"}",
+      "legendFormat": "",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    }
+  ]
+}

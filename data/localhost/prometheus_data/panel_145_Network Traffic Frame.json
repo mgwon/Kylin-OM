@@ -1,0 +1,20 @@
+{
+  "panel_title": "Network Traffic Frame",
+  "panel_id": 145,
+  "description": "Rate of frame errors on received packets, typically caused by physical layer issues such as bad cables, duplex mismatches, or hardware problems",
+  "targets": [
+    {
+      "refId": "A",
+      "query": "rate(node_network_receive_frame_total{instance=\"localhost:9100\",job=\"node_exporter\"}[5m])",
+      "legendFormat": "{{device}} - Rx in",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    }
+  ]
+}

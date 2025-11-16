@@ -1,0 +1,33 @@
+{
+  "panel_title": "Disk Read/Write Data",
+  "panel_id": 33,
+  "description": "Number of bytes read from or written to the device per second",
+  "targets": [
+    {
+      "refId": "A",
+      "query": "irate(node_disk_read_bytes_total{instance=\"localhost:9100\",job=\"node_exporter\"}[5m])",
+      "legendFormat": "{{device}} - Read",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    },
+    {
+      "refId": "B",
+      "query": "irate(node_disk_written_bytes_total{instance=\"localhost:9100\",job=\"node_exporter\"}[5m])",
+      "legendFormat": "{{device}} - Write",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    }
+  ]
+}

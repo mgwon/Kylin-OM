@@ -1,0 +1,85 @@
+{
+  "panel_title": "CPU Basic",
+  "panel_id": 77,
+  "description": "CPU time spent busy vs idle, split by activity type",
+  "targets": [
+    {
+      "refId": "A",
+      "query": "sum(irate(node_cpu_seconds_total{instance=\"localhost:9100\",job=\"node_exporter\", mode=\"system\"}[5m])) / scalar(count(count(node_cpu_seconds_total{instance=\"localhost:9100\",job=\"node_exporter\"}) by (cpu)))",
+      "legendFormat": "Busy System",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    },
+    {
+      "refId": "B",
+      "query": "sum(irate(node_cpu_seconds_total{instance=\"localhost:9100\",job=\"node_exporter\", mode=\"user\"}[5m])) / scalar(count(count(node_cpu_seconds_total{instance=\"localhost:9100\",job=\"node_exporter\"}) by (cpu)))",
+      "legendFormat": "Busy User",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    },
+    {
+      "refId": "C",
+      "query": "sum(irate(node_cpu_seconds_total{instance=\"localhost:9100\",job=\"node_exporter\", mode=\"iowait\"}[5m])) / scalar(count(count(node_cpu_seconds_total{instance=\"localhost:9100\",job=\"node_exporter\"}) by (cpu)))",
+      "legendFormat": "Busy Iowait",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    },
+    {
+      "refId": "D",
+      "query": "sum(irate(node_cpu_seconds_total{instance=\"localhost:9100\",job=\"node_exporter\", mode=~\".*irq\"}[5m])) / scalar(count(count(node_cpu_seconds_total{instance=\"localhost:9100\",job=\"node_exporter\"}) by (cpu)))",
+      "legendFormat": "Busy IRQs",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    },
+    {
+      "refId": "E",
+      "query": "sum(irate(node_cpu_seconds_total{instance=\"localhost:9100\",job=\"node_exporter\",  mode!='idle',mode!='user',mode!='system',mode!='iowait',mode!='irq',mode!='softirq'}[5m])) / scalar(count(count(node_cpu_seconds_total{instance=\"localhost:9100\",job=\"node_exporter\"}) by (cpu)))",
+      "legendFormat": "Busy Other",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    },
+    {
+      "refId": "F",
+      "query": "sum(irate(node_cpu_seconds_total{instance=\"localhost:9100\",job=\"node_exporter\", mode=\"idle\"}[5m])) / scalar(count(count(node_cpu_seconds_total{instance=\"localhost:9100\",job=\"node_exporter\"}) by (cpu)))",
+      "legendFormat": "Idle",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    }
+  ]
+}

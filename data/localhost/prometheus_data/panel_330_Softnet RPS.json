@@ -1,0 +1,33 @@
+{
+  "panel_title": "Softnet RPS",
+  "panel_id": 330,
+  "description": "Tracks the number of packets processed or dropped by Receive Packet Steering (RPS), a mechanism to distribute packet processing across CPUs",
+  "targets": [
+    {
+      "refId": "A",
+      "query": "irate(node_softnet_received_rps_total{instance=\"localhost:9100\",job=\"node_exporter\"}[5m])",
+      "legendFormat": "CPU {{cpu}} - Processed",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    },
+    {
+      "refId": "B",
+      "query": "irate(node_softnet_flow_limit_count_total{instance=\"localhost:9100\",job=\"node_exporter\"}[5m])",
+      "legendFormat": "CPU {{cpu}} - Dropped",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    }
+  ]
+}

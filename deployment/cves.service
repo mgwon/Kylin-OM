@@ -1,0 +1,22 @@
+[Unit]
+Description=Kylin-OM CVE Dependency Scanner Service
+Documentation=file:///home/your_username/kylin-OM/kylin/docs
+After=network.target
+
+[Service]
+Type=oneshot
+
+# [修改] 工作目录设置为项目的 cve_security 模块路径。
+# 这可以确保脚本中的相对路径引用（如打开配置文件）正确无误。
+WorkingDirectory=/home/your_username/kylin-OM/kylin/src/cve_security
+
+# [修改] 执行命令指向 cve_security 目录下的主脚本。
+# 假设该目录中有一个名为 main.py 或 run_scanner.py 的主控脚本。
+ExecStart=/usr/bin/python3 /home/your_username/kylin-OM/kylin/src/cve_security/main.py
+
+# 以指定用户运行。请确保该用户对日志目录和报告输出目录有写入权限。
+# 使用 root 用户权限较高，请谨慎评估。
+User=root
+
+[Install]
+WantedBy=multi-user.target

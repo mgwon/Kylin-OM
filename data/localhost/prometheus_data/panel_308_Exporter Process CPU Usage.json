@@ -1,0 +1,20 @@
+{
+  "panel_title": "Exporter Process CPU Usage",
+  "panel_id": 308,
+  "description": "Rate of CPU time used by the process exposing this metric (user + system mode)",
+  "targets": [
+    {
+      "refId": "A",
+      "query": "irate(process_cpu_seconds_total{instance=\"localhost:9100\",job=\"node_exporter\"}[5m])",
+      "legendFormat": "Process CPU Usage",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "panel_title": "Disk R/W Merged",
+  "panel_id": 133,
+  "description": "Number of read and write requests merged per second that were queued to the device",
+  "targets": [
+    {
+      "refId": "A",
+      "query": "irate(node_disk_reads_merged_total{instance=\"localhost:9100\",job=\"node_exporter\"}[5m])",
+      "legendFormat": "{{device}} - Read",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    },
+    {
+      "refId": "B",
+      "query": "irate(node_disk_writes_merged_total{instance=\"localhost:9100\",job=\"node_exporter\"}[5m])",
+      "legendFormat": "{{device}} - Write",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    }
+  ]
+}

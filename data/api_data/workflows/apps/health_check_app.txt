@@ -1,0 +1,12 @@
+{
+  "id": "health_check_app",
+  "name": "health_check_app",
+  "version": "2.1",
+  "description": "Application to perform health checks on various services.",
+  "flow": [
+    { "id": "check_db", "name": "数据库连接检查"},
+    { "id": "check_api", "name": "API端点检查"},
+    { "id": "check_disk", "name": "磁盘空间检查"},
+    { "id": "send_report", "name": "发送健康报告"}
+  ]
+}

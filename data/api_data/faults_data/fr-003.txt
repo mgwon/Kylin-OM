@@ -1,0 +1,20 @@
+{
+  "id": "fr-003",
+  "summary": "日志服务器磁盘空间不足",
+  "type": "自动",
+  "result": "失败",
+  "timeline": [
+    { "status": "告警触发", "time": "14:04:00", "description": "log-server-01 磁盘使用率 92% > 90%" },
+    { "status": "修复执行", "time": "14:04:05", "description": "Playbook: 清理临时日志 被触发" },
+    { "status": "执行失败", "time": "14:05:11", "description": "清理了7天前的日志，但空间未释放" },
+    { "status": "告警升级", "time": "14:05:15", "description": "自动化修复失败，告警升级至P2，通知人工处理" },
+    { "status": "事件关闭", "time": "14:30:00", "description": "人工介入后关闭" }
+  ],
+  "llmAnalysis": "自动化工作流 '清理临时日志' 成功执行，但未能解决问题。根本原因是磁盘空间被一个巨大的 'core.dump' 文件（45GB）占据，而该文件不在工作流的清理路径内。这暴露了当前自动化预案的覆盖度不足。工作流本身没有错，但它不适用于所有磁盘空间满的场景。",
+  "context": {
+    "alertDetails": "Alert: Low_Disk_Space\nSeverity: P3\nSource: Agent\nDescription: Filesystem '/dev/sda1' on 'log-server-01' has less than 10% free space.",
+    "performanceChartUrl": "monitoring_report.html",
+    "relatedLogs": "[14:04:06] INFO: Running playbook 'clean_temp_logs'. Deleted 1.2 GB of old logs.\n[14:05:10] WARN: Disk space on '/dev/sda1' still at 91%. No significant change."
+  },
+  "executionDetails": "--- Executing Playbook: 清理临时日志 ---\n\nTASK [Find and delete logs older than 7 days] *****\n- command: find /var/log/app_logs/ -mtime +7 -type f -delete\nchanged: [log-server-01]\n\nTASK [Check free space] ****************************\n- shell: df -h /dev/sda1 | awk 'NR==2{print $5}'\n- stdout: \"91%\"\n\nTASK [Verify Result] *******************************\n- failed_when: free_space_after|int >= 90\n- FAILED! => {\"msg\": \"Disk space still above threshold.\"}"
+}

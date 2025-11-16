@@ -1,0 +1,20 @@
+{
+  "panel_title": "Reboot Required",
+  "panel_id": 328,
+  "description": "",
+  "targets": [
+    {
+      "refId": "A",
+      "query": "node_reboot_required{instance=\"localhost:9100\",job=\"node_exporter\"}",
+      "legendFormat": "",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    }
+  ]
+}

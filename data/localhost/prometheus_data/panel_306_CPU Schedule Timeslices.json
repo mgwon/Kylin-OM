@@ -1,0 +1,20 @@
+{
+  "panel_title": "CPU Schedule Timeslices",
+  "panel_id": 306,
+  "description": "Rate of scheduling timeslices executed per CPU. Reflects how frequently the scheduler switches tasks on each core",
+  "targets": [
+    {
+      "refId": "A",
+      "query": "irate(node_schedstat_timeslices_total{instance=\"localhost:9100\",job=\"node_exporter\"}[5m])",
+      "legendFormat": "CPU {{ cpu }}",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    }
+  ]
+}

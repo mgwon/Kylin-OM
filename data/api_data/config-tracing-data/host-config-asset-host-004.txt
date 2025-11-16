@@ -1,0 +1,22 @@
+{
+  "assetId": "host-004",
+  "ip": "192.168.2.6",
+  "filePath": "/etc/my.cnf",
+  "isDrift": true,
+  "properties": {
+    "fileAttr": "0644",
+    "fileOwner": "mysql:mysql",
+    "rpmName": "N/A",
+    "rpmVersion": "N/A",
+    "rpmRelease": "N/A"
+  },
+  "content": "# my.cnf for 192.168.2.6\n[mysqld]\nmax_connections = 1500\n# User 'db_admin' changed this value for performance test\ninnodb_buffer_pool_size = 4G\n",
+  "processTrace": {
+    "llmSummary": "AIOps分析: 本次对 /etc/my.cnf 文件的修改由进程 'vi' 发起，其父进程链为 'bash -> sshd'。这表明该变更是由运维人员 'db_admin' 通过SSH登录后，使用vi编辑器手动修改所致，操作具有高可信度，但可能偏离了标准基线。",
+    "log": "vi my.cnf => bash => sshd sshd: db_admin[pts/1(11223<44556>)]"
+  },
+  "history": [
+    { "id": "hist-mysql-1", "timestamp": "2025-07-25 10:55:10", "source": "user:db_admin", "version": "v3" },
+    { "id": "hist-mysql-2", "timestamp": "2025-07-23 09:30:00", "source": "ansible-playbook", "version": "v2" }
+  ]
+}

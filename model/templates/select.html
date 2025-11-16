@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>选择时间段</title>
+    
+    <!-- 自定义样式 --> 
+    <style> 
+        .datetime-input { 
+            width: 100%; 
+            padding: 10px; 
+            border-radius: 5px; 
+            border: 1px solid #ccc; 
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1); 
+            transition: border-color 0.3s, box-shadow 0.3s; 
+        } 
+        
+        .datetime-input:focus { 
+            border-color: #66afe9; 
+            outline: 0; 
+            box-shadow: 0 0 8px 
+            rgba(102, 175, 233, 0.6); 
+        } 
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body,html{
+            height:100%;
+            width: 100%;
+            margin: 0 auto;
+            position: relative;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
+
+        .top-bar {
+            background-color: white;
+            color: black;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            z-index: 1000; /* 使主题栏位于较高层级 */
+            position: fixed; /* 固定在屏幕上 */
+            width:100%;
+            height:80px;
+            border-bottom: 1px solid #c2c4c6;
+        }
+
+        .top-bar__left {
+            margin-left: 80px;
+            font-size: 1.5rem;
+        }
+
+        .top-bar__right {
+            font-size: 1rem;
+        }
+
+        .btn {
+            text-decoration: none;
+            color: black;
+            padding: 8px 15px;
+        }
+
+        .btn:hover {
+            background-color: #fff;
+            color: #333;
+        }
+
+        .container {
+            display: flex;
+            width: 100%; /* 设置为全屏宽度 */
+            margin: 0;
+            padding: 0;
+            z-index: 900; /* 使目录栏位于较低层级 */
+        }
+
+        .sidebar {
+            width: 15%; /* 设置目录栏宽度 */
+            background-color: white;
+            padding: 20px;
+            position: fixed; /* 固定在屏幕上 */
+            left: 0; /* 距离左侧的距离 */
+            height: 100%; /* 撑满整个屏幕高度 */
+            box-sizing: border-box; /* 确保 padding 不会增加元素的实际尺寸 */
+            overflow-y: auto; /* 若内容过多，启用垂直滚动条 */
+            z-index: 900; /* 使目录栏位于较低层级 */
+            margin-top: 80px;
+            border-right: 1px solid #c2c4c6;
+        }
+
+        .menu {
+            list-style-type: none;
+            padding: 0;
+        }
+        
+        .sidebar-btn{
+            text-align: center;
+            padding: 10px 0;
+            transition: all 0.3s ease;
+        }
+        .sidebar-btn:hover{
+            background-color: #d6d8d98e;
+            color:#333;
+        }
+
+        .menu li {
+            margin-bottom: 10px;
+        }
+
+        .menu li a {
+            text-decoration: none;
+            font-size: 18px;
+            color: #707070;
+            display: block;
+        }
+
+        .content {
+            flex: 1; /* 让主内容区域自动填充剩余空间 */
+            padding: 20px;
+            height:100vh;
+            margin-top: 100px;
+            margin-left:15%; /* 为了避免侧边栏覆盖内容，给内容部分增加左边距 */
+            text-align: center;
+        }
+        
+        .h1 {
+            height: 10%;
+            width: 100%;
+            background-color: transparent;
+            color: black;
+            text-align: center;
+            font-size: 40px;
+        }
+        
+        .box {
+            height: 250px;
+            width: 100%;
+            /* 弹性布局 */
+            display: flex;
+            /*弹性布局，默认主轴方向为x轴方向*/
+            margin-top: 10px;
+            border:solid 3px #c2c4c6;  
+            border-radius: 10px;
+            background-color: #EBEBEB;
+            justify-content: center;
+            align-items: center;  
+            text-align: center;
+            font-size: 20px;
+            line-height: 2;
+        }
+        
+        .form-group {
+            margin-bottom: 10px; /* 调整间距 */
+            width: 600px;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            font-size: 20px;
+        }
+                
+        .btn-select {
+            background-color: #3d4451; /* 按钮背景颜色 */
+            color: white; /* 按钮文字颜色 */
+            padding: 10px 20px; /* 按钮内边距 */
+            border: none; /* 去除边框 */
+            border-radius: 5px; /* 圆角边框 */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 阴影效果 */
+            font-size: 16px; /* 字体大小 */
+            font-weight: bold; /* 字体加粗 */
+            transition: background-color 0.3s, color 0.3s; /* 过渡效果 */
+            margin-top: 20px;
+            text-decoration: none; /* 去除下划线 */
+        }
+
+        .btn-select:hover {
+            background-color: #646974; /* 按钮悬停背景颜色 */
+            color: #fff; /* 按钮悬停文字颜色 */
+        }
+        
+        .row {
+            display: flex;
+            width: 300px;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            font-size: 25px;
+        }
+        
+        .table-container {
+            overflow-y: auto;
+            height: 260px; /* 根据需要调整高度 */
+            margin-top: 20px;
+            border: 1px solid #c2c4c6;
+        }
+        
+        table {
+            width: 100%; /* 表格宽度占满容器 */
+            border-collapse: collapse; /* 边框合并为单一线条 */
+            margin-bottom: 20px; /* 表格下方的间距 */
+        }
+        
+        /* 为表格的头部设置样式 */
+        th {
+            background-color: #EBEBEB;
+            color: #333; /* 文字颜色 */
+            padding: 10px; /* 内边距 */
+            border: 1px solid #c2c4c6; /* 边框 */
+        }
+        
+        /* 为表格的单元格设置样式 */
+        td {
+            padding: 8px; /* 内边距 */
+            border: 1px solid #c2c4c6; /* 边框 */
+            text-align: center; /* 文字对齐方式 */
+        }
+        
+        tr:hover {
+            background-color: #fafafa; /* 悬停时的背景颜色 */
+        }
+
+    </style>
+</head>
+<body>
+    <header class="top-bar">
+        <div class="top-bar__left">
+            基于机器学习的银河麒麟操作系统智能调优软件
+        </div>
+        <div class="top-bar__right">
+            <a href="https://github.com" target="_blank" class="btn">GitHub</a>
+        </div>
+    </header>
+    <div class="container">
+        <div class="sidebar">
+            <ul class="menu">
+                <li><a class="sidebar-btn" href="{% url 'home' %}">主页</a></li>
+                <li><a class="sidebar-btn" href="{% url 'select' %}">选择时间段</a></li>
+                <li><a class="sidebar-btn" href="{% url 'show_demo' %}">可视化大屏(demo)</a></li>
+                <li><a class="sidebar-btn" href="{% url 'show' %}">可视化大屏</a></li>
+                <li><a class="sidebar-btn" href="{% url 'optimization' %}">调优界面</a></li>
+                <li><a class="sidebar-btn" href="{% url 'ebpf' %}">eBPF</a></li>
+            </ul>
+        </div>
+        <main class="content">
+            <b class="h1">选择您的系统信息收集时间段</b>
+            <div class="box">
+                <form method="post"> 
+                    {% csrf_token %} 
+                    <div class="form-group "> 
+                        <div class="row">{{ form.start_time.label_tag }}</div>
+                        <div class="row">{{ form.start_time }}</div>
+                    </div>
+                    <div class="form-group "> 
+                        <div class="row">{{ form.end_time.label_tag }}</div>
+                        <div class="row">{{ form.end_time }}</div>
+                    </div>
+                    <button type="submit" class="btn-select">执行</button>
+                </form> 
+            </div>
+            <div class="table-container">
+                <table>
+                    <tr>
+                        <th>序号</th>
+                        <th>开始时间</th>
+                        <th>结束时间</th>
+                    </tr>
+                    {% for record in records %}
+                    <tr>
+                        <td>{{ record.0 }}</td>
+                        <td>{{ record.1 }}</td>
+                        <td>{{ record.2 }}</td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="3">没有找到记录</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </main>
+    </div>
+
+</body>
+</html>

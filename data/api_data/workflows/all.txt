@@ -1,0 +1,38 @@
+[
+  {
+    "id": "wf-1",
+    "name": "workflow1",
+    "description": "The first workflow we created!",
+    "hostGroup": "group1",
+    "application": "default_network",
+    "status": "运行中",
+    "isRecommended": false
+  },
+  {
+    "id": "backup_db_workflow",
+    "name": "backup_db_workflow",
+    "description": "Daily database backup workflow.",
+    "hostGroup": "Database",
+    "application": "backup_script_app",
+    "status": "运行中",
+    "isRecommended": true
+  },
+  {
+    "id": "web_server_health_check",
+    "name": "web_server_health_check",
+    "description": "Check the health of all web servers every 5 minutes.",
+    "hostGroup": "Web Servers",
+    "application": "health_check_app",
+    "status": "已暂停",
+    "isRecommended": false
+  },
+  {
+    "id": "log_cleanup_task",
+    "name": "log_cleanup_task",
+    "description": "Clean up old log files from production servers.",
+    "hostGroup": "group1",
+    "application": "cleanup_service",
+    "status": "已暂停",
+    "isRecommended": false
+  }
+]

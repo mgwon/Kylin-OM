@@ -1,0 +1,11 @@
+# Web 框架，用于提供备份 API 服务
+Flask
+Flask-Cors
+
+# 用于与系统的 Cron 定时任务交互
+python-crontab
+
+# 用于构建和操作内存中的拓扑图
+networkx
+
+psutil

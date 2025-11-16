@@ -1,0 +1,14 @@
+{
+  "id": "anom-001",
+  "diagnosis": {
+    "llm_summary": "根据关联指标分析，数据库主机 CPU user time 占比超过 90%，同时活跃连接数达到最大值。日志中频繁出现 'connection limit exceeded' 错误。初步诊断为应用层数据库连接池配置不当，导致大量短连接耗尽数据库资源。推荐方案是优化应用端的连接池配置或执行数据库主备切换。",
+    "causal_graph": "App-Request-Spike -> DB-Connection-Increase -> DB-CPU-High -> Service-Timeout"
+  },
+  "correlated_logs": "July 29 15:30:01 db-server-01 postgres[1234]: [ERROR] FATAL: sorry, too many clients already\nJuly 29 15:30:02 db-server-01 postgres[1235]: [ERROR] FATAL: sorry, too many clients already",
+  "solution": {
+    "name": "P02-数据库主备切换",
+    "description": "执行标准数据库主备切换流程，将流量引导至备用节点。",
+    "success_rate": "99.5%",
+    "steps": "1. 检查备库数据同步状态\n2. 将应用连接指向备库\n3. 将原主库设置为只读模式"
+  }
+}

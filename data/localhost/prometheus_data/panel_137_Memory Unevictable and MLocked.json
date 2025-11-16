@@ -1,0 +1,33 @@
+{
+  "panel_title": "Memory Unevictable and MLocked",
+  "panel_id": 137,
+  "description": "Memory that is locked in RAM and cannot be swapped out. Includes both kernel-unevictable memory and user-level memory locked with mlock()",
+  "targets": [
+    {
+      "refId": "A",
+      "query": "node_memory_Unevictable_bytes{instance=\"localhost:9100\",job=\"node_exporter\"}",
+      "legendFormat": "Unevictable – Kernel-pinned memory (not swappable)",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    },
+    {
+      "refId": "B",
+      "query": "node_memory_Mlocked_bytes{instance=\"localhost:9100\",job=\"node_exporter\"}",
+      "legendFormat": "Mlocked – Application-locked memory via mlock()",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    }
+  ]
+}

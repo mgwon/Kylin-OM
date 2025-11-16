@@ -1,0 +1,72 @@
+{
+  "panel_title": "TCP Stat",
+  "panel_id": 320,
+  "description": "Number of TCP sockets in key connection states. Requires the --collector.tcpstat flag on node_exporter",
+  "targets": [
+    {
+      "refId": "A",
+      "query": "node_tcp_connection_states{state=\"established\",instance=\"localhost:9100\",job=\"node_exporter\"}",
+      "legendFormat": "Established",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    },
+    {
+      "refId": "B",
+      "query": "node_tcp_connection_states{state=\"fin_wait2\",instance=\"localhost:9100\",job=\"node_exporter\"}",
+      "legendFormat": "FIN_WAIT2",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    },
+    {
+      "refId": "C",
+      "query": "node_tcp_connection_states{state=\"listen\",instance=\"localhost:9100\",job=\"node_exporter\"}",
+      "legendFormat": "Listen",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    },
+    {
+      "refId": "D",
+      "query": "node_tcp_connection_states{state=\"time_wait\",instance=\"localhost:9100\",job=\"node_exporter\"}",
+      "legendFormat": "TIME_WAIT",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    },
+    {
+      "refId": "E",
+      "query": "node_tcp_connection_states{state=\"close_wait\", instance=\"localhost:9100\", job=\"node_exporter\"}",
+      "legendFormat": "CLOSE_WAIT",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    }
+  ]
+}

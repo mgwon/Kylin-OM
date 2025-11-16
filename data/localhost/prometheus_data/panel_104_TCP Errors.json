@@ -1,0 +1,124 @@
+{
+  "panel_title": "TCP Errors",
+  "panel_id": 104,
+  "description": "Tracks various TCP error and congestion-related events, including retransmissions, timeouts, dropped connections, and buffer issues",
+  "targets": [
+    {
+      "refId": "A",
+      "query": "irate(node_netstat_TcpExt_ListenOverflows{instance=\"localhost:9100\",job=\"node_exporter\"}[5m])",
+      "legendFormat": "Listen Overflows",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    },
+    {
+      "refId": "B",
+      "query": "irate(node_netstat_TcpExt_ListenDrops{instance=\"localhost:9100\",job=\"node_exporter\"}[5m])",
+      "legendFormat": "Listen Drops",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    },
+    {
+      "refId": "C",
+      "query": "irate(node_netstat_TcpExt_TCPSynRetrans{instance=\"localhost:9100\",job=\"node_exporter\"}[5m])",
+      "legendFormat": "SYN Retransmits",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    },
+    {
+      "refId": "D",
+      "query": "irate(node_netstat_Tcp_RetransSegs{instance=\"localhost:9100\",job=\"node_exporter\"}[5m])",
+      "legendFormat": "Segment Retransmits",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    },
+    {
+      "refId": "E",
+      "query": "irate(node_netstat_Tcp_InErrs{instance=\"localhost:9100\",job=\"node_exporter\"}[5m])",
+      "legendFormat": "Receive Errors",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    },
+    {
+      "refId": "F",
+      "query": "irate(node_netstat_Tcp_OutRsts{instance=\"localhost:9100\",job=\"node_exporter\"}[5m])",
+      "legendFormat": "RST Sent",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    },
+    {
+      "refId": "G",
+      "query": "irate(node_netstat_TcpExt_TCPRcvQDrop{instance=\"localhost:9100\",job=\"node_exporter\"}[5m])",
+      "legendFormat": "Receive Queue Drops",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    },
+    {
+      "refId": "H",
+      "query": "irate(node_netstat_TcpExt_TCPOFOQueue{instance=\"localhost:9100\",job=\"node_exporter\"}[5m])",
+      "legendFormat": "Out-of-order Queued",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    },
+    {
+      "refId": "I",
+      "query": "irate(node_netstat_TcpExt_TCPTimeouts{instance=\"localhost:9100\",job=\"node_exporter\"}[5m])",
+      "legendFormat": "TCP Timeouts",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    }
+  ]
+}

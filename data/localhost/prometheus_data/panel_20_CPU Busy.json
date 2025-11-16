@@ -1,0 +1,20 @@
+{
+  "panel_title": "CPU Busy",
+  "panel_id": 20,
+  "description": "Overall CPU busy percentage (averaged across all cores)",
+  "targets": [
+    {
+      "refId": "A",
+      "query": "100 * (1 - avg(rate(node_cpu_seconds_total{mode=\"idle\", instance=\"localhost:9100\"}[5m])))",
+      "legendFormat": "",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "panel_title": "TCP In / Out",
+  "panel_id": 299,
+  "description": "Rate of TCP segments sent and received per second, including data and control segments",
+  "targets": [
+    {
+      "refId": "A",
+      "query": "irate(node_netstat_Tcp_InSegs{instance=\"localhost:9100\",job=\"node_exporter\"}[5m])",
+      "legendFormat": "TCP Rx in",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    },
+    {
+      "refId": "B",
+      "query": "irate(node_netstat_Tcp_OutSegs{instance=\"localhost:9100\",job=\"node_exporter\"}[5m])",
+      "legendFormat": "TCP Tx out",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    }
+  ]
+}

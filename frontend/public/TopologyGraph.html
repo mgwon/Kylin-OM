@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A-Ops 架构感知 (故障影响版)</title>
+    <style>
+        :root {
+            /* --- 核心修改 1: 更新颜色定义 --- */
+            --normal-color: #409eff;
+            --normal-color-light: #85c1ff;
+            --faulty-color: #f5222d;            /* 故障色 -> 红色 */
+            --faulty-color-dark: #a8071a;       /* 故障色描边 -> 深红色 */
+            --infected-color: #faad14;          /* 新增: 受影响色 -> 黄色 */
+            --infected-color-dark: #d48806;    /* 新增: 受影响色描边 -> 深黄色 */
+            
+            --bg-color: #f0f2f5;
+            --container-bg-color: #ffffff;
+            --border-color: #dcdfe6;
+            --text-color: #303133;
+            --light-text-color: #909399;
+            --error-bg-color: #fef0f0;
+            --error-text-color: #f56c6c;
+        }
+
+        body, html {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        #app {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        h1 {
+            text-align: center; color: #1f2d3d; margin: 20px 0;
+            font-weight: 400; flex-shrink: 0;
+        }
+
+        #status-bar {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 8px 25px; font-size: 14px; background-color: var(--container-bg-color);
+            border-bottom: 1px solid var(--border-color); flex-shrink: 0;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        #status-bar.error { background-color: var(--error-bg-color); color: var(--error-text-color); }
+
+        .content-wrapper {
+            flex-grow: 1;
+            padding: 20px;
+            padding-top: 10px;
+        }
+
+        .main-canvas-section {
+            padding: 10px;
+            background: var(--container-bg-color);
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            position: relative;
+            display: flex;
+            box-shadow: 0 2px 12px 0 rgba(0,0,0,0.06);
+            height: 120vh;
+            min-height: 800px;
+        }
+        
+        .g6-container {
+            flex-grow: 1;
+            position: relative;
+        }
+
+        .empty-placeholder {
+            position: absolute; top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            color: #aaa; font-size: 16px; text-align: center;
+        }
+        
+        .modal-backdrop { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.6); display: flex; justify-content: center; align-items: center; z-index: 1000; }
+        .modal-content { background-color: #fff; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.3); width: 600px; max-width: 90vw; display: flex; flex-direction: column; max-height: 80vh; }
+        .modal-header { padding: 16px 24px; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; font-size: 20px; }
+        .modal-header .close-button { cursor: pointer; font-size: 28px; font-weight: bold; color: #999; border: none; background: none; }
+        .modal-body { padding: 24px; overflow-y: auto; font-family: 'Courier New', Courier, monospace; font-size: 14px; line-height: 1.8; }
+        .modal-body pre { margin: 0; white-space: pre-wrap; word-wrap: break-word; }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <h1>A-Ops 架构感知系统</h1>
+        <div id="status-bar" :class="{ error: hasError }">
+            <span>{{ timestampText }}</span>
+            <span>{{ status }}</span>
+        </div>
+        <div class="content-wrapper">
+            <div class="main-canvas-section">
+                <div id="mountNode" class="g6-container">
+                    <div v-if="isEmpty" class="empty-placeholder">等待 Agent 上报数据...</div>
+                </div>
+            </div>
+        </div>
+        <div v-if="isModalVisible" class="modal-backdrop" @click.self="closeModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>{{ modalTitle }}</h3>
+                    <button class="close-button" @click="closeModal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <pre>{{ modalContent }}</pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+    <script src="https://unpkg.com/@antv/g6@4/dist/g6.min.js"></script>
+
+    <script>
+        const { createApp } = Vue;
+        createApp({
+            data: () => ({
+                graph: null,
+                status: '正在初始化...',
+                timestampText: '数据时间: N/A',
+                apiEndpoint: 'http://127.0.0.1:5002/api/topology',
+                isEmpty: true,
+                hasError: false,
+                intervalId: null,
+                isFetching: false,
+                isModalVisible: false,
+                modalTitle: '',
+                modalContent: '',
+                styleConfig: {} 
+            }),
+            mounted() {
+                this.$nextTick(() => {
+                    const computedStyles = getComputedStyle(document.documentElement);
+                    // --- 核心修改 2: 读取新增的颜色变量 ---
+                    this.styleConfig = {
+                        normalColor: computedStyles.getPropertyValue('--normal-color').trim(),
+                        normalColorLight: computedStyles.getPropertyValue('--normal-color-light').trim(),
+                        faultyColor: computedStyles.getPropertyValue('--faulty-color').trim(),
+                        faultyColorDark: computedStyles.getPropertyValue('--faulty-color-dark').trim(),
+                        infectedColor: computedStyles.getPropertyValue('--infected-color').trim(),
+                        infectedColorDark: computedStyles.getPropertyValue('--infected-color-dark').trim(),
+                    };
+                });
+
+                this.fetchData();
+                this.intervalId = setInterval(this.fetchData, 10000);
+                window.addEventListener('resize', this.handleResize);
+            },
+            beforeUnmount() {
+                if (this.intervalId) clearInterval(this.intervalId);
+                this.destroyGraph();
+                window.removeEventListener('resize', this.handleResize);
+            },
+            methods: {
+                destroyGraph() {
+                    if (this.graph && !this.graph.get('destroyed')) this.graph.destroy();
+                    this.graph = null;
+                },
+                handleResize() {
+                    if (this.graph) {
+                        const container = document.getElementById('mountNode');
+                        if(container) {
+                            const width = container.clientWidth;
+                            const height = container.clientHeight;
+                            this.graph.changeSize(width, height);
+                            const rootNode = this.graph.findById('virtual-root');
+                            if (rootNode) this.graph.updateItem(rootNode, { fx: width / 2, fy: height / 2 });
+                        }
+                    }
+                },
+                closeModal() { this.isModalVisible = false; },
+
+                renderGraph(data) {
+                    this.destroyGraph();
+                    const graphData = this.processDataForDisplay(data);
+                    this.isEmpty = graphData.nodes.length <= 1;
+
+                    this.$nextTick(() => {
+                        if (!this.isEmpty) {
+                            this.graph = this.createGraphInstance('mountNode', graphData);
+                        }
+                    });
+                },
+
+                // --- 核心修改 3: 重构数据处理逻辑为三步 ---
+                processDataForDisplay(data) {
+                    const nodeMap = new Map();
+                    const faultyNodeIds = new Set();
+                    const infectedNodeIds = new Set();
+                    const allFinalNodes = [];
+                    const allFinalEdges = [];
+
+                    // Pass 1: 初步处理节点，并找出所有故障节点的ID
+                    data.nodes.forEach(node => {
+                        if (node.isRoot) return;
+                        node.processName = node.label;
+                        node.label = node.pid.toString();
+                        nodeMap.set(node.id, node);
+                        if (node.status === 'faulty') {
+                            faultyNodeIds.add(node.id);
+                        }
+                    });
+
+                    // Pass 2: 遍历真实的边，找出与故障节点相连的“受影响”节点
+                    data.edges.forEach(edge => {
+                        const sourceIsFaulty = faultyNodeIds.has(edge.source);
+                        const targetIsFaulty = faultyNodeIds.has(edge.target);
+                        if (sourceIsFaulty && !targetIsFaulty) {
+                            infectedNodeIds.add(edge.target);
+                        }
+                        if (targetIsFaulty && !sourceIsFaulty) {
+                            infectedNodeIds.add(edge.source);
+                        }
+                    });
+
+                    // Pass 3: 最终确定所有节点的样式，并构建最终的节点和边列表
+                    const virtualRoot = { id: 'virtual-root', isVirtual: true, size: 25, style: { fill: '#e0e0e0', stroke: '#c0c0c0' } };
+                    allFinalNodes.push(virtualRoot);
+                    
+                    nodeMap.forEach(node => {
+                        // 根据分类应用样式
+                        if (faultyNodeIds.has(node.id)) {
+                            // 故障节点 -> 红色
+                            node.style = { fill: this.styleConfig.faultyColor, stroke: this.styleConfig.faultyColorDark, lineWidth: 3 };
+                            node.labelCfg = { style: { fill: '#FFFFFF' } }; // 白色字体
+                        } else if (infectedNodeIds.has(node.id)) {
+                            // 受影响节点 -> 黄色
+                            node.style = { fill: this.styleConfig.infectedColor, stroke: this.styleConfig.infectedColorDark, lineWidth: 2 };
+                            node.labelCfg = { style: { fill: '#FFFFFF' } }; // 白色字体
+                        } else {
+                            // 正常节点 -> 蓝色
+                            node.style = { fill: this.styleConfig.normalColor, stroke: this.styleConfig.normalColorLight, lineWidth: 2 };
+                            node.labelCfg = { style: { fill: '#FFFFFF', fontSize: 14, fontWeight: 'bold' } };
+                        }
+                        allFinalNodes.push(node);
+                        allFinalEdges.push({ source: 'virtual-root', target: node.id, isVirtual: true, style: { stroke: '#ccc', lineDash: [5, 5] } });
+                    });
+                    
+                    data.edges.forEach(edge => {
+                         const realEdgeStyle = { style: { stroke: '#b5b5b5', lineWidth: 1.5, endArrow: { path: G6.Arrow.triangle(4, 5), fill: '#b5b5b5' } } };
+                         allFinalEdges.push({ ...edge, ...realEdgeStyle });
+                    });
+
+                    return { nodes: allFinalNodes, edges: allFinalEdges };
+                },
+                
+                createGraphInstance(containerId, data) {
+                    const container = document.getElementById(containerId);
+                    if (!container) return null;
+                    const width = container.clientWidth;
+                    const height = container.clientHeight;
+                    if (width === 0 || height === 0) return null;
+
+                    const rootNode = data.nodes.find(n => n.id === 'virtual-root');
+                    if (rootNode) {
+                        rootNode.fx = width / 2;
+                        rootNode.fy = height / 2;
+                    }
+
+                    const graph = new G6.Graph({
+                        container, width, height,
+                        modes: { default: ['drag-canvas', 'zoom-canvas', 'drag-node'] },
+                        layout: {
+                            type: 'force',
+                            linkDistance: (edge) => edge.isVirtual ? 200 : 250,
+                            preventOverlap: true,
+                            nodeStrength: -800,
+                            edgeStrength: 0.2
+                        },
+                        defaultNode: { type: 'circle', size: 60 },
+                        nodeStateStyles: { hover: { lineWidth: 4, stroke: this.styleConfig.normalColor } }
+                    });
+
+                    graph.data(data);
+                    graph.render();
+
+                    graph.on('node:mouseenter', e => { if (!e.item.getModel().isVirtual) graph.setItemState(e.item, 'hover', true)});
+                    graph.on('node:mouseleave', e => graph.setItemState(e.item, 'hover', false));
+                    graph.on('node:click', this.handleNodeClick);
+                    graph.on('edge:click', this.handleEdgeClick);
+
+                    return graph;
+                },
+                
+                async fetchData() {
+                    if (this.isFetching) return;
+                    this.isFetching = true; this.hasError = false;
+                    try {
+                        const response = await fetch(this.apiEndpoint);
+                        if (!response.ok) throw new Error(`API请求失败: ${response.status}`);
+                        const rawData = await response.json();
+                        this.timestampText = `数据时间: ${rawData.timestamp || 'N/A'}`;
+                        if (!rawData.nodes || rawData.nodes.length <= 1) {
+                            this.status = '暂无有效数据...';
+                            this.destroyGraph();
+                            this.isEmpty = true;
+                        } else {
+                            this.status = `在线 | 进程: ${rawData.nodes.filter(n => !n.isRoot).length}, 链路: ${rawData.edges.filter(e => !e.source.includes('virtual')).length}`;
+                            this.renderGraph(rawData);
+                        }
+                    } catch (error) {
+                        this.hasError = true; this.status = `错误: ${error.message}`;
+                        console.error("获取或渲染数据时出错:", error);
+                    } finally {
+                        this.isFetching = false;
+                    }
+                },
+                handleNodeClick(e) {
+                    const nodeModel = e.item.getModel();
+                    if (nodeModel.isVirtual) return;
+                    this.modalTitle = `进程详情: ${nodeModel.processName} (${nodeModel.pid})`;
+                    let content = `[基础信息]\n----------------------------------------\n`;
+                    content += `进程名: ${nodeModel.processName}\nPID    : ${nodeModel.pid}\n状态   : ${nodeModel.status === 'faulty' ? '故障' : '正常'}\n\n`;
+                    if (nodeModel.status === 'faulty') {
+                        content += `[故障诊断]\n----------------------------------------\n此进程处于“僵尸”状态，通常意味着其父进程存在缺陷。`;
+                    } else {
+                        const { raw, scores } = nodeModel.details;
+                        content += `[资源占用 (物理量)]\n----------------------------------------\n`;
+                        content += `CPU 使用率    : ${raw.cpu}\n物理内存 (RSS) : ${raw.mem}\n磁盘 I/O 速率  : ${raw.disk_io}\n网络连接数     : ${raw.conns}\n\n`;
+                        content += `[资源占用 (RCS综合得分: ${nodeModel.rcs})]\n----------------------------------------\n`;
+                        content += `CPU 得分       : ${scores.s_cpu}\n内存 得分      : ${scores.s_mem}\n磁盘 得分      : ${scores.s_disk}\n网络 得分      : ${scores.s_net}`;
+                    }
+                    this.modalContent = content;
+                    this.isModalVisible = true;
+                },
+                handleEdgeClick(e) {
+                    const edgeModel = e.item.getModel();
+                    if (edgeModel.isVirtual) return;
+                    this.modalTitle = `连接详情`;
+                    let content = `[关联信息]\n----------------------------------------\n`;
+                    content += `类型: ${edgeModel.type || 'N/A'}\n从  : ${edgeModel.source}\n到  : ${edgeModel.target}\n\n[详细参数]\n----------------------------------------\n`;
+                    content += `${JSON.stringify(edgeModel.details, null, 2)}`;
+                    this.modalContent = content;
+                    this.isModalVisible = true;
+                }
+            }
+        }).mount('#app');
+    </script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+{
+  "panel_title": "Systemd Sockets Accepted",
+  "panel_id": 297,
+  "description": "Rate of accepted connections per second for each systemd socket",
+  "targets": [
+    {
+      "refId": "A",
+      "query": "irate(node_systemd_socket_accepted_connections_total{instance=\"localhost:9100\",job=\"node_exporter\"}[5m])",
+      "legendFormat": "{{ name }}",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    }
+  ]
+}

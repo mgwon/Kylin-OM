@@ -1,0 +1,20 @@
+{
+  "panel_title": "MTU",
+  "panel_id": 288,
+  "description": "MTU (Maximum Transmission Unit) in bytes for each network interface. Affects packet size and transmission efficiency",
+  "targets": [
+    {
+      "refId": "A",
+      "query": "node_network_mtu_bytes{instance=\"localhost:9100\",job=\"node_exporter\"}",
+      "legendFormat": "{{ device }}",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    }
+  ]
+}

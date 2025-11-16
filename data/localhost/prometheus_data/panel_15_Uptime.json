@@ -1,0 +1,20 @@
+{
+  "panel_title": "Uptime",
+  "panel_id": 15,
+  "description": "",
+  "targets": [
+    {
+      "refId": "A",
+      "query": "node_time_seconds{instance=\"localhost:9100\",job=\"node_exporter\"} - node_boot_time_seconds{instance=\"localhost:9100\",job=\"node_exporter\"}",
+      "legendFormat": "",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    }
+  ]
+}

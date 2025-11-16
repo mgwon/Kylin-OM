@@ -1,0 +1,46 @@
+{
+  "panel_title": "CPU Frequency Scaling",
+  "panel_id": 321,
+  "description": "Real-time CPU frequency scaling per core, including average minimum and maximum allowed scaling frequencies",
+  "targets": [
+    {
+      "refId": "B",
+      "query": "node_cpu_scaling_frequency_hertz{instance=\"localhost:9100\",job=\"node_exporter\"}",
+      "legendFormat": "CPU {{ cpu }}",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    },
+    {
+      "refId": "A",
+      "query": "avg(node_cpu_scaling_frequency_max_hertz{instance=\"localhost:9100\",job=\"node_exporter\"})",
+      "legendFormat": "Max",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    },
+    {
+      "refId": "C",
+      "query": "avg(node_cpu_scaling_frequency_min_hertz{instance=\"localhost:9100\",job=\"node_exporter\"})",
+      "legendFormat": "Min",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="en" style="height: 100%">
+{% load static %}
+<head>
+  <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>可视化大屏</title>
+  <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
+
+<style>
+    body,html{
+            height:100%;
+            width: 100%;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+    }
+
+    canvas {
+        display: block;
+        vertical-align: bottom;
+    }
+
+    #particles-js {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: #00356B;
+    }
+
+    .Top{
+            width: 50%;
+            display: flex;
+            justify-content: center;
+            margin: 0 auto;
+            position: relative;
+            z-index:1;
+        }
+
+    .oricl{
+        border-top: 9vh solid #acc6f4;
+        border-left: 2vw solid transparent;
+        height: 0;
+        width: 20vw;
+        position: relative;
+    }
+
+    .oricl span {
+        display: block;
+        border-top: 9vh solid #98b8f2;
+        border-left: 2vw solid transparent;
+        height: 10px;
+        width: 20vw;
+        position: absolute;
+        left: -1.7vw;
+        top: -9.8vh;
+        }
+
+    .oricl1{
+        border-top: 9vh solid #acc6f4;
+        border-right: 2vw solid transparent;
+        height: 0;
+        width: 20vw;
+        position: relative;
+    }
+
+    .oricl1 span{
+        display: block;
+        border-top: 9vh solid #98b8f2;
+        border-right: 2vw solid transparent;
+        height: 0;
+        width: 20vw;
+        position: absolute;
+        right: -1.7vw;
+        top: -9.8vh;
+    }
+
+    .title{
+        width: 80%;
+        height:80%;
+        color: black;
+        font-size: 40px;
+        margin: 0 auto;
+        position: absolute;
+        background-color: transparent;
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    .BoxWrap{
+        width: 90%;
+        height:90%;
+        position: relative;
+        margin: -20px 5% 0 5%;
+        z-index:2;
+        overflow: hidden;
+    }
+
+    .Btm {
+        position: absolute;
+        width: 99%;
+        height: 98%;
+        margin: 3px ;
+        display: flex;
+    }
+
+    .horn{
+        position: absolute;
+        width: 99%;
+        height: 98%;
+        border:4px solid #98b8f2;
+        margin: 3px ;
+    }
+
+    .horn>div{
+        width: 100px;
+        height: 60px;
+        position:absolute;
+    }
+
+    .horn .lt{
+        border-top: 6px solid #2665cd;
+        border-left: 6px solid #2665cd;
+        left: -6px;
+        top: -6px;
+    }
+
+    .horn .rt{
+        border-top: 6px solid #2665cd;
+        border-right: 6px solid #2665cd;
+        right: -6px;
+        top: -6px;
+    }
+
+    .horn .rb{
+        border-bottom:6px solid #2665cd;
+        border-right: 6px solid #2665cd;
+        right: -6px;
+        bottom: -6px;
+    }
+    .horn .lb{
+        border-bottom:6px solid #2665cd;
+        border-left: 6px solid #2665cd;
+        left: -6px;
+        bottom: -6px;
+    }
+
+    .left {
+        flex: 6;
+        /*flex继承主轴方向上的大小比例*/
+        height: 100%;
+        /*或者100%，继承父级高度*/
+        /* 宽可以 */
+        background-color: transparent;
+        display: flex;
+        flex-direction: column;/*修改主轴方向为y轴方向*/
+    }
+    .center {
+        flex: 7;
+        height: 100%;
+        background-color: transparent;
+        display: flex;
+        flex-direction: column;
+    }
+    .right {
+        flex: 6;
+        height: 100%;
+        background-color: transparent;
+        display: flex;
+        flex-direction: column;
+    }
+
+    {#左边的容器#}
+    .left-box{
+        flex:1;
+        width: 100%;
+        /*设置宽度继承父级*/
+        background-color: transparent;
+        justify-content: center;
+        align-items: center;
+    }
+    .left-box1{
+        position: relative;
+        margin-top:20px;
+        margin-left: 25px;
+        height:85%;
+        background: transparent;
+        border: 4px solid #98b8f2;
+        border-radius: 8px;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        display: flex;
+        flex-direction: column; /* 设置为列布局，实现上下排列 */
+
+    }
+
+
+    {#中间的容器#}
+    .center-box1{
+        position: relative;
+        margin-top:30px;
+        margin-left:30px;
+        margin-right:30px;
+        height: 92%;
+        background: transparent;
+        border: 4px solid #98b8f2;
+        border-radius: 8px;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        display: flex;
+        flex-direction: column; /* 设置为列布局，实现上下排列 */
+
+    }
+
+    {#左边的容器#}
+    .right-box{
+        flex:1;
+        width: 500px;
+        /*设置宽度继承父级*/
+        background-color: transparent;
+        justify-content: center;
+        align-items: center;
+        height:350px;
+
+    }
+    .right-box1{
+        position: relative;
+        margin-top:20px;
+        margin-right: 5px;
+        height:90%;
+        background: transparent;
+        border: 4px solid #98b8f2;
+        border-radius: 8px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        overflow: hidden; /* 防止内容溢出 */
+        flex-direction: column; /* 设置为列布局，实现上下排列 */
+    }
+
+
+    {#按钮容器#}
+    .button_box {
+        flex:0.2;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        margin:10px;
+        background: transparent;
+        text-align: center;
+        padding-top: 20px;
+    }
+    .custom-button {
+        display: inline-block;
+        background-color: #007bff;
+        color: #fff;
+        text-decoration: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+    }
+    .custom-button:hover {
+        background-color: #0056b3;
+    }
+
+    #cpu-pie-container{
+            width: 400px;   /* 根据需要调整宽度 */
+            height: 200px; /* 高度可根据需要调整 */
+
+        }
+    #mem-chart-container{
+            width: 400px;   /* 根据需要调整宽度 */
+            height: 200px; /* 高度可根据需要调整 */
+
+        }
+    #disk-bar-container{
+            width: 400px;   /* 根据需要调整宽度 */
+            height: 200px; /* 高度可根据需要调整 */
+            margin-bottom: 30px; /* 设置底部外边距 */
+
+        }
+    #cpu-chart-container{
+            width: 500px;   /* 根据需要调整宽度 */
+            height: 260px; /* 高度可根据需要调整 */
+
+        }
+
+    #disk-chart-container{
+            width: 500px;   /* 根据需要调整宽度 */
+            height: 260px; /* 高度可根据需要调整 */
+
+        }
+
+    #cn_map {
+            width: 600px;
+            height: 560px;
+            padding= 10,10,10,10;
+        }
+    #svg-image {
+        width: 60%;
+        height: auto;
+    }
+
+    .table-container {
+            overflow-y: auto;
+            height: 100%; /* 根据需要调整高度 */
+            margin:0;
+            border: 1px solid #c2c4c6;
+    }
+
+    table {
+        width: 100%; /* 表格宽度占满容器 */
+        border-collapse: collapse; /* 边框合并为单一线条 */
+        margin:0; /* 表格下方的间距 */
+        height:100%;
+    }
+
+    /* 为表格的头部设置样式 */
+    th {
+        background-color: #142776;
+        color: white; /* 文字颜色 */
+        padding: 10px; /* 内边距 */
+        border: 1px solid #c2c4c6; /* 边框 */
+    }
+
+    /* 为表格的单元格设置样式 */
+    td {
+        padding: 8px; /* 内边距 */
+        border: 1px solid #c2c4c6; /* 边框 */
+        text-align: center; /* 文字对齐方式 */
+        color:white;
+        font-size: 15px;
+    }
+
+    tr:hover {
+        background-color: #172c84; /* 悬停时的背景颜色 */
+    }
+
+    {#按钮容器#}
+    .button_box {
+        flex:0.2;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        margin:10px;
+        background: transparent;
+        text-align: center;
+        padding-top: 20px;
+    }
+    .custom-button {
+        display: inline-block;
+        text-decoration: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+        font-size: 16px;
+        cursor: pointer;
+        background-color: #335d89;
+        color: white;
+        border: none;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        margin: -50px 0 0 0;
+    }
+    .custom-button:hover {
+        background-color: #00356B;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    .custom-button:active {
+            background-color: #00356B;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+</style>
+
+</head>
+<body translate="no" >
+    <div id="particles-js"></div>
+    <script src="{% static 'js/particles.js' %}"></script>
+    <script id="rendered-js" >
+        // ParticlesJS Config.
+        particlesJS("particles-js", {
+            "particles": {
+                "number": {
+                    "value": 80,
+                    "density": {
+                        "enable": true,
+                        "value_area": 700
+                    }
+                },
+                "color": {
+                    "value": "#ffffff"
+                },
+                "shape": {
+                    "type": "circle",
+                    "stroke": {
+                        "width": 0,
+                        "color": "#000000"
+                    },
+                    "polygon": {
+                        "nb_sides": 5
+                    }
+                },
+                "opacity": {
+                    "value": 0.5,
+                    "random": false,
+                    "anim": {
+                        "enable": false,
+                        "speed": 0.1,
+                        "opacity_min": 0.1,
+                        "sync": false
+                    }
+                },
+                "size": {
+                    "value": 3,
+                    "random": true,
+                    "anim": {
+                        "enable": false,
+                        "speed": 10,
+                        "size_min": 0.1,
+                        "sync": false
+                    }
+                },
+                "line_linked": {
+                    "enable": true,
+                    "distance": 150,
+                    "color": "#ffffff",
+                    "opacity": 0.4,
+                    "width": 1
+                },
+                "move": {
+                    "enable": true,
+                    "speed": 2,
+                    "direction": "none",
+                    "random": false,
+                    "straight": false,
+                    "out_mode": "out",
+                    "bounce": false,
+                    "attract": {
+                        "enable": false,
+                        "rotateX": 600,
+                        "rotateY": 1200
+                    }
+                }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": {
+                    "onhover": {
+                        "enable": true,
+                        "mode": "grab"
+                    },
+                    "onclick": {
+                    "enable": true,
+                    "mode": "push"
+                    },
+                    "resize": true
+                },
+                "modes": {
+                    "grab": {
+                        "distance": 140,
+                        "line_linked": {
+                            "opacity": 1
+                        }
+                    },
+                    "bubble": {
+                        "distance": 400,
+                        "size": 40,
+                        "duration": 2,
+                        "opacity": 8,
+                        "speed": 3
+                    },
+                    "repulse": {
+                        "distance": 200,
+                        "duration": 0.4
+                    },
+                    "push": {
+                        "particles_nb": 4
+                    },
+                    "remove": {
+                        "particles_nb": 2
+                    }
+                }
+            },
+            "retina_detect": true
+        });
+    </script>
+    <div class="Top">
+        <div class="oricl">
+            <span></span>
+        </div>
+        <div class="oricl1">
+            <span></span>
+        </div>
+        <div class="title">可视化大屏</div>
+    </div>
+    {#    <div class="Btm">#}
+    <div class="BoxWrap">
+        <div class="horn">
+            <div class="lt"></div>
+            <div class="rt"></div>
+            <div class="rb"></div>
+            <div class="lb"></div>
+        </div>
+
+        <div class="Btm">
+            <div class="left">
+                <div class="left-box">
+                    <div class="left-box1">
+                        <p class="cpu_pie_title" style="color: lightblue; font-size: 15px; ">CPU利用率</p>
+                        <div id="cpu-pie-container"></div>
+                                <script type="text/javascript" src="{% static 'js/echarts.js' %}"></script>
+                                <script type="text/javascript" src="{% static 'js/echarts.min.js' %}"></script>
+                                <script type="text/javascript" src="{% static 'js/cpu_pie.js' %}"></script>
+                                <script type="text/javascript">
+                                  var timestamps = {{ timestamps|safe }};
+                                  var clocktime = {{ clocktime|safe }};
+                                  var cpuFreqs = {{ cpu_freq|safe }};
+                                  var cpuLogicsNum = {{ cpu_logics_num|safe }};
+                                  var cpuPhysicalsNum = {{ cpu_physicals_num|safe }};
+                                  var usermodeRuntime = {{ usermode_runtime|safe }};
+                                  var corestateRuntime = {{ corestate_runtime|safe }};
+                                  var IOwaitTime = {{ IOwait_time|safe }};
+                                  var averloadIn1min = {{ averload_in1min|safe }};
+                                  var averloadIn5min = {{ averload_in5min|safe }};
+                                  var averloadIn15min = {{ averload_in15min|safe }};
+                                  var interruptionsNum = {{ interruptions_num|safe }};
+                                  var softinterruptionsNum = {{ softinterruptions_num|safe }};
+                                  var systemcallsNum = {{ systemcalls_num|safe }};
+                                  var timestamps = {{ timestamps|safe }};
+                                  var cpu_usages = {{ cpu_usages|safe }};
+
+                                  var value_i = {{ value_i|safe }};
+                                  var value_ii = {{ value_ii|safe }};
+                                  var value_iii = {{ value_iii|safe }};
+                                  var value_iv = {{ value_iv|safe }};
+                                  var value_v = {{ value_v|safe }};
+
+                                  // 调用函数渲染图表
+                                  renderCpuChart('cpu-pie-container',value_i ,value_ii, value_iii, value_iv, value_v);
+                                </script>
+                    </div>
+                </div>
+                <div class="left-box">
+                    <div class="left-box1">
+                        <p class="mem_chart_title" style="color: lightblue; font-size: 15px; ">内存利用率</p>
+                        <div id="mem-chart-container"></div>
+                                <script type="text/javascript" src="{% static 'js/echarts.js' %}"></script>
+                                <script type="text/javascript" src="{% static 'js/mem_chart.js' %}"></script>
+                                <script type="text/javascript">
+                                  var timestamps = {{ timestamps|safe }};
+                                  var clocktime = {{ clocktime|safe }};
+                                  var Totalmemory_size = {{ Totalmemory_size|safe }};
+                                  var Usedmemory_size = {{ Usedmemory_size|safe }};
+                                  var Freememory_size = {{  Freememory_size |safe}};
+                                  var Memory_usage = {{ Memory_usage |safe }};
+                                  var Swapmemory_size = {{ Swapmemory_size |safe }};
+                                  var UsedSwapmemory_size = {{ UsedSwapmemory_size |safe }};
+                                  var FreeSwapmemory_size = {{ FreeSwapmemory_size |safe }};
+                                  var Swapmemory_usage = {{ Swapmemory_usage |safe }};
+
+                                  // 调用函数渲染图表
+                                  renderCpuChart('mem-chart-container', timestamps, clocktime, Totalmemory_size, Usedmemory_size, Freememory_size, Memory_usage, Swapmemory_size, UsedSwapmemory_size, FreeSwapmemory_size, Swapmemory_usage);
+                                </script>
+                    </div>
+                </div>
+                <div class="left-box" style="height:246px">
+                    <div class="left-box1">
+                        <p class="disk_bar_title" style="color: lightblue; font-size: 15px; ">磁盘利用率</p>
+                        <div id="disk-bar-container"></div>
+                                <script type="text/javascript" src="{% static 'js/echarts.js' %}"></script>
+                                <script type="text/javascript" src="{% static 'js/echarts.min.js' %}"></script>
+                                <script type="text/javascript" src="{% static 'js/disk_bar.js' %}"></script>
+                                <script type="text/javascript">
+                                    var timestamps = {{ timestamps|safe }};
+                                    var clocktime = {{ clocktime|safe }};
+                                    var Totaldisk_size = {{ Totaldisk_size|safe }};
+                                    var Useddisk_size = {{ Useddisk_size|safe }};
+                                    var Freedisk_size = {{ Freedisk_size|safe }};
+                                    var Disk_usage = {{ Disk_usage|safe }};
+                                    var readIO_size = {{ readIO_size|safe }};
+                                    var writeIO_size = {{ writeIO_size|safe }};
+                                    var readdisk_time = {{ readdisk_time|safe }};
+                                    var writedisk_time = {{ writedisk_time|safe }};
+
+                                  // 调用函数渲染图表
+                                  renderCpuChart('disk-bar-container', timestamps, clocktime, Totaldisk_size, Useddisk_size, Freedisk_size, Disk_usage, readIO_size, writeIO_size, readdisk_time, writedisk_time);
+                                </script>
+                    </div>
+                </div>
+            </div>
+            <div class="center">
+                <div class="center-box1">
+                    <div id="cn_map"></div>
+                    <script type="text/javascript" src="{% static 'js/echarts.min.js' %}"></script>
+                    <script type="text/javascript" src="{% static 'js/china.js' %}"></script>
+                    <script type="text/javascript">
+                        var chartDom = document.getElementById('cn_map');
+                        var myChart = echarts.init(chartDom);
+                        var option;
+
+                        option = {
+                        title: {
+                            text: '麒麟系统全国分布',
+                            left: 'center',
+                            textStyle: {
+                                color: '#1F90ff',
+                                fontSize: 24
+                            }
+                        },
+                        tooltip: {
+                            trigger: 'item'
+                        },
+                        visualMap: {
+                            min: 0,
+                            max: 1000,
+                            left: 'left',
+                            top: 'bottom',
+                            text: ['高', '低'],
+                            inRange: {
+                                color: ['#b0c4de', '#1e90ff'] // 淡蓝色到深蓝色
+                            },
+                            textStyle: {
+                                color: '#ffffff'
+                            },
+                            show: true
+                        },
+                        series: [
+                            {
+                                name: '中国地图数据',
+                                type: 'map',
+                                mapType: 'china',
+                                roam: false,
+                                label: {
+                                    show: true,
+                                    color: '#ffffff' // 省份名称颜色
+                                },
+                                itemStyle: {
+                                    normal: {
+                                        areaColor: '#0e2a42', // 地图基调科技感淡蓝色
+                                        borderColor: '#51c1c3' // 边界颜色
+                                    },
+                                    emphasis: {
+                                        areaColor: '#4682b4' // 悬浮时的颜色
+                                    }
+                                },
+                                data: [
+                                    {name: '北京', value: Math.round(Math.random() * 1000)},
+                                    {name: '天津', value: Math.round(Math.random() * 1000)},
+                                    {name: '上海', value: Math.round(Math.random() * 1000)},
+                                    {name: '重庆', value: Math.round(Math.random() * 1000)},
+                                    {name: '河北', value: Math.round(Math.random() * 1000)},
+                                    {name: '河南', value: Math.round(Math.random() * 1000)},
+                                    {name: '云南', value: Math.round(Math.random() * 1000)},
+                                    {name: '辽宁', value: Math.round(Math.random() * 1000)}
+                                ]
+                            }
+                        ],
+                    };
+
+                    myChart.setOption(option);
+                </script>
+                </div>
+            </div>
+            <div class="right">
+                <div class="right-box">
+                    <div class="right-box1">
+                            <img src="{% static 'svg/svg_name.svg' %}" id="svg-image" alt="SVG Image">
+                            <script>
+                                document.addEventListener('DOMContentLoaded', function () {
+                                    const img = document.getElementById('svg-image');
+                                    let scale = 1;
+                                    let posX = 0, posY = 0;
+                                    let startX = 0, startY = 0;
+                                    let isDragging = false;
+
+                                    // 放缩功能
+                                    img.addEventListener('wheel', function (event) {
+                                        event.preventDefault();
+                                        if (event.deltaY < 0) {
+                                            scale *= 1.1; // 放大
+                                        } else {
+                                            scale /= 1.1; // 缩小
+                                        }
+                                        img.style.transform = `translate(${posX}px, ${posY}px) scale(${scale})`;
+                                    });
+
+                                    // 按下左键开始拖动
+                                    img.addEventListener('mousedown', function (event) {
+                                        if (event.button === 0) { // 只响应左键
+                                            isDragging = true;
+                                            startX = event.clientX - posX;
+                                            startY = event.clientY - posY;
+                                            img.style.cursor = 'grabbing';
+                                        }
+                                    });
+
+                                    // 移动鼠标时拖动图片
+                                    document.addEventListener('mousemove', function (event) {
+                                        if (isDragging) {
+                                            posX = event.clientX - startX;
+                                            posY = event.clientY - startY;
+                                            img.style.transform = `translate(${posX}px, ${posY}px) scale(${scale})`;
+                                        }
+                                    });
+
+                                    // 松开左键停止拖动
+                                    document.addEventListener('mouseup', function () {
+                                        if (isDragging) {
+                                            isDragging = false;
+                                            img.style.cursor = 'grab';
+                                        }
+                                    });
+
+                                    // 鼠标离开图片区域时自动复原
+                                    img.addEventListener('mouseleave', function () {
+                                        if (isDragging) {
+                                            isDragging = false;
+                                            img.style.cursor = 'grab';
+                                            posX = 0;
+                                            posY = 0;
+                                            scale = 1;
+                                            img.style.transform = `translate(${posX}px, ${posY}px) scale(${scale})`;
+                                        }
+                                    });
+                                });
+                            </script>
+                        <p class="svg_title" style="color: lightblue; font-size: 15px; ">火焰图</p>
+                    </div>
+                </div>
+                <div class="right-box">
+                    <div class="right-box1">
+                        <div class="table-container">
+                            <table>
+                                <tr>
+                                    <th>序号</th>
+                                    <th>开始时间</th>
+                                    <th>结束时间</th>
+                                </tr>
+                                {% for record in records %}
+                                <tr>
+                                    <td>{{ record.0 }}</td>
+                                    <td>{{ record.1 }}</td>
+                                    <td>{{ record.2 }}</td>
+                                </tr>
+                                {% empty %}
+                                <tr>
+                                    <td colspan="3">没有找到记录</td>
+                                </tr>
+                                {% endfor %}
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="button_box">
+                    <a class="custom-button" href="{% url 'optimization' %}">调优</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</body>
+
+</html>
+
+
+
+

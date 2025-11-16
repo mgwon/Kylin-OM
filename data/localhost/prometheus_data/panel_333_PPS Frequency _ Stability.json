@@ -1,0 +1,33 @@
+{
+  "panel_title": "PPS Frequency / Stability",
+  "panel_id": 333,
+  "description": "Displays the PPS signal's frequency offset and stability (jitter) in hertz. Useful for monitoring high-precision time sources like GPS or atomic clocks",
+  "targets": [
+    {
+      "refId": "A",
+      "query": "node_timex_pps_frequency_hertz{instance=\"localhost:9100\",job=\"node_exporter\"}",
+      "legendFormat": "PPS Frequency Offset",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    },
+    {
+      "refId": "B",
+      "query": "node_timex_pps_stability_hertz{instance=\"localhost:9100\",job=\"node_exporter\"}",
+      "legendFormat": "PPS Frequency Stability",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    }
+  ]
+}

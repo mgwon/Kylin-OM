@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en" style="height: 100%">
+{% load static %}
+<head>
+  <meta charset="utf-8">
+    <title>系统CPU信息</title>
+  <style>
+    body, html {
+      height: 100%;
+      margin: 0;
+    }
+    #container_cpu {
+      height: 80%;
+    }
+    #cpu-info {
+      margin-top: 20px;
+    }
+    #cpu-pie-container{
+            width: 400px;   /* 根据需要调整宽度 */
+            height: 200px; /* 高度可根据需要调整 */
+    }
+  </style>
+</head>
+
+<body style="height: 100%; margin: 0">
+  <p class="cpu_pie_title" style="color: lightblue; font-size: 15px; ">CPU利用率</p>
+                        <div id="cpu-pie-container"></div>
+                                <script type="text/javascript" src="{% static 'js/echarts.js' %}"></script>
+                                <script type="text/javascript" src="{% static 'js/echarts.min.js' %}"></script>
+                                <script type="text/javascript" src="{% static 'js/cpu_pie.js' %}"></script>
+                                <script type="text/javascript">
+                                  var timestamps = {{ timestamps|safe }};
+                                  var clocktime = {{ clocktime|safe }};
+                                  var cpuFreqs = {{ cpu_freq|safe }};
+                                  var cpuLogicsNum = {{ cpu_logics_num|safe }};
+                                  var cpuPhysicalsNum = {{ cpu_physicals_num|safe }};
+                                  var usermodeRuntime = {{ usermode_runtime|safe }};
+                                  var corestateRuntime = {{ corestate_runtime|safe }};
+                                  var IOwaitTime = {{ IOwait_time|safe }};
+                                  var averloadIn1min = {{ averload_in1min|safe }};
+                                  var averloadIn5min = {{ averload_in5min|safe }};
+                                  var averloadIn15min = {{ averload_in15min|safe }};
+                                  var interruptionsNum = {{ interruptions_num|safe }};
+                                  var softinterruptionsNum = {{ softinterruptions_num|safe }};
+                                  var systemcallsNum = {{ systemcalls_num|safe }};
+                                  var timestamps = {{ timestamps|safe }};
+                                  var cpu_usages = {{ cpu_usages|safe }};
+
+                                  var value_i = {{ value_i|safe }};
+                                  var value_ii = {{ value_ii|safe }};
+                                  var value_iii = {{ value_iii|safe }};
+                                  var value_iv = {{ value_iv|safe }};
+                                  var value_v = {{ value_v|safe }};
+
+                                  // 调用函数渲染图表
+                                  renderCpuChart('cpu-pie-container',value_i ,value_ii, value_iii, value_iv, value_v);
+                                </script>
+
+<!--    var option = {-->
+<!--  xAxis: {-->
+<!--    type: 'category',-->
+<!--    boundaryGap: false,-->
+<!--    data: {{ timestamps|safe }}-->
+<!--  },-->
+<!--  yAxis: {-->
+<!--    type: 'value'-->
+<!--  },-->
+<!--  series: [-->
+<!--    {-->
+<!--      data:-->
+<!--      {{ cpu_usages|safe }},-->
+<!--      type: 'line',-->
+<!--      areaStyle: {},-->
+<!--      markPoint: {-->
+<!--            data: [-->
+<!--              { type: 'max', name: 'Max CPU Usage' }-->
+<!--            ],-->
+<!--            label: {-->
+<!--              show: true,-->
+<!--              formatter: function(params) {-->
+<!--                return '瓶颈: ' + params.value;-->
+<!--              }-->
+<!--            }-->
+<!--          }-->
+
+<!--    }-->
+<!--  ],-->
+<!--  tooltip: { /* 提示框配置 */-->
+<!--        trigger: 'axis', /* 触发类型 */-->
+<!--        formatter: function (params) { /* 格式化函数 */-->
+<!--          var point = params[0]; /* 第一个数据点 */-->
+<!--          var index = params[0].dataIndex;-->
+<!--          /* 显示时间戳和CPU使用率 */-->
+<!--          return '时间戳: ' + point.axisValueLabel + '<br>' +-->
+<!--                 '时间: ' + clocktime[index] + '<br>' +-->
+<!--                 'CPU 利用率: ' + point.value + '%<br>' +-->
+<!--                 'CPU 频率: ' + cpuFreqs[index] + ' MHz<br>' +-->
+<!--                 'CPU 逻辑核心数量: ' + cpuLogicsNum[index] + '<br>' +-->
+<!--                 'CPU 物理核心数量: ' + cpuPhysicalsNum[index] + '<br>' +-->
+<!--                 '用户态运行时间: ' + usermodeRuntime[index] + ' s<br>' +-->
+<!--                 '核心态运行时间: ' + corestateRuntime[index] + ' s<br>' +-->
+<!--                 'IO 等待时间: ' + IOwaitTime[index] + ' s<br>' +-->
+<!--                 '1min内平均负载: ' + averloadIn1min[index] + '<br>' +-->
+<!--                 '5min内平均负载: ' + averloadIn5min[index] + '<br>' +-->
+<!--                 '15min内平均负载: ' + averloadIn15min[index] + '<br>' +-->
+<!--                 '中断次数: ' + interruptionsNum[index] + '<br>' +-->
+<!--                 '软中断次数: ' + softinterruptionsNum[index] + '<br>' +-->
+<!--                 '系统调用次数: ' + systemcallsNum[index];-->
+<!--        }-->
+<!--      }-->
+<!--};-->
+
+<!--    if (option && typeof option === 'object') {-->
+<!--      myChart.setOption(option);-->
+<!--    }-->
+<!--    -->
+<!--    window.addEventListener('resize', myChart.resize);-->
+<!--  </script>-->
+</body>
+</html>

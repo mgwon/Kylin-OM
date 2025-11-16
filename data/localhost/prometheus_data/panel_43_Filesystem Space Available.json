@@ -1,0 +1,46 @@
+{
+  "panel_title": "Filesystem Space Available",
+  "panel_id": 43,
+  "description": "Amount of available disk space per mounted filesystem, excluding rootfs. Based on block availability to non-root users",
+  "targets": [
+    {
+      "refId": "A",
+      "query": "node_filesystem_avail_bytes{instance=\"localhost:9100\",job=\"node_exporter\",device!~'rootfs'}",
+      "legendFormat": "{{mountpoint}}",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    },
+    {
+      "refId": "B",
+      "query": "node_filesystem_free_bytes{instance=\"localhost:9100\",job=\"node_exporter\",device!~'rootfs'}",
+      "legendFormat": "{{mountpoint}} - Free",
+      "hidden": true,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    },
+    {
+      "refId": "C",
+      "query": "node_filesystem_size_bytes{instance=\"localhost:9100\",job=\"node_exporter\",device!~'rootfs'}",
+      "legendFormat": "{{mountpoint}} - Size",
+      "hidden": true,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    }
+  ]
+}

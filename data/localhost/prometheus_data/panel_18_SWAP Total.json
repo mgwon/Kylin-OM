@@ -1,0 +1,20 @@
+{
+  "panel_title": "SWAP Total",
+  "panel_id": 18,
+  "description": "",
+  "targets": [
+    {
+      "refId": "A",
+      "query": "node_memory_SwapTotal_bytes{instance=\"localhost:9100\",job=\"node_exporter\"}",
+      "legendFormat": "",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    }
+  ]
+}

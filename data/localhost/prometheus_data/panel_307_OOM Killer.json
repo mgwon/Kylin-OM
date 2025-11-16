@@ -1,0 +1,20 @@
+{
+  "panel_title": "OOM Killer",
+  "panel_id": 307,
+  "description": "Rate of Out-of-Memory (OOM) kill events. A non-zero value indicates the kernel has terminated one or more processes due to memory exhaustion",
+  "targets": [
+    {
+      "refId": "A",
+      "query": "irate(node_vmstat_oom_kill{instance=\"localhost:9100\",job=\"node_exporter\"}[5m])",
+      "legendFormat": "OOM Kills",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    }
+  ]
+}

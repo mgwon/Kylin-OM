@@ -1,0 +1,92 @@
+{
+  "id": "backup_db_workflow",
+  "name": "Database Backup Workflow",
+  "hostGroup": "database-servers",
+  "hostCount": 2,
+  "application": "mysql_backup_app",
+  "description": "A workflow to monitor and manage the daily backup process for critical MySQL databases.",
+  "status": "运行中",
+  "hosts": [
+    {
+      "id": "host-db-master-01",
+      "name": "db-master-01",
+      "ip": "192.168.10.5",
+      "indicatorCount": 4,
+      "indicators": [
+        {
+          "id": "ind-db-001",
+          "name": "db_backup_last_status",
+          "algorithm": "mae",
+          "model": "Mae"
+        },
+        {
+          "id": "ind-db-002",
+          "name": "db_backup_duration_seconds",
+          "algorithm": "ewma",
+          "model": "Ewma"
+        },
+        {
+          "id": "ind-db-003",
+          "name": "db_backup_file_size_mb",
+          "algorithm": "mae",
+          "model": "Mae"
+        },
+        {
+          "id": "ind-db-004",
+          "name": "backup_storage_free_space_percent",
+          "algorithm": "arima",
+          "model": "Arima"
+        }
+      ],
+      "multiMetricRules": [
+        {
+          "name": "Backup Health Score",
+          "threshold": 75,
+          "metrics": [
+            {
+              "currentValue": 30,
+              "id": "m-1754043503786",
+              "name": "memory_usage",
+              "weight": 0.3
+            }
+          ],
+          "currentValue": 9,
+          "id": "rule-db-health-1"
+        }
+      ]
+    },
+    {
+      "id": "host-db-slave-01",
+      "name": "db-slave-01",
+      "ip": "192.168.10.6",
+      "indicatorCount": 4,
+      "indicators": [
+        {
+          "id": "ind-db-005",
+          "name": "db_backup_last_status",
+          "algorithm": "ewma",
+          "model": "Ewma"
+        },
+        {
+          "id": "ind-db-006",
+          "name": "db_backup_duration_seconds",
+          "algorithm": "mae",
+          "model": "Mae"
+        },
+        {
+          "id": "ind-db-007",
+          "name": "db_backup_file_size_mb",
+          "algorithm": "mae",
+          "model": "Mae"
+        },
+        {
+          "id": "ind-db-008",
+          "name": "backup_storage_free_space_percent",
+          "algorithm": "fft",
+          "model": "Fft"
+        }
+      ],
+      "multiMetricRules": []
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "panel_title": "IRQ Detail",
+  "panel_id": 259,
+  "description": "Breaks down hardware interrupts by type and device. Useful for diagnosing IRQ load on network, disk, or CPU interfaces. Requires --collector.interrupts to be enabled in node_exporter",
+  "targets": [
+    {
+      "refId": "A",
+      "query": "irate(node_interrupts_total{instance=\"localhost:9100\",job=\"node_exporter\"}[5m])",
+      "legendFormat": "{{ type }} - {{ info }}",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    }
+  ]
+}

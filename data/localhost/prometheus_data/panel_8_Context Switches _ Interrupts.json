@@ -1,0 +1,33 @@
+{
+  "panel_title": "Context Switches / Interrupts",
+  "panel_id": 8,
+  "description": "Per-second rate of context switches and hardware interrupts. High values may indicate intense CPU or I/O activity",
+  "targets": [
+    {
+      "refId": "A",
+      "query": "irate(node_context_switches_total{instance=\"localhost:9100\",job=\"node_exporter\"}[5m])",
+      "legendFormat": "Context switches",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    },
+    {
+      "refId": "B",
+      "query": "irate(node_intr_total{instance=\"localhost:9100\",job=\"node_exporter\"}[5m])",
+      "legendFormat": "Interrupts",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    }
+  ]
+}

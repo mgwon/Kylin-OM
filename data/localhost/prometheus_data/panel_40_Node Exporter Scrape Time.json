@@ -1,0 +1,20 @@
+{
+  "panel_title": "Node Exporter Scrape Time",
+  "panel_id": 40,
+  "description": "Duration of each individual collector executed during a Node Exporter scrape. Useful for identifying slow or failing collectors",
+  "targets": [
+    {
+      "refId": "A",
+      "query": "node_scrape_collector_duration_seconds{instance=\"localhost:9100\",job=\"node_exporter\"}",
+      "legendFormat": "{{collector}}",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    }
+  ]
+}

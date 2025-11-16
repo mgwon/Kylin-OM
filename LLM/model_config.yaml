@@ -1,0 +1,17 @@
+provider: autogen_ext.models.openai.OpenAIChatCompletionClient
+config:
+  model: deepseek-reasoner
+  base_url: https://api.deepseek.com/v1
+  api_key: sk-076467fa0b844ee78ee17ff68b80e943
+  model_info:
+    vision: false
+    function_calling: true
+    json_output: true
+    family: r1
+    structured_output: true
+  temperature: 0.3
+  top_p: 0.8
+  max_tokens: 4096
+  # 可选的高级参数
+  # frequency_penalty: 0.0  # 频率惩罚
+  # presence_penalty: 0.0   # 存在惩罚

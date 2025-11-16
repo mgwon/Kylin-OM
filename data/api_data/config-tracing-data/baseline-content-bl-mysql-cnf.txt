@@ -1,0 +1,5 @@
+{
+  "id": "bl-mysql-cnf",
+  "path": "/etc/my.cnf",
+  "content": "# Standard my.cnf baseline\n[mysqld]\nmax_connections = 1000\ninnodb_buffer_pool_size = 2G\n"
+}

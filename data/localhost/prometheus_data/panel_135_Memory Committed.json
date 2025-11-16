@@ -1,0 +1,33 @@
+{
+  "panel_title": "Memory Committed",
+  "panel_id": 135,
+  "description": "Displays committed memory usage versus the system's commit limit. Exceeding the limit is allowed under Linux overcommit policies but may increase OOM risks under high load",
+  "targets": [
+    {
+      "refId": "A",
+      "query": "node_memory_Committed_AS_bytes{instance=\"localhost:9100\",job=\"node_exporter\"}",
+      "legendFormat": "Committed_AS – Memory promised to processes (not necessarily used)",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    },
+    {
+      "refId": "B",
+      "query": "node_memory_CommitLimit_bytes{instance=\"localhost:9100\",job=\"node_exporter\"}",
+      "legendFormat": "CommitLimit - Max allowable committed memory",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    }
+  ]
+}

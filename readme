@@ -1,0 +1,3 @@
+#在服务器上必须执行如下指令，进行服务和指令部署
+
+sudo bash ./scripts/deploy_kylin.sh

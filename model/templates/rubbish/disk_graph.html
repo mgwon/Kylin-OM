@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" style="height: 100%">
+{% load static %}
+<head>
+  <meta charset="utf-8">
+    <title>系统磁盘信息</title>
+  <style>
+    body, html {
+      height: 100%;
+      margin: 0;
+    }
+    #container {
+      height: 80%;
+    }
+    #cpu-info {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+
+<body style="height: 100%; margin: 0">
+  <div id="container" style="height: 100%"></div>
+
+  <script type="text/javascript" src="{% static 'js/echarts.js' %}"></script>
+  <script type="text/javascript">
+    var dom = document.getElementById('container');
+    var myChart = echarts.init(dom, null, {
+      renderer: 'canvas',
+      useDirtyRect: false
+    });
+
+    var clocktime = {{ clocktime|safe }};
+    var Totaldisk_size = {{ Totaldisk_size|safe }};
+    var Useddisk_size = {{ Useddisk_size|safe }};
+    var Freedisk_size = {{ Freedisk_size|safe }};
+
+    var readIO_size = {{ readIO_size|safe }};
+    var writeIO_size = {{ writeIO_size|safe }};
+    var readdisk_time = {{ readdisk_time|safe }};
+    var writedisk_time = {{ writedisk_time|safe }};
+
+    var option;
+    option = {
+        title: {
+            text: '系统磁盘使用情况', // 标题文本
+            left: 'center', // 标题水平位置
+            top: 'bottom' // 标题垂直位置
+        },
+  xAxis: {
+    type: 'category',
+    boundaryGap: false,
+    data: {{ timestamps|safe }}
+  },
+  yAxis: {
+    type: 'value'
+  },
+  series: [
+    {
+      data:
+      {{ Disk_usage|safe }},
+      type: 'line',
+      areaStyle: {},
+      markPoint: {
+            data: [
+              { type: 'max', name: 'Max CPU Usage' }
+            ],
+            label: {
+              show: true,
+              formatter: function(params) {
+                return '瓶颈: ' + params.value;
+              }
+            }
+          }
+
+    }
+  ],
+  tooltip: { /* 提示框配置 */
+        trigger: 'axis', /* 触发类型 */
+        formatter: function (params) { /* 格式化函数 */
+          var point = params[0]; /* 第一个数据点 */
+          var index = params[0].dataIndex;
+          /* 显示时间戳和CPU使用率 */
+          return '时间戳: ' + point.axisValueLabel + '<br>' +
+                 '时间: ' + clocktime[index] + '<br>' +
+                 '磁盘利用率: ' + point.value + '%<br>' +
+                 '磁盘总空间: ' + Totaldisk_size[index] + ' Byte<br>' +
+                 '磁盘已使用大小: ' + Useddisk_size[index] + ' Byte<br>' +
+                 '磁盘空闲大小: ' + Freedisk_size[index] + ' Byte<br>' +
+                 '磁盘读IO量: ' + readIO_size[index] + ' Byte<br>' +
+                 '磁盘写IO量: ' + writeIO_size[index] + ' Byte<br>' +
+                 '磁盘读时间: ' + readdisk_time[index] + ' s<br>' +
+                 '磁盘写时间: ' + writedisk_time[index] + 's'
+
+        }
+      }
+};
+
+    if (option && typeof option === 'object') {
+      myChart.setOption(option);
+    }
+
+
+    window.addEventListener('resize', myChart.resize);
+  </script>
+</body>
+</html>

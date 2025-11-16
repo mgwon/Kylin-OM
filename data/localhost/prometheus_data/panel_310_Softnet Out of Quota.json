@@ -1,0 +1,20 @@
+{
+  "panel_title": "Softnet Out of Quota",
+  "panel_id": 310,
+  "description": "How often the kernel was unable to process all packets in the softnet queue before time ran out. Frequent squeezes may indicate CPU contention or driver inefficiency",
+  "targets": [
+    {
+      "refId": "A",
+      "query": "irate(node_softnet_times_squeezed_total{instance=\"localhost:9100\",job=\"node_exporter\"}[5m])",
+      "legendFormat": "CPU {{cpu}} - Times Squeezed",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    }
+  ]
+}

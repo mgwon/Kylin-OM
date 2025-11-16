@@ -1,0 +1,20 @@
+{
+  "id": "fr-004",
+  "summary": "应用Pod 'frontend-abc' 持续重启 (CrashLoopBackOff)",
+  "type": "自动",
+  "result": "成功",
+  "timeline": [
+    { "status": "告警触发", "time": "09:40:00", "description": "Pod 'frontend-abc' 进入 CrashLoopBackOff 状态" },
+    { "status": "自动诊断", "time": "09:40:05", "description": "诊断发现该Pod关联的Deployment刚刚进行过版本更新" },
+    { "status": "修复执行", "time": "09:40:10", "description": "Playbook: 回滚应用版本 被触发" },
+    { "status": "验证恢复", "time": "09:45:00", "description": "应用回滚到上一稳定版本，Pod恢复Running状态" },
+    { "status": "事件关闭", "time": "09:45:10", "description": "事件关闭，并创建Jira工单通知开发团队" }
+  ],
+  "llmAnalysis": "新发布的镜像 'webapp:v2.3.1' 存在启动时配置加载错误，导致容器启动后立即崩溃。AIOps平台的监控系统检测到 CrashLoopBackOff 状态后，自动关联到最近的发布变更，并触发了回滚预案，将服务恢复到上一个稳定版本 'webapp:v2.3.0'，有效缩短了业务中断时间（MTTR）。",
+  "context": {
+    "alertDetails": "Alert: Kubernetes_Pod_CrashLooping\nSeverity: P2\nSource: Kubelet\nDescription: Pod 'frontend-abc-7f8c9d...' in namespace 'default' is in CrashLoopBackOff state.",
+    "performanceChartUrl": "monitoring_report.html",
+    "relatedLogs": "Error: failed to load config file '/app/config/settings.yaml': file not found\nProcess exited with status 1"
+  },
+  "executionDetails": "--- Executing Playbook: 回滚应用版本 ---\n\nTASK [Get deployment for pod] ************\nok: [localhost]\n\nTASK [Rollback deployment] ***************\n- command: kubectl rollout undo deployment/frontend-deployment --to-revision=3\n- stdout: \"deployment.apps/frontend-deployment rolled back\"\n\nTASK [Wait for rollout to complete] ******\n- command: kubectl rollout status deployment/frontend-deployment\n- stdout: \"deployment \\\"frontend-deployment\\\" successfully rolled out\"\n\n--- Playbook execution finished successfully ---"
+}

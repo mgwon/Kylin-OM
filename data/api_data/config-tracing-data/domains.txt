@@ -1,0 +1,37 @@
+[
+  {
+    "id": "dom-1754816274831",
+    "name": "123",
+    "assetCount": 5,
+    "driftStatus": "未监控",
+    "lastScan": "N/A"
+  },
+  {
+    "id": "dom-1754453073948",
+    "name": "111",
+    "assetCount": 2,
+    "driftStatus": "未监控",
+    "lastScan": "N/A"
+  },
+  {
+    "id": "dom-g1",
+    "name": "Web Servers",
+    "assetCount": 2,
+    "driftStatus": "健康",
+    "lastScan": "2025-07-25 10:30:00"
+  },
+  {
+    "id": "dom-g2",
+    "name": "Database",
+    "assetCount": 4,
+    "driftStatus": "漂移",
+    "lastScan": "2025-07-25 11:00:00"
+  },
+  {
+    "id": "dom-g3",
+    "name": "Cache",
+    "assetCount": 1,
+    "driftStatus": "未监控",
+    "lastScan": "N/A"
+  }
+]

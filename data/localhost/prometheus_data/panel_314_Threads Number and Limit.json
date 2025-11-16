@@ -1,0 +1,33 @@
+{
+  "panel_title": "Threads Number and Limit",
+  "panel_id": 314,
+  "description": "Number of active threads on the system and the configured thread limit. Useful for monitoring thread pressure. Requires --collector.processes in node_exporter",
+  "targets": [
+    {
+      "refId": "A",
+      "query": "node_processes_threads{instance=\"localhost:9100\",job=\"node_exporter\"}",
+      "legendFormat": "Allocated threads",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    },
+    {
+      "refId": "B",
+      "query": "node_processes_max_threads{instance=\"localhost:9100\",job=\"node_exporter\"}",
+      "legendFormat": "Threads limit",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    }
+  ]
+}

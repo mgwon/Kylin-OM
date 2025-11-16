@@ -1,0 +1,59 @@
+{
+  "panel_title": "Memory Writeback and Dirty",
+  "panel_id": 130,
+  "description": "Memory currently dirty (modified but not yet written to disk), being actively written back, or held by writeback buffers. High dirty or writeback memory may indicate disk I/O pressure or delayed flushing",
+  "targets": [
+    {
+      "refId": "A",
+      "query": "node_memory_Writeback_bytes{instance=\"localhost:9100\",job=\"node_exporter\"}",
+      "legendFormat": "Writeback – Memory currently being flushed to disk",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    },
+    {
+      "refId": "B",
+      "query": "node_memory_WritebackTmp_bytes{instance=\"localhost:9100\",job=\"node_exporter\"}",
+      "legendFormat": "WritebackTmp – FUSE temporary writeback buffers",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    },
+    {
+      "refId": "C",
+      "query": "node_memory_Dirty_bytes{instance=\"localhost:9100\",job=\"node_exporter\"}",
+      "legendFormat": "Dirty – Memory marked dirty (pending write to disk)",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    },
+    {
+      "refId": "D",
+      "query": "node_memory_NFS_Unstable_bytes{instance=\"localhost:9100\",job=\"node_exporter\"}",
+      "legendFormat": "NFS Unstable – Pages sent to NFS server, awaiting storage commit",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    }
+  ]
+}

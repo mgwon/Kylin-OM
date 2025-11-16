@@ -1,0 +1,27 @@
+[Unit]
+Description=Kylin-OM Performance Report Generation Service (Looping)
+Documentation=file:///root/kylin_OM/v0.2/kylin/docs
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+# [核心修改] Type=simple，因为主进程(bash)将一直存在
+Type=simple
+
+# [核心修改] ExecStart现在是一个无限循环的bash脚本
+# 它会：1.运行python脚本 -> 2.等待60秒 -> 3.重复
+ExecStart=/bin/bash -c 'while true; do /usr/bin/python3 /root/kylin_OM/v0.2/kylin/src/data_collection/performance_main.py --dashboard-json-dir /root/kylin_OM/v0.2/kylin/data/localhost --panel-data-dir /root/kylin_OM/v0.2/kylin/data/localhost/prometheus_data --charts-dir /root/kylin_OM/v0.2/kylin/frontend/public/charts; sleep 60; done'
+
+# [重要] 运行用户依然是 root
+User=root
+
+# [新增] 当服务被要求停止时，确保循环能够干净地退出
+KillMode=process
+
+# [新增] 如果服务意外失败，10秒后自动重启
+Restart=on-failure
+RestartSec=10s
+
+[Install]
+# [重要] WantedBy 恢复为 multi-user.target，因为它需要开机自启
+WantedBy=multi-user.target

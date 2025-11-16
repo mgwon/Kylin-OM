@@ -1,0 +1,20 @@
+{
+  "id": "fr-001",
+  "summary": "CPU使用率超过95%导致服务响应缓慢",
+  "type": "自动",
+  "result": "成功",
+  "timeline": [
+    { "status": "告警触发", "time": "10:11:30", "description": "web-server-03 CPU使用率98% > 95%" },
+    { "status": "自动诊断", "time": "10:11:35", "description": "定位到 'data-processor' 进程CPU占用异常" },
+    { "status": "修复执行", "time": "10:11:37", "description": "Playbook: 重启Web服务 被触发" },
+    { "status": "验证恢复", "time": "10:15:22", "description": "CPU使用率恢复正常，服务响应时间 < 200ms" },
+    { "status": "事件关闭", "time": "10:15:30", "description": "事件自动关闭" }
+  ],
+  "llmAnalysis": "本次告警由 'data-processor' 子进程因处理异常数据进入死循环，导致CPU资源被耗尽。AIOps平台通过预设的健康检查探针迅速定位到问题进程，并执行了服务重启工作流，在3分45秒内恢复了服务。建议为 'data-processor' 增加更精细的资源限制和异常数据输入的监控。",
+  "context": {
+    "alertDetails": "Alert: High_CPU_Usage\nSeverity: P2\nSource: Zabbix\nDescription: Host 'web-server-03' CPU utilization is at 98% for over 5 minutes.",
+    "performanceChartUrl": "monitoring_report.html",
+    "relatedLogs": "[10:11:28] WARN: Service heartbeat check failed for 'web-server-03'. Response time > 3s.\n[10:15:25] INFO: Service 'WebService' on 'web-server-03' restarted successfully."
+  },
+  "executionDetails": "--- Executing Playbook: 重启Web服务 ---\n\nTASK [Gathering Facts] *******************\nok: [web-server-03]\n\nTASK [Stop WebService] *******************\nchanged: [web-server-03]\n\nTASK [Wait for port 80 to be free] *******\nok: [web-server-03]\n\nTASK [Start WebService] ******************\nchanged: [web-server-03]\n\nTASK [Verify Service Health] *************\nok: [web-server-03] => {\"status_code\": 200}\n\n--- Playbook execution finished successfully ---"
+}

@@ -1,0 +1,46 @@
+{
+  "panel_title": "TCP SynCookie",
+  "panel_id": 91,
+  "description": "Rate of TCP SYN cookies sent, validated, and failed. These are used to protect against SYN flood attacks and manage TCP handshake resources under load",
+  "targets": [
+    {
+      "refId": "A",
+      "query": "irate(node_netstat_TcpExt_SyncookiesFailed{instance=\"localhost:9100\",job=\"node_exporter\"}[5m])",
+      "legendFormat": "SYN Cookies Failed",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    },
+    {
+      "refId": "B",
+      "query": "irate(node_netstat_TcpExt_SyncookiesRecv{instance=\"localhost:9100\",job=\"node_exporter\"}[5m])",
+      "legendFormat": "SYN Cookies Validated",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    },
+    {
+      "refId": "C",
+      "query": "irate(node_netstat_TcpExt_SyncookiesSent{instance=\"localhost:9100\",job=\"node_exporter\"}[5m])",
+      "legendFormat": "SYN Cookies Sent",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    }
+  ]
+}

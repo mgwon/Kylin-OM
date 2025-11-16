@@ -1,0 +1,59 @@
+{
+  "panel_title": "PPS Sync Events",
+  "panel_id": 335,
+  "description": "Rate of PPS synchronization diagnostics including calibration events, jitter violations, errors, and frequency stability exceedances",
+  "targets": [
+    {
+      "refId": "A",
+      "query": "irate(node_timex_pps_calibration_total{instance=\"localhost:9100\",job=\"node_exporter\"}[5m])",
+      "legendFormat": "PPS Calibrations/sec",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    },
+    {
+      "refId": "B",
+      "query": "irate(node_timex_pps_error_total{instance=\"localhost:9100\",job=\"node_exporter\"}[5m])",
+      "legendFormat": "PPS Errors/sec",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    },
+    {
+      "refId": "C",
+      "query": "irate(node_timex_pps_stability_exceeded_total{instance=\"localhost:9100\",job=\"node_exporter\"}[5m])",
+      "legendFormat": "PPS Stability Exceeded/sec",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    },
+    {
+      "refId": "D",
+      "query": "irate(node_timex_pps_jitter_total{instance=\"localhost:9100\",job=\"node_exporter\"}[5m])",
+      "legendFormat": "PPS Jitter Events/sec",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    }
+  ]
+}

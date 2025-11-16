@@ -1,0 +1,41 @@
+{
+  "id": "dom-1754816274831",
+  "name": "123",
+  "assets": [
+    {
+      "id": "host-002",
+      "ip": "192.168.1.11",
+      "protocol": "ipv4",
+      "syncStatus": "✓ 已同步",
+      "driftCount": 0
+    },
+    {
+      "id": "host-003",
+      "ip": "192.168.2.5",
+      "protocol": "ipv4",
+      "syncStatus": "✓ 已同步",
+      "driftCount": 0
+    },
+    {
+      "id": "host-009",
+      "ip": "192.168.1.12",
+      "protocol": "ipv4",
+      "syncStatus": "✓ 已同步",
+      "driftCount": 0
+    },
+    {
+      "id": "host-004",
+      "ip": "192.168.2.6",
+      "protocol": "ipv4",
+      "syncStatus": "✓ 已同步",
+      "driftCount": 0
+    },
+    {
+      "id": "host-010",
+      "ip": "192.168.2.7",
+      "protocol": "ipv4",
+      "syncStatus": "✓ 已同步",
+      "driftCount": 0
+    }
+  ]
+}

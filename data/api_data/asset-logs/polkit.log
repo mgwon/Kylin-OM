@@ -1,0 +1,24 @@
+-- Logs begin at Wed 2025-07-23 11:20:17 CST. --
+-- Logs begin at Wed 2025-07-23 11:20:17 CST. --
+7月 23 11:20:32 localhost.localdomain polkitd[3028]: Loading rules from directory /etc/polkit-1/rules.d
+7月 23 11:20:32 localhost.localdomain polkitd[3028]: Loading rules from directory /usr/share/polkit-1/rules.d
+7月 23 11:20:32 localhost.localdomain polkitd[3028]: Finished loading, compiling and executing 7 rules
+7月 23 11:20:32 localhost.localdomain systemd[1]: Started Authorization Manager.
+7月 23 11:20:32 localhost.localdomain polkitd[3028]: Acquired the name org.freedesktop.PolicyKit1 on the system bus
+7月 23 11:20:39 localhost.localdomain polkitd[3028]: <no filename>:3: action=[Action id='org.freedesktop.DisplayManager.AccountsService.ReadAny']
+7月 23 11:20:39 localhost.localdomain polkitd[3028]: <no filename>:4: subject=[Subject pid=4083 user='lightdm' groups=lightdm seat='seat0' session='c1' local=true active=true]
+7月 23 11:20:39 localhost.localdomain polkitd[3028]: <no filename>:3: action=[Action id='org.freedesktop.DisplayManager.AccountsService.ReadAny']
+7月 23 11:20:39 localhost.localdomain polkitd[3028]: <no filename>:4: subject=[Subject pid=4083 user='lightdm' groups=lightdm seat='seat0' session='c1' local=true active=true]
+7月 23 11:21:11 localhost.localdomain polkitd[3028]: Registered Authentication Agent for unix-session:2 (system bus name :1.67 [/usr/libexec/polkit-mate-authentication-agent-1], object path /org/mate/PolicyKit1/AuthenticationAgent, locale zh_CN.UTF-8)
+7月 23 16:09:39 localhost.localdomain polkitd[3028]: Unregistered Authentication Agent for unix-session:2 (system bus name :1.67, object path /org/mate/PolicyKit1/AuthenticationAgent, locale zh_CN.UTF-8) (disconnected from bus)
+-- Logs begin at Wed 2025-07-23 16:11:24 CST. --
+7月 23 16:11:41 localhost.localdomain polkitd[3044]: Loading rules from directory /etc/polkit-1/rules.d
+7月 23 16:11:41 localhost.localdomain polkitd[3044]: Loading rules from directory /usr/share/polkit-1/rules.d
+7月 23 16:11:41 localhost.localdomain polkitd[3044]: Finished loading, compiling and executing 7 rules
+7月 23 16:11:41 localhost.localdomain systemd[1]: Started Authorization Manager.
+7月 23 16:11:41 localhost.localdomain polkitd[3044]: Acquired the name org.freedesktop.PolicyKit1 on the system bus
+7月 23 16:11:49 localhost.localdomain polkitd[3044]: <no filename>:3: action=[Action id='org.freedesktop.DisplayManager.AccountsService.ReadAny']
+7月 23 16:11:49 localhost.localdomain polkitd[3044]: <no filename>:4: subject=[Subject pid=4083 user='lightdm' groups=lightdm seat='seat0' session='c1' local=true active=true]
+7月 23 16:11:50 localhost.localdomain polkitd[3044]: <no filename>:3: action=[Action id='org.freedesktop.DisplayManager.AccountsService.ReadAny']
+7月 23 16:11:50 localhost.localdomain polkitd[3044]: <no filename>:4: subject=[Subject pid=4083 user='lightdm' groups=lightdm seat='seat0' session='c1' local=true active=true]
+7月 23 16:12:16 localhost.localdomain polkitd[3044]: Registered Authentication Agent for unix-session:2 (system bus name :1.68 [/usr/libexec/polkit-mate-authentication-agent-1], object path /org/mate/PolicyKit1/AuthenticationAgent, locale zh_CN.UTF-8)

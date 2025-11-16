@@ -1,0 +1,42 @@
+[
+  {
+    "id": "anom-001",
+    "status": "active",
+    "severity": "严重",
+    "ai_summary": "数据库服务CPU使用率持续高于95%",
+    "root_cause_recommendation": "数据库连接池耗尽",
+    "scope": "主机组-DBServers (3/5台)",
+    "duration": "45分钟",
+    "solution_match_status": "high_confidence"
+  },
+  {
+    "id": "anom-002",
+    "status": "active",
+    "severity": "警告",
+    "ai_summary": "Web应用响应时间中位数上升300ms",
+    "root_cause_recommendation": "下游服务API超时",
+    "scope": "应用-WebApp-Frontend",
+    "duration": "1小时20分钟",
+    "solution_match_status": "possible_match"
+  },
+  {
+    "id": "anom-003",
+    "status": "active",
+    "severity": "警告",
+    "ai_summary": "Kafka消息积压超过10万条",
+    "root_cause_recommendation": "消费者进程崩溃",
+    "scope": "服务-MessageQueue",
+    "duration": "25分钟",
+    "solution_match_status": "no_match"
+  },
+  {
+    "id": "pred-001",
+    "status": "predicted",
+    "severity": "警告",
+    "ai_summary": "磁盘空间增长模型预测将在4小时后达到阈值",
+    "root_cause_recommendation": "日志文件异常增长",
+    "scope": "主机-log-server-01",
+    "duration": "预测于 20:30 发生",
+    "solution_match_status": "high_confidence"
+  }
+]

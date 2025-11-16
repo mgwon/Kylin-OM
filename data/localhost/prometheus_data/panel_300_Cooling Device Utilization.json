@@ -1,0 +1,20 @@
+{
+  "panel_title": "Cooling Device Utilization",
+  "panel_id": 300,
+  "description": "Shows how hard each cooling device (fan/throttle) is working relative to its maximum capacity",
+  "targets": [
+    {
+      "refId": "A",
+      "query": "100 * node_cooling_device_cur_state{instance=\"localhost:9100\",job=\"node_exporter\"} / node_cooling_device_max_state{instance=\"localhost:9100\",job=\"node_exporter\"}",
+      "legendFormat": "{{ name }} - {{ type }} ",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    }
+  ]
+}

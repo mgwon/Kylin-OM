@@ -1,0 +1,20 @@
+{
+  "panel_title": "ARP Entries",
+  "panel_id": 230,
+  "description": "Number of ARP entries per interface. Useful for detecting excessive ARP traffic or table growth due to scanning or misconfiguration",
+  "targets": [
+    {
+      "refId": "A",
+      "query": "node_arp_entries{instance=\"localhost:9100\",job=\"node_exporter\"}",
+      "legendFormat": "{{ device }} ARP Table",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    }
+  ]
+}

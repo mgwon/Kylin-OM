@@ -1,0 +1,33 @@
+{
+  "panel_title": "TCP Direct Transition",
+  "panel_id": 82,
+  "description": "Rate of TCP connection initiations per second. 'Active' opens are initiated by this host. 'Passive' opens are accepted from incoming connections",
+  "targets": [
+    {
+      "refId": "A",
+      "query": "irate(node_netstat_Tcp_ActiveOpens{instance=\"localhost:9100\",job=\"node_exporter\"}[5m])",
+      "legendFormat": "Active Opens",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    },
+    {
+      "refId": "B",
+      "query": "irate(node_netstat_Tcp_PassiveOpens{instance=\"localhost:9100\",job=\"node_exporter\"}[5m])",
+      "legendFormat": "Passive Opens",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    }
+  ]
+}

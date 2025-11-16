@@ -1,0 +1,20 @@
+{
+  "panel_title": "Processes Forks",
+  "panel_id": 148,
+  "description": "Rate of new processes being created on the system (forks/sec).",
+  "targets": [
+    {
+      "refId": "A",
+      "query": "irate(node_forks_total{instance=\"localhost:9100\",job=\"node_exporter\"}[5m])",
+      "legendFormat": "Process Forks per second",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    }
+  ]
+}

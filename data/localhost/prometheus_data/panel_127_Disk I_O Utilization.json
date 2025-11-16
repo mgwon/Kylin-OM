@@ -1,0 +1,20 @@
+{
+  "panel_title": "Disk I/O Utilization",
+  "panel_id": 127,
+  "description": "Percentage of time the disk was actively processing I/O operations",
+  "targets": [
+    {
+      "refId": "A",
+      "query": "irate(node_disk_io_time_seconds_total{instance=\"localhost:9100\",job=\"node_exporter\",device=~\"[a-z]+|nvme[0-9]+n[0-9]+|mmcblk[0-9]+\"} [5m])",
+      "legendFormat": "{{device}}",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    }
+  ]
+}

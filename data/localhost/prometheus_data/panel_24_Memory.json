@@ -1,0 +1,124 @@
+{
+  "panel_title": "Memory",
+  "panel_id": 24,
+  "description": "Breakdown of physical memory and swap usage. Hardware-detected memory errors are also displayed",
+  "targets": [
+    {
+      "refId": "A",
+      "query": "node_memory_MemTotal_bytes{instance=\"localhost:9100\",job=\"node_exporter\"} - node_memory_MemFree_bytes{instance=\"localhost:9100\",job=\"node_exporter\"} - node_memory_Buffers_bytes{instance=\"localhost:9100\",job=\"node_exporter\"} - node_memory_Cached_bytes{instance=\"localhost:9100\",job=\"node_exporter\"} - node_memory_Slab_bytes{instance=\"localhost:9100\",job=\"node_exporter\"} - node_memory_PageTables_bytes{instance=\"localhost:9100\",job=\"node_exporter\"} - node_memory_SwapCached_bytes{instance=\"localhost:9100\",job=\"node_exporter\"}",
+      "legendFormat": "Apps - Memory used by user-space applications",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    },
+    {
+      "refId": "B",
+      "query": "node_memory_PageTables_bytes{instance=\"localhost:9100\",job=\"node_exporter\"}",
+      "legendFormat": "PageTables - Memory used to map between virtual and physical memory addresses",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    },
+    {
+      "refId": "C",
+      "query": "node_memory_SwapCached_bytes{instance=\"localhost:9100\",job=\"node_exporter\"}",
+      "legendFormat": "SwapCache - Memory that keeps track of pages that have been fetched from swap but not yet been modified",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    },
+    {
+      "refId": "D",
+      "query": "node_memory_Slab_bytes{instance=\"localhost:9100\",job=\"node_exporter\"}",
+      "legendFormat": "Slab - Memory used by the kernel to cache data structures for its own use (caches like inode, dentry, etc)",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    },
+    {
+      "refId": "E",
+      "query": "node_memory_Cached_bytes{instance=\"localhost:9100\",job=\"node_exporter\"}",
+      "legendFormat": "Cache - Parked file data (file content) cache",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    },
+    {
+      "refId": "F",
+      "query": "node_memory_Buffers_bytes{instance=\"localhost:9100\",job=\"node_exporter\"}",
+      "legendFormat": "Buffers - Block device (e.g. harddisk) cache",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    },
+    {
+      "refId": "G",
+      "query": "node_memory_MemFree_bytes{instance=\"localhost:9100\",job=\"node_exporter\"}",
+      "legendFormat": "Unused - Free memory unassigned",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    },
+    {
+      "refId": "H",
+      "query": "(node_memory_SwapTotal_bytes{instance=\"localhost:9100\",job=\"node_exporter\"} - node_memory_SwapFree_bytes{instance=\"localhost:9100\",job=\"node_exporter\"})",
+      "legendFormat": "Swap - Swap space used",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    },
+    {
+      "refId": "I",
+      "query": "node_memory_HardwareCorrupted_bytes{instance=\"localhost:9100\",job=\"node_exporter\"}",
+      "legendFormat": "Hardware Corrupted - Amount of RAM that the kernel identified as corrupted / not working",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    }
+  ]
+}

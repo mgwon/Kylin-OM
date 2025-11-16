@@ -1,0 +1,20 @@
+{
+  "panel_title": "CPU Cores",
+  "panel_id": 14,
+  "description": "",
+  "targets": [
+    {
+      "refId": "A",
+      "query": "count(count(node_cpu_seconds_total{instance=\"localhost:9100\",job=\"node_exporter\"}) by (cpu))",
+      "legendFormat": "__auto",
+      "hidden": false,
+      "result": {
+        "status": "success",
+        "data": {
+          "resultType": "matrix",
+          "result": []
+        }
+      }
+    }
+  ]
+}

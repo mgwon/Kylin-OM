@@ -1,0 +1,25 @@
+[Unit]
+Description=A-Ops Backend Service for Architecture Perception
+After=network.target
+
+[Service]
+# 使用你的Python解释器和脚本的绝对路径
+ExecStart=/usr/bin/python3 /opt/a-ops/aops_backend_service.py
+
+# 设置工作目录
+WorkingDirectory=/opt/a-ops/
+
+# 以root用户运行，因为脚本需要访问/proc和ss命令
+User=root
+Group=root
+
+# 确保输出被记录到系统日志
+StandardOutput=journal
+StandardError=journal
+
+# 如果服务失败，10秒后自动重启
+Restart=on-failure
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
